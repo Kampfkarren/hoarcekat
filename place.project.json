@@ -1,0 +1,41 @@
+{
+  "name": "hoarcekat",
+  "tree": {
+    "$className": "DataModel",
+    "HttpService": {
+      "$className": "HttpService",
+      "$properties": {
+        "HttpEnabled": true
+      }
+    },
+    "ServerStorage": {
+      "$className": "ServerStorage",
+      "Hoarcekat": {
+        "$className": "Folder",
+
+        "Plugin": {
+          "$path": "src"
+        },
+
+        "Vendor": {
+          "$className": "Folder",
+
+          "Roact": {
+            "$path": "vendor/roact/src"
+          },
+
+          "RoactRodux": {
+            "$path": "vendor/roact-rodux/lib"
+          },
+
+          "Rodux": {
+            "$path": "vendor/rodux/lib"
+          }
+        }
+      },
+      "Examples": {
+        "$path": "examples"
+      }
+    }
+  }
+}
