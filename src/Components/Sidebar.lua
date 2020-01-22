@@ -1,5 +1,6 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
+local AutomatedScrollingFrame = require(script.Parent.AutomatedScrollingFrame)
 local Collapsible = require(script.Parent.Collapsible)
 local IconListItem = require(script.Parent.IconListItem)
 local Maid = require(Hoarcekat.Plugin.Maid)
@@ -226,10 +227,14 @@ function Sidebar:render()
 					TextColor3 = theme:GetColor("DimmedText", "Default"),
 				}),
 
-				StoryLists = e("Frame", {
-					BackgroundTransparency = 1,
-					LayoutOrder = 2,
-					Size = UDim2.fromScale(1, 1),
+				StoryLists = e(AutomatedScrollingFrame, {
+					LayoutClass = "UIListLayout",
+
+					Native = {
+						BackgroundTransparency = 1,
+						LayoutOrder = 2,
+						Size = UDim2.new(1, 0, 1, -20),
+					},
 				}, storyLists),
 			})
 		end,
