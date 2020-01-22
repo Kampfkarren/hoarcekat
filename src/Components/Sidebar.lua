@@ -169,7 +169,7 @@ function Sidebar:render()
 	return e(StudioThemeAccessor, {}, {
 		function(theme)
 			local storyTree = {}
-			for storyScript in pairs(self.state.storyScripts) do
+			for storyScript in pairs(self.state.storyScripts or {}) do
 				local hierarchy = {}
 				local parent = storyScript
 
