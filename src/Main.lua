@@ -23,7 +23,7 @@ local function Main(plugin, savedState)
 		toolbar,
 		"Hoarcekat",
 		"Open the Hoarcekat window",
-		"rbxassetid://1461948512"
+		"rbxassetid://4621571957"
 	)
 
 	local store = Rodux.Store.new(Reducer, savedState)
