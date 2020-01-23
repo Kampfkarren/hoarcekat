@@ -1,0 +1,26 @@
+{
+	"name": "Hoarcekat",
+	"tree": {
+		"$className": "Folder",
+
+		"Plugin": {
+			"$path": "src"
+		},
+
+		"Vendor": {
+			"$className": "Folder",
+
+			"Roact": {
+				"$path": "vendor/roact/src"
+			},
+
+			"RoactRodux": {
+				"$path": "vendor/roact-rodux/lib"
+			},
+
+			"Rodux": {
+				"$path": "vendor/rodux/lib"
+			}
+		}
+	}
+}
