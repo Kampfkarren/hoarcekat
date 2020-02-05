@@ -33,7 +33,7 @@ function Preview:init()
 		local fenv = setmetatable({
 			require = self.monkeyRequire,
 			script = otherScript,
-			_G = self.monkeyGlobalTable
+			_G = self.monkeyGlobalTable,
 		}, {
 			__index = getfenv(),
 		})
