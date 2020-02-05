@@ -15,7 +15,10 @@ function Preview:init()
 	self.monkeyRequireCache = {}
 	self.monkeyRequireMaid = Maid.new()
 
+	self.monkeyGlobalTable = {}
+
 	self.monkeyRequire = function(otherScript)
+
 		if self.monkeyRequireCache[otherScript] then
 			return self.monkeyRequireCache[otherScript]
 		end
@@ -29,7 +32,8 @@ function Preview:init()
 
 		local fenv = setmetatable({
 			require = self.monkeyRequire,
-			script = otherScript
+			script = otherScript,
+			_G = self.monkeyGlobalTable,
 		}, {
 			__index = getfenv(),
 		})
@@ -67,6 +71,7 @@ function Preview:refreshPreview()
 	local selectedStory = self.props.selectedStory
 	if selectedStory then
 		self.monkeyRequireCache = {}
+		self.monkeyGlobalTable = {}
 		self.monkeyRequireMaid:DoCleaning()
 
 		local requireOk, result = xpcall(self.monkeyRequire, debug.traceback, selectedStory)
