@@ -1,6 +1,9 @@
+local Selection = game:GetService("Selection")
+
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local EventConnection = require(script.Parent.EventConnection)
+local FloatingButton = require(script.Parent.FloatingButton)
 local Maid = require(Hoarcekat.Plugin.Maid)
 local Roact = require(Hoarcekat.Vendor.Roact)
 local RoactRodux = require(Hoarcekat.Vendor.RoactRodux)
@@ -48,6 +51,13 @@ function Preview:init()
 		end))
 
 		return output
+	end
+
+	self.openSelection = function()
+		local preview = self.previewRef:getValue()
+		if preview then
+			Selection:Set({ preview })
+		end
 	end
 end
 
@@ -109,6 +119,20 @@ function Preview:render()
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			[Roact.Ref] = self.previewRef,
+		}),
+
+		SelectButton = e("Frame", {
+			AnchorPoint = Vector2.new(1, 1),
+			BackgroundTransparency = 1,
+			Position = UDim2.fromScale(0.99, 0.99),
+			Size = UDim2.fromOffset(40, 40),
+		}, {
+			Button = e(FloatingButton, {
+				Activated = self.openSelection,
+				Image = "rbxasset://textures/ui/InspectMenu/ico_inspect@3x.png",
+				ImageSize = UDim.new(0, 24),
+				Size = UDim.new(0, 40),
+			}),
 		}),
 
 		TrackRemoved = selectedStory and e(EventConnection, {
