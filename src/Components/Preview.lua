@@ -21,7 +21,6 @@ function Preview:init()
 	self.monkeyGlobalTable = {}
 
 	self.monkeyRequire = function(otherScript)
-
 		if self.monkeyRequireCache[otherScript] then
 			return self.monkeyRequireCache[otherScript]
 		end
@@ -75,7 +74,17 @@ end
 
 function Preview:refreshPreview()
 	if self.cleanup then
-		self.cleanup()
+		local ok, result = pcall(self.cleanup)
+		if not ok then
+			warn("Error cleaning up story: " .. result)
+		end
+
+		self.cleanup = nil
+	end
+
+	local preview = self.previewRef:getValue()
+	if preview ~= nil then
+		preview:ClearAllChildren()
 	end
 
 	local selectedStory = self.props.selectedStory
