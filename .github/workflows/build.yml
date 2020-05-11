@@ -3,10 +3,10 @@ name: Build
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
     branches:
-    - master
+      - master
 
 jobs:
   build:
@@ -19,13 +19,13 @@ jobs:
           auth_header="$(git config --local --get http.https://github.com/.extraheader)"
           git submodule sync --recursive
           git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
-      - uses: osyrisrblx/setup-rojo@v1
+      - uses: rojo-rbx/setup-foreman@v1
         with:
-          version: 0.6.0-alpha.1
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build
-        run: rojo build plugin.project.json --output plugin.rbxmx
+        run: rojo build plugin.project.json --output plugin.rbxm
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
           name: plugin
-          path: plugin.rbxmx
+          path: plugin.rbxm
