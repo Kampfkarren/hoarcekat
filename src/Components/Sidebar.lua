@@ -37,7 +37,7 @@ local function SidebarList(props)
 				Activated = function()
 					props.SelectStory(child)
 				end,
-				Icon = "rbxasset://textures/Icon_Stream_Off.png",
+				Icon = "rbxasset://textures/StudioToolbox/AssetPreview/hierarchy.png",
 				Selected = props.SelectedStory == child,
 				Text = child.Name:sub(1, #child.Name - #".story"),
 			})
@@ -64,7 +64,7 @@ function Sidebar:init()
 
 		self:lookForStories(service)
 
-		self.maid:GiveTask(service.DescendantAdded:connect(function(child)
+		self.maid:GiveTask(service.DescendantAdded:Connect(function(child)
 			self:lookForStories(child)
 			self:checkStory(child)
 		end))

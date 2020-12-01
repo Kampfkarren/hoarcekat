@@ -35,10 +35,10 @@ function FloatingButton:render()
 		function(theme)
 			return e("ImageButton", {
 				BackgroundTransparency = 1,
-				Image = "rbxasset://textures/ui/LuaApp/buttons/buttonFill@3x.png",
+				Image = "rbxasset://textures/ui/LuaDiscussions/buttonFill@3x.png",
 				ImageColor3 = Roact.joinBindings({
 					hovered = self.hovered,
-					pressed = self.pressed,
+					pressed = self.pressed
 				}):map(function(state)
 					return theme:GetColor(
 						"MainButton",

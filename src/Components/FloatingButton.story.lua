@@ -10,7 +10,7 @@ local function TestFloatingButton()
 		Activated = function()
 			print("activated!")
 		end,
-		Image = "rbxasset://textures/ui/InspectMenu/ico_inspect@3x.png",
+		Image = "rbxasset://textures/ui/InspectMenu/ico_inspect@2x.png",
 		ImageSize = UDim.new(0, 24),
 		Size = UDim.new(0, 40),
 	})
