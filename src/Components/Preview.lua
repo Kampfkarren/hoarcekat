@@ -1,5 +1,5 @@
+local CoreGui = game:GetService("CoreGui")
 local Selection = game:GetService("Selection")
-local CoreGui = game:GetService('CoreGui')
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
@@ -21,7 +21,11 @@ function Preview:init()
 
 	self.monkeyGlobalTable = {}
 
-	self.screenGui = Instance.new('ScreenGui')
+	local display = Instance.new("ScreenGui")
+	display.Name = "HoarcekatDisplay"
+	self.display = display
+
+	self.expand = false
 
 	self.monkeyRequire = function(otherScript)
 		if self.monkeyRequireCache[otherScript] then
@@ -64,7 +68,7 @@ function Preview:init()
 
 	self.expandSelection = function()
 		self.expand = not self.expand
-		self.screenGui.Parent = self.expand and CoreGui or nil
+		self.display.Parent = self.expand and CoreGui or nil
 
 		self:refreshPreview()
 	end
@@ -110,7 +114,7 @@ function Preview:refreshPreview()
 		end
 
 		local execOk, cleanup = xpcall(function()
-			return result(self.expand and self.screenGui or self.previewRef:getValue())
+			return result(self.expand and self.display or self.previewRef:getValue())
 		end, debug.traceback)
 
 		if not execOk then

@@ -39,8 +39,8 @@ function Collapsible:render()
 		Topbar = e(IconListItem, {
 			Activated = self.toggle,
 			Icon = self.state.open and
-				"rbxassetid://6028345928" or
-				"rbxassetid://6028354556",
+				"rbxassetid://6028345928" or -- down arrow
+				"rbxassetid://6028354556", -- right arrow
 			Text = self.props.Title,
 		}),
 
