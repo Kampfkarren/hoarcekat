@@ -1,5 +1,6 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
+local Assets = require(Hoarcekat.Plugin.Assets)
 local FitComponent = require(script.Parent.FitComponent)
 local IconListItem = require(script.Parent.IconListItem)
 local Roact = require(Hoarcekat.Vendor.Roact)
@@ -39,8 +40,8 @@ function Collapsible:render()
 		Topbar = e(IconListItem, {
 			Activated = self.toggle,
 			Icon = self.state.open and
-				"rbxasset://textures/collapsibleArrowDown.png" or
-				"rbxasset://textures/collapsibleArrowRight.png",
+				Assets.collapse_down or
+				Assets.collapse_right,
 			Text = self.props.Title,
 		}),
 

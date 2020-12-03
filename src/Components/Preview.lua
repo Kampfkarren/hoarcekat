@@ -2,6 +2,7 @@ local Selection = game:GetService("Selection")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
+local Assets = require(Hoarcekat.Plugin.Assets)
 local EventConnection = require(script.Parent.EventConnection)
 local FloatingButton = require(script.Parent.FloatingButton)
 local Maid = require(Hoarcekat.Plugin.Maid)
@@ -138,7 +139,7 @@ function Preview:render()
 		}, {
 			Button = e(FloatingButton, {
 				Activated = self.openSelection,
-				Image = "rbxasset://textures/ui/InspectMenu/ico_inspect@3x.png",
+				Image = Assets.preview,
 				ImageSize = UDim.new(0, 24),
 				Size = UDim.new(0, 40),
 			}),
