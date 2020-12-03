@@ -1,6 +1,6 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
-local Assets = require(Hoarcekat.Assets)
+local Assets = require(Hoarcekat.Plugin.Assets)
 local FitComponent = require(script.Parent.FitComponent)
 local IconListItem = require(script.Parent.IconListItem)
 local Roact = require(Hoarcekat.Vendor.Roact)

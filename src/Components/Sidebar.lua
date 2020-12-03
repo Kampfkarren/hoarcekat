@@ -1,6 +1,6 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
-local Assets = require(Hoarcekat.Assets)
+local Assets = require(Hoarcekat.Plugin.Assets)
 local AutomatedScrollingFrame = require(script.Parent.AutomatedScrollingFrame)
 local Collapsible = require(script.Parent.Collapsible)
 local IconListItem = require(script.Parent.IconListItem)

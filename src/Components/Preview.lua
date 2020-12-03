@@ -2,7 +2,7 @@ local Selection = game:GetService("Selection")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
-local Assets = require(Hoarcekat.Assets)
+local Assets = require(Hoarcekat.Plugin.Assets)
 local EventConnection = require(script.Parent.EventConnection)
 local FloatingButton = require(script.Parent.FloatingButton)
 local Maid = require(Hoarcekat.Plugin.Maid)
