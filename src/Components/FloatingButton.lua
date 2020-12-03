@@ -1,5 +1,6 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
+local Assets = require(Hoarcekat.Assets)
 local Roact = require(Hoarcekat.Vendor.Roact)
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
 
@@ -35,7 +36,7 @@ function FloatingButton:render()
 		function(theme)
 			return e("ImageButton", {
 				BackgroundTransparency = 1,
-				Image = "rbxasset://textures/ui/LuaApp/buttons/buttonFill@3x.png",
+				Image = Hoarcekat.button_fill,
 				ImageColor3 = Roact.joinBindings({
 					hovered = self.hovered,
 					pressed = self.pressed,

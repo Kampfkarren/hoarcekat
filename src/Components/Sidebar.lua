@@ -1,5 +1,6 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
+local Assets = require(Hoarcekat.Assets)
 local AutomatedScrollingFrame = require(script.Parent.AutomatedScrollingFrame)
 local Collapsible = require(script.Parent.Collapsible)
 local IconListItem = require(script.Parent.IconListItem)
@@ -37,7 +38,7 @@ local function SidebarList(props)
 				Activated = function()
 					props.SelectStory(child)
 				end,
-				Icon = "rbxasset://textures/Icon_Stream_Off.png",
+				Icon = Assets.hamburger,
 				Selected = props.SelectedStory == child,
 				Text = child.Name:sub(1, #child.Name - #".story"),
 			})

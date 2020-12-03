@@ -1,0 +1,24 @@
+[inputs."assets/button_fill.png"]
+hash = "0d06ee1564e952337009b4ea9f7e53b6c3709e46b656cd826af85d07723c224a"
+id = 6037473336
+packable = false
+
+[inputs."assets/collapse_down.png"]
+hash = "46eaca35f3b9e1eeb259d182ff4e3311142751b5cdfff674c578c7ce1e44b0c0"
+id = 6037473412
+packable = false
+
+[inputs."assets/collapse_right.png"]
+hash = "7b1e9da83b8d50cb1da84a5a0c9f127abec08ff7c4363b0db5411b1f1f66e824"
+id = 6037473464
+packable = false
+
+[inputs."assets/hamburger.png"]
+hash = "40719b3fb1c51601db35933f77a5a8c1c744b22fbd34d00956eed15772df483d"
+id = 6037473573
+packable = false
+
+[inputs."assets/preview.png"]
+hash = "fbf7f578e866fe4ceda99b6491cd4395e33e446aeecdcc4941f5b2f4e1b39b5e"
+id = 6037473638
+packable = false

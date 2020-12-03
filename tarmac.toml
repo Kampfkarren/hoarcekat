@@ -1,0 +1,7 @@
+name = "hoarcekat"
+
+[[inputs]]
+glob = "assets/*.png"
+codegen = true
+codegen-path = "src/Assets.lua"
+codegen-base-path = "assets"
