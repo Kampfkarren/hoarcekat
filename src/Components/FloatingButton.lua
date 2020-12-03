@@ -36,7 +36,7 @@ function FloatingButton:render()
 		function(theme)
 			return e("ImageButton", {
 				BackgroundTransparency = 1,
-				Image = Hoarcekat.button_fill,
+				Image = Assets.button_fill,
 				ImageColor3 = Roact.joinBindings({
 					hovered = self.hovered,
 					pressed = self.pressed,
