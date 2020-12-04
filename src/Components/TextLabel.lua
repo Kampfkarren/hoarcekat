@@ -12,13 +12,13 @@ local function TextLabel(props)
 			if not rbx then return end
 			local width = rbx.AbsoluteSize.x
 			local tb = TextService:GetTextSize(rbx.Text, rbx.TextSize, rbx.Font, Vector2.new(width - 2, 100000))
-			rbx.Size = UDim2.new(1, 0, 0, tb.y)
+			rbx.Size = UDim2.new(1, 0, 0, tb.Y)
 		end
 	else
 		function update(rbx)
 			if not rbx then return end
 			local tb = TextService:GetTextSize(rbx.Text, rbx.TextSize, rbx.Font, Vector2.new(100000, 100000))
-			rbx.Size = UDim2.new(props.Width or UDim.new(0, tb.x), UDim.new(0, tb.y))
+			rbx.Size = UDim2.new(props.Width or UDim.new(0, tb.X), UDim.new(0, tb.Y))
 		end
 	end
 

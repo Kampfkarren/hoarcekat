@@ -65,7 +65,7 @@ function Sidebar:init()
 
 		self:lookForStories(service)
 
-		self.maid:GiveTask(service.DescendantAdded:connect(function(child)
+		self.maid:GiveTask(service.DescendantAdded:Connect(function(child)
 			self:lookForStories(child)
 			self:checkStory(child)
 		end))

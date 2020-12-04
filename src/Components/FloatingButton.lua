@@ -39,7 +39,7 @@ function FloatingButton:render()
 				Image = Assets.button_fill,
 				ImageColor3 = Roact.joinBindings({
 					hovered = self.hovered,
-					pressed = self.pressed,
+					pressed = self.pressed
 				}):map(function(state)
 					return theme:GetColor(
 						"MainButton",
