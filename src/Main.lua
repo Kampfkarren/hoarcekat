@@ -1,3 +1,5 @@
+local RunService = game:GetService('RunService')
+
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local Reducer = require(script.Parent.Reducer)
@@ -53,6 +55,8 @@ local function Main(plugin, savedState)
 		connection:Disconnect()
 		return store:getState()
 	end)
+
+	if RunService:IsRunning() then return end
 
 	local unloadConnection
 	unloadConnection = gui.AncestryChanged:Connect(function()
