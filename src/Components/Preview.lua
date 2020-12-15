@@ -27,7 +27,7 @@ function Preview:init()
 		end
 
 		-- loadstring is used to avoid cache while preserving `script` (which requiring a clone wouldn't do)
-		local result, parseError = loadstring(otherScript.Source)
+		local result, parseError = loadstring(otherScript.Source, otherScript:GetFullName())
 		if result == nil then
 			error(("Could not parse %s: %s"):format(otherScript:GetFullName(), parseError))
 			return
