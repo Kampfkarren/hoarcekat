@@ -56,8 +56,6 @@ local function Main(plugin, savedState)
 		return store:getState()
 	end)
 
-	if RunService:IsRunning() then return end
-
 	local unloadConnection
 	unloadConnection = gui.AncestryChanged:Connect(function()
 		print("New Hoarcekat version coming online; unloading the old version")
