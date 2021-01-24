@@ -1,5 +1,3 @@
-local RunService = game:GetService('RunService')
-
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local Reducer = require(script.Parent.Reducer)
