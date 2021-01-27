@@ -6,7 +6,7 @@ return function(target)
 	instance.Position = UDim2.fromScale(0.5, 0.5)
 	instance.Size = UDim2.fromScale(0.3, 0.1)
 	instance.Text = counter
-	instance.MouseButton1Click:connect(function()
+	instance.MouseButton1Click:Connect(function()
 		counter = counter + 1
 		instance.Text = counter
 	end)
