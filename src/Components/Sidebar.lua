@@ -65,7 +65,7 @@ function Sidebar:init()
 
 		self:lookForStories(service)
 
-		self.maid:GiveTask(service.DescendantAdded:connect(function(child)
+		self.maid:GiveTask(service.DescendantAdded:Connect(function(child)
 			self:lookForStories(child)
 			self:checkStory(child)
 		end))
@@ -123,14 +123,14 @@ function Sidebar:addStoryScript(storyScript)
 		self.maid[instanceMaid] = nil
 	end)
 
-	instanceMaid:GiveTask(storyScript.Changed:connect(function()
+	instanceMaid:GiveTask(storyScript.Changed:Connect(function()
 		if not isStoryScript(storyScript) then
 			-- We were a story script, now we're not, remove us
 			instanceMaid:DoCleaning()
 		end
 	end))
 
-	instanceMaid:GiveTask(storyScript.AncestryChanged:connect(function()
+	instanceMaid:GiveTask(storyScript.AncestryChanged:Connect(function()
 		if not storyScript:IsDescendantOf(game) then
 			-- We were removed from the data model
 			instanceMaid:DoCleaning()
@@ -151,7 +151,7 @@ function Sidebar:removeStoryScript(storyScript)
 
 	if storyScript:IsDescendantOf(game) then
 		local changedConnection
-		changedConnection = storyScript.Changed:connect(function()
+		changedConnection = storyScript.Changed:Connect(function()
 			if isStoryScript(storyScript) then
 				-- We didn't use to be a story script, now we are, add us
 				self:addStoryScript(storyScript)
