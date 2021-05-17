@@ -150,6 +150,7 @@ function Preview:render()
 			BackgroundTransparency = 1,
 			Position = UDim2.fromScale(0.99, 0.99),
 			Size = UDim2.fromOffset(40, 40),
+			ZIndex = 2,
 		}, {
 			Button = e(FloatingButton, {
 				Activated = self.openSelection,
@@ -164,6 +165,7 @@ function Preview:render()
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0.99, -45, 0.99),
 			Size = UDim2.fromOffset(40, 40),
+			ZIndex = 2,
 		}, {
 			Button = e(FloatingButton, {
 				Activated = self.expandSelection,
