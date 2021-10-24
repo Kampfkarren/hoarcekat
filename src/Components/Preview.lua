@@ -24,6 +24,7 @@ function Preview:init()
 
 	local display = Instance.new("ScreenGui")
 	display.Name = "HoarcekatDisplay"
+	display.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	self.display = display
 
 	self.expand = false
