@@ -34,6 +34,10 @@ function Preview:init()
 			return self.monkeyRequireCache[otherScript]
 		end
 
+		self.monkeyRequireMaid:GiveTask(otherScript.Changed:connect(function()
+			self:refreshPreview()
+		end))
+
 		-- loadstring is used to avoid cache while preserving `script` (which requiring a clone wouldn't do)
 		local result, parseError = loadstring(otherScript.Source, otherScript:GetFullName())
 		if result == nil then
@@ -53,10 +57,6 @@ function Preview:init()
 
 		local output = result()
 		self.monkeyRequireCache[otherScript] = output
-
-		self.monkeyRequireMaid:GiveTask(otherScript.Changed:connect(function()
-			self:refreshPreview()
-		end))
 
 		return output
 	end
