@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+- Vertical splitter bar between Stories list and Preview pane which can be dragged to resize the two areas.
+
 ## [1.2.1]
 ### Changed
 - Improved live editing experience by retaining last working preview and delaying error messages. ([#27](https://github.com/Kampfkarren/hoarcekat/pull/27))
