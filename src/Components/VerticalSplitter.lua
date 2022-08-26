@@ -47,9 +47,10 @@ function VerticalSplitter:init()
 		if input.UserInputType == Enum.UserInputType.MouseMovement then
 			if self.state.dragging == true then
 				local container = self.containerRef:getValue()
-				local offset = input.Position.x - container.AbsolutePosition.x
 				local width = container.AbsoluteSize.x
-				self:setState({ alpha = math.clamp(offset / width, 0, 1) })
+				local offset = input.Position.x - container.AbsolutePosition.x
+				offset = math.clamp(offset, HANDLE_WIDTH, width - HANDLE_WIDTH)
+				self:setState({ alpha = offset / width })
 			end
 		end
 	end
