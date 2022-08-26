@@ -1,8 +1,10 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+local Plugin = script:FindFirstAncestorWhichIsA("Plugin")
 
 local Roact = require(Hoarcekat.Vendor.Roact)
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
 
+local pluginMouse = Plugin:GetMouse()
 local e = Roact.createElement
 
 local HANDLE_WIDTH = 4
@@ -54,6 +56,22 @@ function VerticalSplitter:init()
 			end
 		end
 	end
+end
+
+function VerticalSplitter:updateMouseIcon()
+	if self.state.hovering or self.state.dragging then
+		pluginMouse.Icon = "rbxasset://SystemCursors/SplitEW"
+	else
+		pluginMouse.Icon = "rbxasset://SystemCursors/Arrow"
+	end
+end
+
+function VerticalSplitter:didUpdate()
+	self:updateMouseIcon()
+end
+
+function VerticalSplitter:willUnmount()
+	self:updateMouseIcon()
 end
 
 function VerticalSplitter:render()
