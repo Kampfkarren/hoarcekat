@@ -14,6 +14,7 @@ local OFFSET = 8
 function Collapsible:init()
 	self:setState({
 		open = false,
+		isSearching = self.props.IsSearching,
 	})
 
 	self.toggle = function()
@@ -23,8 +24,17 @@ function Collapsible:init()
 	end
 end
 
+function Collapsible:didUpdate(_, prevState)
+	if prevState.isSearching ~= self.props.IsSearching then
+		self:setState({
+			isSearching = self.props.IsSearching,
+		})
+	end
+end
+
 function Collapsible:render()
-	local content = self.state.open and self.props[Roact.Children]
+	local isOpen = self.state.open or self.state.isSearching
+	local content = isOpen and self.props[Roact.Children]
 
 	return e(FitComponent, {
 		ContainerClass = "Frame",
@@ -39,7 +49,7 @@ function Collapsible:render()
 	}, {
 		Topbar = e(IconListItem, {
 			Activated = self.toggle,
-			Icon = self.state.open and
+			Icon = isOpen and
 				Assets.collapse_down or
 				Assets.collapse_right,
 			Text = self.props.Title,

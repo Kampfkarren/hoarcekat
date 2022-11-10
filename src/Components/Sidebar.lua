@@ -54,6 +54,7 @@ local function SidebarList(props)
 
 	return e(Collapsible, {
 		Title = props.Title,
+		IsSearching = props.IsSearching
 	}, contents)
 end
 
@@ -138,6 +139,8 @@ function Sidebar:addStoryScript(storyScript)
 		if not storyScript:IsDescendantOf(game) then
 			-- We were removed from the data model
 			instanceMaid:DoCleaning()
+		else
+			self:setState({}) -- force update if parent changes
 		end
 	end))
 
@@ -177,11 +180,12 @@ function Sidebar:willUnmount()
 end
 
 function Sidebar:render()
-	print(self.state.storyScripts)
+	local searchStr = self.state.search:lower()
+	local isSearching = searchStr ~= ""
+
 	return e(StudioThemeAccessor, {}, {
 		function(theme)
 			local storyTree = {}
-			local searchStr = self.state.search:lower()
 
 			for storyScript in pairs(self.state.storyScripts or {}) do
 				local hierarchy = {}
@@ -189,7 +193,7 @@ function Sidebar:render()
 
 				local scriptName = storyScript.Name
 
-				if searchStr ~= "" and not scriptName:lower():find(searchStr, 1, true) then
+				if isSearching and not scriptName:lower():find(searchStr, 1, true) then
 					continue
 				end
 
@@ -224,6 +228,7 @@ function Sidebar:render()
 					SelectStory = self.props.selectStory,
 					SelectedStory = self.props.selectedStory,
 					Title = parent,
+					IsSearching = isSearching,
 				})
 			end
 
@@ -242,11 +247,43 @@ function Sidebar:render()
 					PaddingTop = UDim.new(0, 2),
 				}),
 
-				StoriesLabel = e(TextLabel, {
-					Font = Enum.Font.SourceSansBold,
-					LayoutOrder = 1,
-					Text = "STORIES",
-					TextColor3 = theme:GetColor("DimmedText", "Default"),
+				Top = e("Frame", {
+					Size = UDim2.fromScale(1, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					BackgroundTransparency = 1,
+				}, {
+					StoriesLabel = e(TextLabel, {
+						Font = Enum.Font.SourceSansBold,
+						LayoutOrder = 1,
+						Text = "STORIES",
+						TextColor3 = theme:GetColor("DimmedText", "Default"),
+					}),
+
+					SearchBox = e("TextBox", {
+						Size = UDim2.new(0, 150, 1, -4),
+						Position = UDim2.new(1, -20, 0.5, 0),
+						AnchorPoint = Vector2.new(1, 0.5),
+						PlaceholderText = "Search...",
+						Text = "",
+						TextXAlignment = Enum.TextXAlignment.Left,
+						TextScaled = true,
+						BackgroundColor3 = theme:GetColor("InputFieldBackground", "Default"),
+						PlaceholderColor3 = theme:GetColor("DimmedText", "Default"),
+						TextColor3 = theme:GetColor("MainText", "Default"),
+						[Roact.Change.Text] = function(rbx)
+							self:setState({
+								search = rbx.Text,
+							})
+						end,
+					}, {
+						Corner = e("UICorner", {
+							CornerRadius = UDim.new(0, 5),
+						}),
+						Stroke = e("UIStroke", {
+							Thickness = 2,
+							Color = theme:GetColor("Border", "Default"),
+						}),
+					})
 				}),
 
 				StoryLists = e(AutomatedScrollingFrame, {
