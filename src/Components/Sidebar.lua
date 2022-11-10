@@ -237,6 +237,7 @@ function Sidebar:render()
 				BorderSizePixel = 0,
 				ClipsDescendants = true,
 				Size = UDim2.fromScale(1, 1),
+				ZIndex = 2
 			}, {
 				UIListLayout = e("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
@@ -260,7 +261,7 @@ function Sidebar:render()
 					}),
 
 					SearchBox = e("TextBox", {
-						Size = UDim2.new(0, 150, 1, -4),
+						Size = UDim2.new(0, 100, 1, -4),
 						Position = UDim2.new(1, -20, 0.5, 0),
 						AnchorPoint = Vector2.new(1, 0.5),
 						PlaceholderText = "Search...",
