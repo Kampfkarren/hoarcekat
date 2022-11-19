@@ -6,7 +6,7 @@ local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
 local e = Roact.createElement
 
 local HANDLE_WIDTH = 4
-local DEFAULT_ALPHA = 0.2
+local DEFAULT_ALPHA = 0.3
 
 --[[
 ideally this component would not have a hard-coded default alpha or self-contained alpha state

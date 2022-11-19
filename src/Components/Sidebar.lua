@@ -54,8 +54,27 @@ local function SidebarList(props)
 
 	return e(Collapsible, {
 		Title = props.Title,
-		IsSearching = props.IsSearching
+		IsSearching = props.IsSearching,
 	}, contents)
+end
+
+local function getNumChildren(t)
+	local count = 0
+
+	for _, _ in pairs(t) do
+		count += 1
+	end
+	return count
+end
+
+local function getKeyOfFirstChild(t): string | nil
+	if typeof(t) == "Instance" then
+		return nil
+	end
+
+	for key, _ in pairs(t) do
+		return key
+	end
 end
 
 function Sidebar:init()
@@ -73,12 +92,14 @@ function Sidebar:init()
 	end
 
 	self:setState({
-		search = ""
+		search = "",
 	})
 end
 
 function Sidebar:patchStoryScripts(patch)
-	if self.cleaning then return end
+	if self.cleaning then
+		return
+	end
 
 	local storyScripts = {}
 
@@ -194,6 +215,7 @@ function Sidebar:render()
 				local scriptName = storyScript.Name
 
 				if isSearching and not scriptName:lower():find(searchStr, 1, true) then
+					print("show", scriptName)
 					continue
 				end
 
@@ -219,7 +241,99 @@ function Sidebar:render()
 				end
 			end
 
-			warn(storyTree)
+			--[[
+				if a parent folder has no children, combine with the parent
+				{
+					tree = {
+						["ReplicatedStorage"] = {
+							["System1"} = {
+								["Folder3"} = {
+									[1] = script : Instance
+								}
+							},
+							["System2"} = {
+								[1] = script : Instance
+							}
+						}
+					}
+					Becomes
+					tree = {
+						["ReplicatedStorage"] = {
+							["System1/Folder3"} = {
+								script : Instance
+							},
+							["System2"} = {
+								[1] = script : Instance
+							}
+						}
+					}
+				}
+			]]
+
+			local function condense(t)
+				local newT = {}
+				for key, value in pairs(t) do
+					if typeof(value) == "Instance" then
+						newT[key] = value
+						continue
+					end
+
+					local function areAllValuesStories()
+						for _, child in pairs(value) do
+							if typeof(child) ~= "Instance" or not child:IsA("ModuleScript") then
+								return false
+							end
+						end
+
+						return true
+					end
+
+					if areAllValuesStories() then
+						newT[key] = value
+						continue
+					end
+
+					local numChildren = getNumChildren(value)
+					local newKey = key
+
+					local r = 0
+					repeat
+						if numChildren == 1 then
+							local childName = getKeyOfFirstChild(value)
+
+							if not childName then
+								break
+							end
+
+							local addKey: string = getKeyOfFirstChild(value)
+
+							if type(addKey) == "number" then
+								break
+							end
+
+							newKey ..= "/" .. addKey
+							value = value[addKey]
+							numChildren = getNumChildren(value)
+						else
+							value =  condense(value)
+							break
+						end
+						r += 1
+					until r == 10
+
+					if r == 10 then
+						warn("Recursion limit reached")
+					end
+
+					newT[newKey] = value
+				end
+
+				return newT
+			end
+
+			print("before", storyTree)
+			storyTree = condense(storyTree)
+			print("after", storyTree)
 
 			local storyLists = {}
 			for parent, children in pairs(storyTree) do
@@ -237,7 +351,7 @@ function Sidebar:render()
 				BorderSizePixel = 0,
 				ClipsDescendants = true,
 				Size = UDim2.fromScale(1, 1),
-				ZIndex = 2
+				ZIndex = 2,
 			}, {
 				UIListLayout = e("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
@@ -284,7 +398,7 @@ function Sidebar:render()
 							Thickness = 2,
 							Color = theme:GetColor("Border", "Default"),
 						}),
-					})
+					}),
 				}),
 
 				StoryLists = e(AutomatedScrollingFrame, {
