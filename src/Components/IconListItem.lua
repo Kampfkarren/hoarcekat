@@ -52,6 +52,7 @@ local function IconListItem(props)
 					Text = props.Text,
 					TextColor3 = theme:GetColor("BrightText", "Default"),
 					TextXAlignment = Enum.TextXAlignment.Left,
+					RichText = true
 				}),
 			})
 		end,

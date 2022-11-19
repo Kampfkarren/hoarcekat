@@ -215,7 +215,6 @@ function Sidebar:render()
 				local scriptName = storyScript.Name
 
 				if isSearching and not scriptName:lower():find(searchStr, 1, true) then
-					print("show", scriptName)
 					continue
 				end
 
@@ -311,7 +310,7 @@ function Sidebar:render()
 								break
 							end
 
-							newKey ..= "/" .. addKey
+							newKey ..= "<b>/</b>" .. addKey
 							value = value[addKey]
 							numChildren = getNumChildren(value)
 						else
