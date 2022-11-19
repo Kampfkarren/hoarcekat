@@ -315,7 +315,7 @@ function Sidebar:render()
 							value = value[addKey]
 							numChildren = getNumChildren(value)
 						else
-							value =  condense(value)
+							value = condense(value)
 							break
 						end
 						r += 1
@@ -331,9 +331,7 @@ function Sidebar:render()
 				return newT
 			end
 
-			print("before", storyTree)
 			storyTree = condense(storyTree)
-			print("after", storyTree)
 
 			local storyLists = {}
 			for parent, children in pairs(storyTree) do
