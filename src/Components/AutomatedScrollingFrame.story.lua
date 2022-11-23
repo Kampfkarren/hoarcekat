@@ -1,4 +1,4 @@
-local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+local Hoarcekat = script:FindFirstAncestor("Storyboards")
 
 local AutomatedScrollingFrame = require(script.Parent.AutomatedScrollingFrame)
 local Roact = require(Hoarcekat.Vendor.Roact)

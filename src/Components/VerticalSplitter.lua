@@ -1,4 +1,4 @@
-local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+local Hoarcekat = script:FindFirstAncestor("Storyboards")
 
 local Roact = require(Hoarcekat.Vendor.Roact)
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
@@ -23,11 +23,13 @@ VerticalSplitter.defaultProps = {
 }
 
 function VerticalSplitter:init()
+	local startSize = self.props.Plugin:getSetting("SplitterSize") or DEFAULT_ALPHA
+
 	self.containerRef = Roact.createRef()
 	self:setState({
 		hovering = false,
 		dragging = false,
-		alpha = DEFAULT_ALPHA,
+		alpha = startSize,
 	})
 	self.onInputBegan = function(_rbx, input)
 		if input.UserInputType == Enum.UserInputType.MouseMovement then
@@ -51,6 +53,7 @@ function VerticalSplitter:init()
 				local offset = input.Position.x - container.AbsolutePosition.x
 				offset = math.clamp(offset, HANDLE_WIDTH, width - HANDLE_WIDTH)
 				self:setState({ alpha = offset / width })
+				self.props.Plugin:setSetting("SplitterSize", self.state.alpha)
 			end
 		end
 	end

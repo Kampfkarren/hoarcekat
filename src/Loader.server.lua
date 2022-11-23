@@ -108,6 +108,20 @@ function PluginFacade:getMouse()
 end
 
 --[[
+	Wrapper around plugin:GetSetting
+]]
+function PluginFacade:getSetting(name)
+	return plugin:GetSetting(name)
+end
+
+--[[
+	Wrapper around plugin:SetSetting
+]]
+function PluginFacade:setSetting(name, value)
+	return plugin:SetSetting(name, value)
+end
+
+--[[
 	Sets the method to call the next time the system tries to reload
 ]]
 function PluginFacade:beforeUnload(callback)

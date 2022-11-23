@@ -1,4 +1,4 @@
-local Modules = script:FindFirstAncestor("Hoarcekat")
+local Modules = script:FindFirstAncestor("Storyboards")
 
 local Roact = require(Modules.Vendor.Roact)
 

@@ -1,7 +1,7 @@
 local CoreGui = game:GetService("CoreGui")
 local Selection = game:GetService("Selection")
 
-local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+local Hoarcekat = script:FindFirstAncestor("Storyboards")
 
 local Assets = require(Hoarcekat.Plugin.Assets)
 local EventConnection = require(script.Parent.EventConnection)
