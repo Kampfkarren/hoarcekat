@@ -113,12 +113,22 @@ end
 
 function Preview:prepareState(selectedStory)
 	local state = {
+		actions = {},
 		cleanup = nil,
 		monkeyRequireCache = {},
 		monkeyGlobalTable = {},
 		monkeyRequireMaid = Maid.new(),
 		target = nil,
 	}
+
+	local actionHandler = {}
+	
+	function actionHandler:Register(image, callback)
+			table.insert(state.actions, {
+				["image"] = image;
+				["callback"] = callback;
+			})
+		end
 
 	function state:destroy()
 		self.monkeyRequireMaid:DoCleaning()
@@ -181,7 +191,7 @@ function Preview:prepareState(selectedStory)
 	state.target.Size = UDim2.fromScale(1, 1)
 
 	local execOk, cleanup = xpcall(function()
-		return result(state.target)
+		return result(state.target, actionHandler)
 	end, debug.traceback)
 
 	if not execOk then
@@ -195,6 +205,33 @@ end
 
 function Preview:render()
 	local selectedStory = self.props.selectedStory
+	
+	local actions = {};
+	
+	table.insert(actions, e("UIListLayout", {
+		Padding = UDim.new(0, 45),
+		FillDirection = Enum.FillDirection.Horizontal,
+		VerticalAlignment = Enum.VerticalAlignment.Center,
+		HorizontalAlignment = Enum.HorizontalAlignment.Right
+	}))
+
+	if self.currentPreview then
+		for _, action in self.currentPreview.actions do
+			table.insert(actions, e("Frame", {
+				AnchorPoint = Vector2.new(1, 1),
+				BackgroundTransparency = 1,
+				Size = UDim2.fromOffset(40, 40),
+				ZIndex = 2,
+			}, {
+				Button = e(FloatingButton, {
+					Activated = action.callback,
+					Image = action.image,
+					ImageSize = UDim.new(0, 24),
+					Size = UDim.new(0, 40),
+				}),
+			}))
+		end
+	end
 
 	return e("Frame", {
 		BackgroundTransparency = 1,
@@ -205,6 +242,13 @@ function Preview:render()
 			PaddingLeft = UDim.new(0, 5),
 			PaddingTop = UDim.new(0, 5),
 		}),
+
+		Actions = e("Frame", {
+			AnchorPoint = Vector2.new(0, 1),
+			BackgroundTransparency = 1,
+			Position = UDim2.fromScale(0, 0.99),
+			Size = UDim2.new(0.99, -90, 0, 40)
+		}, actions),
 
 		SelectButton = e("Frame", {
 			AnchorPoint = Vector2.new(1, 1),
