@@ -101,6 +101,13 @@ function PluginFacade:createDockWidgetPluginGui(name, ...)
 end
 
 --[[
+	Wrapper around plugin:GetMouse
+]]
+function PluginFacade:getMouse()
+	return plugin:GetMouse()
+end
+
+--[[
 	Sets the method to call the next time the system tries to reload
 ]]
 function PluginFacade:beforeUnload(callback)

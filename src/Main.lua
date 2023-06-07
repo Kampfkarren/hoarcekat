@@ -1,4 +1,4 @@
-local RunService = game:GetService('RunService')
+local RunService = game:GetService("RunService")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
@@ -21,12 +21,7 @@ local function Main(plugin, savedState)
 	local displaySuffix, nameSuffix = getSuffix(plugin)
 	local toolbar = plugin:toolbar("Hoarcekat" .. displaySuffix)
 
-	local toggleButton = plugin:button(
-		toolbar,
-		"Hoarcekat",
-		"Open the Hoarcekat window",
-		"rbxassetid://4621571957"
-	)
+	local toggleButton = plugin:button(toolbar, "Hoarcekat", "Open the Hoarcekat window", "rbxassetid://4621571957")
 
 	local store = Rodux.Store.new(Reducer, savedState)
 
@@ -45,7 +40,9 @@ local function Main(plugin, savedState)
 	local app = Roact.createElement(RoactRodux.StoreProvider, {
 		store = store,
 	}, {
-		App = Roact.createElement(App),
+		App = Roact.createElement(App, {
+			Mouse = plugin:getMouse(),
+		}),
 	})
 
 	local instance = Roact.mount(app, gui, "Hoarcekat")
@@ -56,7 +53,9 @@ local function Main(plugin, savedState)
 		return store:getState()
 	end)
 
-	if RunService:IsRunning() then return end
+	if RunService:IsRunning() then
+		return
+	end
 
 	local unloadConnection
 	unloadConnection = gui.AncestryChanged:Connect(function()
