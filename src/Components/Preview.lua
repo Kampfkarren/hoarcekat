@@ -33,18 +33,16 @@ function Preview:init()
 
 	self.openSelection = function()
 		if self.currentPreview and self.currentPreview.target then
-			if self.state.expand then
-				local studioSettings: GlobalSettings = settings()
-
-				-- This could not work as intended in the future if Roblox decides to change this setting name...
-				if studioSettings.Studio[HIDDEN_OBJECT_SETTING_NAME] == false then
-					warn(
-						`Cannot show instance in game.CoreGui as {HIDDEN_OBJECT_SETTING_NAME} setting in Studio is not enabled.`
-					)
-				end
-			end
-
 			Selection:Set({ self.currentPreview.target })
+
+			local studioSettings: GlobalSettings = settings()
+
+			-- This could not work as intended in the future if Roblox decides to change this setting name...
+			if studioSettings.Studio[HIDDEN_OBJECT_SETTING_NAME] == false then
+				warn(
+					`Cannot show instance in explorer ({self.currentPreview.target:GetFullName()}) as {HIDDEN_OBJECT_SETTING_NAME} setting in Studio is not enabled.`
+				)
+			end
 		end
 	end
 
@@ -54,9 +52,6 @@ function Preview:init()
 				expand = not current.expand,
 			}
 		end)
-		self.display.Parent = self.state.expand and CoreGui or nil
-
-		self:updateDisplay()
 	end
 end
 
@@ -97,6 +92,7 @@ function Preview:updateDisplay()
 	if not target then
 		return
 	end
+
 	if self.state.expand then
 		target.Parent = self.display
 	else
@@ -117,6 +113,7 @@ function Preview:refreshPreview()
 	end
 	self:clearPreview()
 	self.currentPreview = nextState
+	self.display.Parent = self.state.expand and CoreGui or nil
 	self:updateDisplay()
 end
 
@@ -250,7 +247,7 @@ function Preview:render()
 		}, {
 			Button = e(FloatingButton, {
 				Activated = self.expandSelection,
-				ToolTipText = `Render story in {if self.state.expand then "Hoarcekat" else "Studio Viewport"}`,
+				ToolTipText = `Render story in {if self.state.expand then "Hoarcekat" else "Studio viewport"}`,
 				Image = "rbxasset://textures/ui/VR/toggle2D.png",
 				ImageSize = UDim.new(0, 24),
 				Size = UDim.new(0, 40),
