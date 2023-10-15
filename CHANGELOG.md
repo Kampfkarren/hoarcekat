@@ -6,11 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.3.1]
 ### Added
-- Tooltips added to the floating buttons to better convey their purpose.
-- Warning in the output when the user tries to select a story instance in the `CoreGui` when they do not have the "Show Hidden Objects in Explorer" Studio setting enabled.
+- Tooltips have been added to the floating buttons to better convey their purpose.
+- Warning in the output when the user tries to select a story instance (using the dedicated floating button) when they do not have the "Show Hidden Objects in Explorer" Studio setting enabled.
 
 ### Changed
 - Hoarcekat no longer initializes if the game is running, this ensures the plugin doesn't potentially cause performance issues during play tests.
+- Floating buttons no longer appear if a story is not selected.
 
 ## [1.3.0]
 ### Added
