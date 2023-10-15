@@ -1,6 +1,8 @@
 local CoreGui = game:GetService("CoreGui")
 local Selection = game:GetService("Selection")
 
+local HIDDEN_OBJECT_SETTING_NAME = "Show Hidden Objects in Explorer"
+
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local Assets = require(Hoarcekat.Plugin.Assets)
@@ -17,6 +19,10 @@ local Preview = Roact.PureComponent:extend("Preview")
 function Preview:init()
 	self.rootRef = Roact.createRef()
 
+	self:setState({
+		expand = false,
+	})
+
 	self.currentPreview = nil
 	self.errorID = 0
 
@@ -25,17 +31,30 @@ function Preview:init()
 	display.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	self.display = display
 
-	self.expand = false
-
 	self.openSelection = function()
 		if self.currentPreview and self.currentPreview.target then
+			if self.state.expand then
+				local studioSettings: GlobalSettings = settings()
+
+				-- This could not work as intended in the future if Roblox decides to change this setting name...
+				if studioSettings.Studio[HIDDEN_OBJECT_SETTING_NAME] == false then
+					warn(
+						`Cannot show instance in game.CoreGui as {HIDDEN_OBJECT_SETTING_NAME} setting in Studio is not enabled.`
+					)
+				end
+			end
+
 			Selection:Set({ self.currentPreview.target })
 		end
 	end
 
 	self.expandSelection = function()
-		self.expand = not self.expand
-		self.display.Parent = self.expand and CoreGui or nil
+		self:setState(function(current)
+			return {
+				expand = not current.expand,
+			}
+		end)
+		self.display.Parent = self.state.expand and CoreGui or nil
 
 		self:updateDisplay()
 	end
@@ -78,7 +97,7 @@ function Preview:updateDisplay()
 	if not target then
 		return
 	end
-	if self.expand then
+	if self.state.expand then
 		target.Parent = self.display
 	else
 		target.Parent = self.rootRef:getValue()
@@ -206,7 +225,7 @@ function Preview:render()
 			PaddingTop = UDim.new(0, 5),
 		}),
 
-		SelectButton = e("Frame", {
+		SelectButton = selectedStory and e("Frame", {
 			AnchorPoint = Vector2.new(1, 1),
 			BackgroundTransparency = 1,
 			Position = UDim2.fromScale(0.99, 0.99),
@@ -217,11 +236,12 @@ function Preview:render()
 				Activated = self.openSelection,
 				Image = Assets.preview,
 				ImageSize = UDim.new(0, 24),
+				ToolTipText = "Select in Studio Explorer",
 				Size = UDim.new(0, 40),
 			}),
 		}),
 
-		ExpandButton = e("Frame", {
+		ExpandButton = selectedStory and e("Frame", {
 			AnchorPoint = Vector2.new(1, 1),
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0.99, -45, 0.99),
@@ -230,6 +250,7 @@ function Preview:render()
 		}, {
 			Button = e(FloatingButton, {
 				Activated = self.expandSelection,
+				ToolTipText = `Render story in {if self.state.expand then "Hoarcekat" else "Studio Viewport"}`,
 				Image = "rbxasset://textures/ui/VR/toggle2D.png",
 				ImageSize = UDim.new(0, 24),
 				Size = UDim.new(0, 40),
