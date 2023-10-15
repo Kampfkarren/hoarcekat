@@ -4,8 +4,14 @@ local Assets = require(Hoarcekat.Plugin.Assets)
 local Roact = require(Hoarcekat.Vendor.Roact)
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
 
-local e = Roact.createElement
+local TOOLTIP_PADDING = {
+	PaddingLeft = UDim.new(0, 12),
+	PaddingRight = UDim.new(0, 12),
+	PaddingTop = UDim.new(0, 5),
+	PaddingBottom = UDim.new(0, 5),
+}
 
+local e = Roact.createElement
 local FloatingButton = Roact.Component:extend("FloatingButton")
 
 function FloatingButton:init()
@@ -43,12 +49,7 @@ function FloatingButton:render()
 				}):map(function(state)
 					return theme:GetColor(
 						"MainButton",
-						state.pressed
-							and "Pressed"
-							or (state.hovered
-								and "Hover"
-								or "Default"
-							)
+						state.pressed and "Pressed" or (state.hovered and "Hover" or "Default")
 					)
 				end),
 				Size = UDim2.new(props.Size, props.Size),
@@ -65,6 +66,31 @@ function FloatingButton:render()
 					Image = props.Image,
 					Position = UDim2.fromScale(0.5, 0.5),
 					Size = UDim2.new(props.ImageSize, props.ImageSize),
+				}),
+
+				ToolTip = e("TextLabel", {
+					Text = props.ToolTipText,
+					TextColor3 = theme:GetColor("BrightText", "Default"),
+					BackgroundTransparency = 0,
+					Position = UDim2.fromScale(1, -0.5),
+					AnchorPoint = Vector2.new(1, 0.5),
+					AutomaticSize = Enum.AutomaticSize.XY,
+					BackgroundColor3 = theme:GetColor("ScrollBarBackground", "Default"),
+					Visible = self.hovered:map(function(hovered)
+						return hovered
+					end),
+				}, {
+					UIPadding = e("UIPadding", TOOLTIP_PADDING),
+
+					UICorner = e("UICorner", {
+						CornerRadius = UDim.new(0, 4),
+					}),
+
+					UIStroke = e("UIStroke", {
+						Thickness = 3,
+						ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+						Color = theme:GetColor("DialogButtonBorder"),
+					}),
 				}),
 			})
 		end,
