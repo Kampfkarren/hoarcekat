@@ -247,7 +247,7 @@ function Preview:render()
 		}, {
 			Button = e(FloatingButton, {
 				Activated = self.expandSelection,
-				ToolTipText = `Render story in {if self.state.expand then "Hoarcekat" else "Studio viewport"}`,
+				ToolTipText = `Render story in {if self.state.expand then "Hoarcekat" else "Studio Viewport"}`,
 				Image = "rbxasset://textures/ui/VR/toggle2D.png",
 				ImageSize = UDim.new(0, 24),
 				Size = UDim.new(0, 40),
