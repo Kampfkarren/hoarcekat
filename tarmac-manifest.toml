@@ -3,6 +3,11 @@ hash = "0d06ee1564e952337009b4ea9f7e53b6c3709e46b656cd826af85d07723c224a"
 id = 6037473336
 packable = false
 
+[inputs."assets/clear_output.png"]
+hash = "4383049d6bcdce3ed9639d99cf98e03cfd45425ad92453056fef0f59b701f2e4"
+id = 15081097417
+packable = false
+
 [inputs."assets/collapse_down.png"]
 hash = "46eaca35f3b9e1eeb259d182ff4e3311142751b5cdfff674c578c7ce1e44b0c0"
 id = 6037473412
