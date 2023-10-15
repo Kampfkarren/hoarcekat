@@ -40,7 +40,7 @@ function Preview:init()
 			-- This could not work as intended in the future if Roblox decides to change this setting name...
 			if studioSettings.Studio[HIDDEN_OBJECT_SETTING_NAME] == false then
 				warn(
-					`Cannot show instance in explorer ({self.currentPreview.target:GetFullName()}) as {HIDDEN_OBJECT_SETTING_NAME} setting in Studio is not enabled.`
+					`Cannot show instance in explorer ({self.currentPreview.target:GetFullName()}) as "{HIDDEN_OBJECT_SETTING_NAME}" setting in Studio is not enabled.`
 				)
 			end
 		end
