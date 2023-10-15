@@ -87,7 +87,7 @@ function FloatingButton:render()
 					}),
 
 					UIStroke = e("UIStroke", {
-						Thickness = 3,
+						Thickness = 2,
 						ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 						Color = theme:GetColor("DialogButtonBorder"),
 					}),
