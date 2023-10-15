@@ -21,6 +21,10 @@ local function IconListItem(props)
 
 				[Roact.Event.Activated] = props.Activated,
 			}, {
+				UICorner = e("UICorner", {
+					CornerRadius = UDim.new(0, 8),
+				}),
+
 				Layout = e("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					Padding = UDim.new(0, 5),
