@@ -1,4 +1,5 @@
 local CoreGui = game:GetService("CoreGui")
+local LogService = game:GetService("LogService")
 local Selection = game:GetService("Selection")
 
 local HIDDEN_OBJECT_SETTING_NAME = "Show Hidden Objects in Explorer"
@@ -21,6 +22,7 @@ function Preview:init()
 
 	self:setState({
 		expand = false,
+		clearOutput = false,
 	})
 
 	self.currentPreview = nil
@@ -50,6 +52,14 @@ function Preview:init()
 		self:setState(function(current)
 			return {
 				expand = not current.expand,
+			}
+		end)
+	end
+
+	self.toggleClearOutput = function()
+		self:setState(function(current)
+			return {
+				clearOutput = not current.clearOutput,
 			}
 		end)
 	end
@@ -100,7 +110,11 @@ function Preview:updateDisplay()
 	end
 end
 
-function Preview:refreshPreview()
+function Preview:refreshPreview(checkPreferenceToClear: boolean)
+	if checkPreferenceToClear and self.state.clearOutput then
+		LogService:ClearOutput()
+	end
+
 	local selectedStory = self.props.selectedStory
 	if not selectedStory then
 		self:clearPreview()
@@ -159,7 +173,7 @@ function Preview:prepareState(selectedStory)
 		end
 
 		state.monkeyRequireMaid:GiveTask(otherScript.Changed:connect(function()
-			self:refreshPreview()
+			self:refreshPreview(true)
 		end))
 
 		-- loadstring is used to avoid cache while preserving `script` (which requiring a clone wouldn't do)
@@ -249,6 +263,24 @@ function Preview:render()
 				Activated = self.expandSelection,
 				ToolTipText = `Render story in {if self.state.expand then "Hoarcekat" else "Studio Viewport"}`,
 				Image = "rbxasset://textures/ui/VR/toggle2D.png",
+				ImageSize = UDim.new(0, 24),
+				Size = UDim.new(0, 40),
+			}),
+		}),
+
+		ClearOutputButton = selectedStory and e("Frame", {
+			AnchorPoint = Vector2.new(1, 1),
+			BackgroundTransparency = 1,
+			Position = UDim2.new(0.99, -90, 0.99),
+			Size = UDim2.fromOffset(40, 40),
+			ZIndex = 2,
+		}, {
+			Button = e(FloatingButton, {
+				Activated = self.toggleClearOutput,
+				ToolTipText = `Clear output when story is updated {if self.state.clearOutput
+					then "(Enabled)"
+					else "(Disabled)"}`,
+				Image = Assets.clear_output,
 				ImageSize = UDim.new(0, 24),
 				Size = UDim.new(0, 40),
 			}),
