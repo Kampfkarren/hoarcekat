@@ -110,11 +110,13 @@ function Preview:updateDisplay()
 	end
 end
 
-function Preview:refreshPreview(checkPreferenceToClear: boolean)
-	if checkPreferenceToClear and self.state.clearOutput then
+function Preview:clearOutput()
+	if self.state.clearOutput then
 		LogService:ClearOutput()
 	end
+end
 
+function Preview:refreshPreview()
 	local selectedStory = self.props.selectedStory
 	if not selectedStory then
 		self:clearPreview()
@@ -173,7 +175,8 @@ function Preview:prepareState(selectedStory)
 		end
 
 		state.monkeyRequireMaid:GiveTask(otherScript.Changed:connect(function()
-			self:refreshPreview(true)
+			self:refreshPreview()
+			self:clearOutput()
 		end))
 
 		-- loadstring is used to avoid cache while preserving `script` (which requiring a clone wouldn't do)
