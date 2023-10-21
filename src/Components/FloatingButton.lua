@@ -47,7 +47,7 @@ function FloatingButton:render()
 			local hovered = self.state.hovered
 
 			local buttonColor = if props.Disabled
-				then theme:GetColor("DialogButtonBorder")
+				then settings().Studio["Background Color"]
 				else theme:GetColor(
 					"MainButton",
 					if props.Disabled
@@ -58,7 +58,7 @@ function FloatingButton:render()
 				)
 
 			return e("ImageButton", {
-				BackgroundTransparency = 0,
+				BackgroundTransparency = if hovered then 0 else 0.5,
 				BackgroundColor3 = buttonColor,
 				Size = UDim2.new(props.Size, props.Size),
 
@@ -75,6 +75,7 @@ function FloatingButton:render()
 				Image = e("ImageLabel", {
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					BackgroundTransparency = 1,
+					ImageTransparency = if hovered then 0 else 0.5,
 					Image = props.Image,
 					Position = UDim2.fromScale(0.5, 0.5),
 					Size = UDim2.new(props.ImageSize, props.ImageSize),
