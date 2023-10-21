@@ -68,8 +68,8 @@ function FloatingButton:render()
 					Size = UDim2.new(props.ImageSize, props.ImageSize),
 				}),
 
-				ToolTip = e("TextLabel", {
-					Text = props.ToolTipText,
+				Tooltip = e("TextLabel", {
+					Text = props.TooltipText,
 					TextColor3 = theme:GetColor("BrightText", "Default"),
 					BackgroundTransparency = 0,
 					Position = UDim2.fromScale(1, -0.5),

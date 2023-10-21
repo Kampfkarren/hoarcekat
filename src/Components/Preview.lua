@@ -247,7 +247,7 @@ function Preview:render()
 				Activated = self.openSelection,
 				Image = Assets.preview,
 				ImageSize = UDim.new(0, 24),
-				ToolTipText = "Select story instance in Studio explorer",
+				TooltipText = "Select story instance in Studio explorer",
 				Size = UDim.new(0, 40),
 			}),
 		}),
@@ -261,7 +261,7 @@ function Preview:render()
 		}, {
 			Button = e(FloatingButton, {
 				Activated = self.expandSelection,
-				ToolTipText = `Render story in {if self.state.expand then "Hoarcekat" else "Studio viewport"}`,
+				TooltipText = `Render story in {if self.state.expand then "Hoarcekat" else "Studio viewport"}`,
 				Image = "rbxasset://textures/ui/VR/toggle2D.png",
 				ImageSize = UDim.new(0, 24),
 				Size = UDim.new(0, 40),
@@ -277,7 +277,7 @@ function Preview:render()
 		}, {
 			Button = e(FloatingButton, {
 				Activated = self.toggleClearOutput,
-				ToolTipText = `Clear output when story is updated {if self.state.clearOutput
+				TooltipText = `Clear output when story is updated {if self.state.clearOutput
 					then "(Enabled)"
 					else "(Disabled)"}`,
 				Image = Assets.clear_output,
