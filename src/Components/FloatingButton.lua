@@ -4,13 +4,6 @@ local Assets = require(Hoarcekat.Plugin.Assets)
 local Roact = require(Hoarcekat.Vendor.Roact)
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
 
-local TOOLTIP_PADDING = {
-	PaddingLeft = UDim.new(0, 12),
-	PaddingRight = UDim.new(0, 12),
-	PaddingTop = UDim.new(0, 5),
-	PaddingBottom = UDim.new(0, 5),
-}
-
 local e = Roact.createElement
 local FloatingButton = Roact.Component:extend("FloatingButton")
 
@@ -80,7 +73,12 @@ function FloatingButton:render()
 						return hovered
 					end),
 				}, {
-					UIPadding = e("UIPadding", TOOLTIP_PADDING),
+					UIPadding = e("UIPadding", {
+						PaddingLeft = UDim.new(0, 12),
+						PaddingRight = UDim.new(0, 12),
+						PaddingTop = UDim.new(0, 5),
+						PaddingBottom = UDim.new(0, 5),
+					}),
 
 					UICorner = e("UICorner", {
 						CornerRadius = UDim.new(0, 4),
