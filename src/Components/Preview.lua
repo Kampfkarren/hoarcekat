@@ -37,7 +37,7 @@ function Preview:init()
 		if self.currentPreview and self.currentPreview.target then
 			Selection:Set({ self.currentPreview.target })
 
-			local studioSettings: GlobalSettings = settings()
+			local studioSettings = settings()
 
 			-- This could not work as intended in the future if Roblox decides to change this setting name...
 			if studioSettings.Studio[HIDDEN_OBJECT_SETTING_NAME] == false then
