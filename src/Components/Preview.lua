@@ -127,7 +127,7 @@ function Preview:refreshPreview(checkPreferenceToClear: boolean)
 	end
 	self:clearPreview()
 	self.currentPreview = nextState
-	self.display.Parent = self.state.expand and CoreGui or nil
+	self.display.Parent = if self.state.expand then CoreGui else nil
 	self:updateDisplay()
 end
 
