@@ -280,9 +280,7 @@ function Preview:render()
 		}, {
 			Button = e(FloatingButton, {
 				Activated = self.toggleClearOutput,
-				TooltipText = `Clear output when story is updated {if self.state.clearOutput
-					then "(Enabled)"
-					else "(Disabled)"}`,
+				TooltipText = "Clear output when story is updated",
 				Disabled = not self.state.clearOutput,
 				Image = Assets.clear_output,
 				ImageSize = UDim.new(0, 24),
