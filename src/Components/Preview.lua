@@ -280,6 +280,7 @@ function Preview:render()
 				TooltipText = `Clear output when story is updated {if self.state.clearOutput
 					then "(Enabled)"
 					else "(Disabled)"}`,
+				Disabled = not self.state.clearOutput,
 				Image = Assets.clear_output,
 				ImageSize = UDim.new(0, 24),
 				Size = UDim.new(0, 40),

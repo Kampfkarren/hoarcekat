@@ -17,6 +17,7 @@ local function TestFloatingButton()
 			Activated = function()
 				print("activated!")
 			end,
+			Disabled = true,
 			TooltipText = "This is an example tooltip",
 			Image = Assets.preview,
 			ImageSize = UDim.new(0, 24),

@@ -46,12 +46,20 @@ function FloatingButton:render()
 			local pressed = self.state.pressed
 			local hovered = self.state.hovered
 
-			local buttonColor = if pressed then "Pressed" elseif hovered then "Hover" else "Default"
+			local buttonColor = if props.Disabled
+				then theme:GetColor("DialogButtonBorder")
+				else theme:GetColor(
+					"MainButton",
+					if props.Disabled
+						then "Disabled"
+						elseif pressed then "Pressed"
+						elseif hovered then "Hover"
+						else "Default"
+				)
 
 			return e("ImageButton", {
-				BackgroundTransparency = 1,
-				Image = Assets.button_fill,
-				ImageColor3 = theme:GetColor("MainButton", buttonColor),
+				BackgroundTransparency = 0,
+				BackgroundColor3 = buttonColor,
 				Size = UDim2.new(props.Size, props.Size),
 
 				[Roact.Event.MouseEnter] = self.onMouseEnter,
@@ -60,6 +68,10 @@ function FloatingButton:render()
 				[Roact.Event.MouseButton1Up] = self.onMouseButton1Up,
 				[Roact.Event.Activated] = props.Activated,
 			}, {
+				UICorner = e("UICorner", {
+					CornerRadius = UDim.new(1, 0),
+				}),
+
 				Image = e("ImageLabel", {
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					BackgroundTransparency = 1,
