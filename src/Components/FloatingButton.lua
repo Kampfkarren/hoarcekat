@@ -8,23 +8,33 @@ local e = Roact.createElement
 local FloatingButton = Roact.Component:extend("FloatingButton")
 
 function FloatingButton:init()
-	self.hovered, self.setHovered = Roact.createBinding(false)
-	self.pressed, self.setPressed = Roact.createBinding(false)
+	self:setState({
+		hovered = false,
+		pressed = false,
+	})
 
-	self.hover = function()
-		self.setHovered(true)
+	self.onMouseEnter = function()
+		self:setState({
+			hovered = true,
+		})
 	end
 
-	self.unhover = function()
-		self.setHovered(false)
+	self.onMouseLeave = function()
+		self:setState({
+			hovered = false,
+		})
 	end
 
-	self.press = function()
-		self.setPressed(true)
+	self.onMouseButton1Down = function()
+		self:setState({
+			pressed = true,
+		})
 	end
 
-	self.unpress = function()
-		self.setPressed(false)
+	self.onMouseButton1Up = function()
+		self:setState({
+			pressed = false,
+		})
 	end
 end
 
@@ -33,24 +43,21 @@ function FloatingButton:render()
 
 	return e(StudioThemeAccessor, {}, {
 		function(theme)
+			local pressed = self.state.pressed
+			local hovered = self.state.hovered
+
+			local buttonColor = if pressed then "Pressed" elseif hovered then "Hover" else "Default"
+
 			return e("ImageButton", {
 				BackgroundTransparency = 1,
 				Image = Assets.button_fill,
-				ImageColor3 = Roact.joinBindings({
-					hovered = self.hovered,
-					pressed = self.pressed,
-				}):map(function(state)
-					return theme:GetColor(
-						"MainButton",
-						state.pressed and "Pressed" or (state.hovered and "Hover" or "Default")
-					)
-				end),
+				ImageColor3 = theme:GetColor("MainButton", buttonColor),
 				Size = UDim2.new(props.Size, props.Size),
 
-				[Roact.Event.MouseEnter] = self.hover,
-				[Roact.Event.MouseLeave] = self.unhover,
-				[Roact.Event.MouseButton1Down] = self.press,
-				[Roact.Event.MouseButton1Up] = self.unpress,
+				[Roact.Event.MouseEnter] = self.onMouseEnter,
+				[Roact.Event.MouseLeave] = self.onMouseLeave,
+				[Roact.Event.MouseButton1Down] = self.onMouseButton1Down,
+				[Roact.Event.MouseButton1Up] = self.onMouseButton1Up,
 				[Roact.Event.Activated] = props.Activated,
 			}, {
 				Image = e("ImageLabel", {
@@ -61,7 +68,7 @@ function FloatingButton:render()
 					Size = UDim2.new(props.ImageSize, props.ImageSize),
 				}),
 
-				Tooltip = e("TextLabel", {
+				Tooltip = hovered and e("TextLabel", {
 					Text = props.TooltipText,
 					TextColor3 = theme:GetColor("BrightText", "Default"),
 					BackgroundTransparency = 0,
@@ -69,9 +76,6 @@ function FloatingButton:render()
 					AnchorPoint = Vector2.new(1, 0.5),
 					AutomaticSize = Enum.AutomaticSize.XY,
 					BackgroundColor3 = theme:GetColor("ScrollBarBackground", "Default"),
-					Visible = self.hovered:map(function(hovered)
-						return hovered
-					end),
 				}, {
 					UIPadding = e("UIPadding", {
 						PaddingLeft = UDim.new(0, 12),
