@@ -7,7 +7,7 @@
 			"$path": "src"
 		},
 
-		"Vendor": {
+		"Packages": {
 			"$path": "Packages"
 		}
 	}
