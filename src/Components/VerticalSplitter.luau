@@ -12,7 +12,7 @@ type Props = {
 	size: UDim2,
 }
 
-local function VerticalSplitter(props)
+local function VerticalSplitter(props: Props)
 	local containerRef = React.useRef(nil)
 	local hovering, setHovering = React.useState(false)
 	local dragging, setDragging = React.useState(false)
