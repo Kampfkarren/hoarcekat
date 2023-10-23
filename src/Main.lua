@@ -1,13 +1,12 @@
+--!nonstrict
 local RunService = game:GetService("RunService")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
-local Reducer = require(script.Parent.Reducer)
-local Roact = require(Hoarcekat.Vendor.Roact)
-local RoactRodux = require(Hoarcekat.Vendor.RoactRodux)
-local Rodux = require(Hoarcekat.Vendor.Rodux)
+local React = require(Hoarcekat.Packages.React)
+local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
-local App = require(script.Parent.Components.App)
+local App = require(Hoarcekat.Plugin.App)
 
 local function getSuffix(plugin)
 	if plugin.isDev then
@@ -23,7 +22,7 @@ local function Main(plugin, savedState)
 
 	local toggleButton = plugin:button(toolbar, "Hoarcekat", "Open the Hoarcekat window", "rbxassetid://4621571957")
 
-	local store = Rodux.Store.new(Reducer, savedState)
+	-- local store = Rodux.Store.new(Reducer, savedState)
 
 	local info = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, false, 0, 0)
 	local gui = plugin:createDockWidgetPluginGui("Hoarcekat" .. nameSuffix, info)
@@ -37,20 +36,17 @@ local function Main(plugin, savedState)
 		toggleButton:SetActive(gui.Enabled)
 	end)
 
-	local app = Roact.createElement(RoactRodux.StoreProvider, {
-		store = store,
-	}, {
-		App = Roact.createElement(App, {
-			Mouse = plugin:getMouse(),
-		}),
+	local app = React.createElement(App, {
+		mouse = plugin:getMouse(),
 	})
 
-	local instance = Roact.mount(app, gui, "Hoarcekat")
+	local root = ReactRoblox.createRoot(Instance.new("Folder"))
+	root:render(ReactRoblox.createPortal(app, gui, "Hoarcekat"))
 
 	plugin:beforeUnload(function()
-		Roact.unmount(instance)
+		root:unmount()
 		connection:Disconnect()
-		return store:getState()
+		return "TODO: context state instead of Rodux state"
 	end)
 
 	if RunService:IsRunning() then
