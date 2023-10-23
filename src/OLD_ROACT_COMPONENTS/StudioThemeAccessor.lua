@@ -1,6 +1,6 @@
 local Modules = script:FindFirstAncestor("Hoarcekat")
 
-local Roact = require(Modules.Vendor.Roact)
+local Roact = require(Modules.Packages.Roact)
 
 local StudioThemeAccessor = Roact.PureComponent:extend("StudioThemeAccessor")
 

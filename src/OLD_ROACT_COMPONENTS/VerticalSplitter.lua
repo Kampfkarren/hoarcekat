@@ -1,6 +1,6 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
-local Roact = require(Hoarcekat.Vendor.Roact)
+local Roact = require(Hoarcekat.Packages.Roact)
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
 
 local e = Roact.createElement

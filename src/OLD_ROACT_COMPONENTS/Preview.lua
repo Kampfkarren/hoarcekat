@@ -7,8 +7,8 @@ local Assets = require(Hoarcekat.Plugin.Assets)
 local EventConnection = require(script.Parent.EventConnection)
 local FloatingButton = require(script.Parent.FloatingButton)
 local Maid = require(Hoarcekat.Plugin.Maid)
-local Roact = require(Hoarcekat.Vendor.Roact)
-local RoactRodux = require(Hoarcekat.Vendor.RoactRodux)
+local Roact = require(Hoarcekat.Packages.Roact)
+local RoactRodux = require(Hoarcekat.Packages.RoactRodux)
 
 local e = Roact.createElement
 

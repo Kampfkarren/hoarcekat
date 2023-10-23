@@ -1,7 +1,7 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local Assets = require(Hoarcekat.Plugin.Assets)
-local Roact = require(Hoarcekat.Vendor.Roact)
+local Roact = require(Hoarcekat.Packages.Roact)
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
 
 local e = Roact.createElement
@@ -43,12 +43,7 @@ function FloatingButton:render()
 				}):map(function(state)
 					return theme:GetColor(
 						"MainButton",
-						state.pressed
-							and "Pressed"
-							or (state.hovered
-								and "Hover"
-								or "Default"
-							)
+						state.pressed and "Pressed" or (state.hovered and "Hover" or "Default")
 					)
 				end),
 				Size = UDim2.new(props.Size, props.Size),

@@ -5,8 +5,8 @@ local AutomatedScrollingFrame = require(script.Parent.AutomatedScrollingFrame)
 local Collapsible = require(script.Parent.Collapsible)
 local IconListItem = require(script.Parent.IconListItem)
 local Maid = require(Hoarcekat.Plugin.Maid)
-local Roact = require(Hoarcekat.Vendor.Roact)
-local RoactRodux = require(Hoarcekat.Vendor.RoactRodux)
+local Roact = require(Hoarcekat.Packages.Roact)
+local RoactRodux = require(Hoarcekat.Packages.RoactRodux)
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
 local TextLabel = require(script.Parent.TextLabel)
 
@@ -73,7 +73,9 @@ function Sidebar:init()
 end
 
 function Sidebar:patchStoryScripts(patch)
-	if self.cleaning then return end
+	if self.cleaning then
+		return
+	end
 
 	local storyScripts = {}
 
