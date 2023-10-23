@@ -4,7 +4,7 @@ local React = require(Hoarcekat.Packages.React)
 local e = React.createElement
 local VerticalSplitter = require(Hoarcekat.Plugin.Components.VerticalSplitter)
 
-type Props = { children: any?, mouse: any? }
+type Props = { children: any?, mouse: PluginMouse }
 
 local function App(props: Props)
 	return e("Frame", {
