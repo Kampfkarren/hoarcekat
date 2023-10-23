@@ -7,6 +7,11 @@ local e = React.createElement
 local HANDLE_WIDTH = 3
 local DEFAULT_ALPHA = 0.2
 
+type Props = {
+	mouse: PluginMouse,
+	size: UDim2,
+}
+
 local function VerticalSplitter(props)
 	local containerRef = React.useRef(nil)
 	local hovering, setHovering = React.useState(false)
