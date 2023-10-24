@@ -32,10 +32,11 @@ function Sidebar(props)
 	}, {
 		UIListLayout = e("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
+			Padding = UDim.new(0, 5),
 		}),
 
 		UIPadding = e("UIPadding", {
-			PaddingLeft = UDim.new(0, 5),
+			PaddingLeft = UDim.new(0, 3),
 			PaddingTop = UDim.new(0, 2),
 		}),
 
@@ -46,7 +47,9 @@ function Sidebar(props)
 			AnchorPoint = Vector2.new(0, 0),
 			Font = Enum.Font.SourceSansBold,
 			LayoutOrder = 1,
-			Text = "STORIES",
+			BackgroundTransparency = 1,
+			Text = `STORIES`,
+			TextSize = 21,
 			TextColor3 = theme.sideBar.storiesLabelTextColor,
 		}, {
 			UIPadding = e("UIPadding", {
@@ -57,7 +60,6 @@ function Sidebar(props)
 
 		StoryLists = e(AutomatedScrollingFrame, {
 			layoutClass = "UIListLayout",
-
 			native = {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
