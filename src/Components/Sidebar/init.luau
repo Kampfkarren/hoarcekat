@@ -40,11 +40,20 @@ function Sidebar(props)
 			PaddingTop = UDim.new(0, 2),
 		}),
 
-		StoriesLabel = e(TextLabel, {
-			font = Enum.Font.SourceSansBold,
-			layoutOrder = 1,
-			text = "STORIES",
-			textColor3 = theme.sideBar.storiesLabelTextColor,
+		StoriesLabel = e("TextLabel", {
+			AutomaticSize = Enum.AutomaticSize.X,
+			Size = UDim2.fromOffset(0, 20),
+			Position = UDim2.fromScale(0, 0),
+			AnchorPoint = Vector2.new(0, 0),
+			Font = Enum.Font.SourceSansBold,
+			LayoutOrder = 1,
+			Text = "STORIES",
+			TextColor3 = theme.sideBar.storiesLabelTextColor,
+		}, {
+			UIPadding = e("UIPadding", {
+				PaddingLeft = UDim.new(0, 4),
+				PaddingRight = UDim.new(0, 4),
+			}),
 		}),
 
 		StoryLists = e(AutomatedScrollingFrame, {
