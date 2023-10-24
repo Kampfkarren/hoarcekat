@@ -32,7 +32,7 @@ local function App(props: Props)
 					}),
 				}),
 				Right = e("Frame", {
-					BackgroundColor3 = Color3.fromRGB(25, 25, 25),
+					BackgroundColor3 = theme.holder.background,
 					Size = UDim2.fromScale(1, 1),
 				}),
 			}),
