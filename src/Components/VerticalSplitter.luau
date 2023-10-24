@@ -2,7 +2,7 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
-local HANDLE_WIDTH = 6
+local HANDLE_WIDTH = 4
 local DEFAULT_ALPHA = 0.2
 
 local e = React.createElement
