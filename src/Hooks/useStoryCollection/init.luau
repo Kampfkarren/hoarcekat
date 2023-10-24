@@ -3,7 +3,7 @@ local React = require(Hoarcekat.Packages.React)
 
 local USER_SERVICES = require(Hoarcekat.Plugin.Config).userServices
 
-local StoryObserver = require(script.StoryCollection)
+local StoryObserver = require(script.StoryObserver)
 
 local function useStoryCollection()
 	local storyScripts, setStoryScripts = React.useState({})
