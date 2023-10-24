@@ -1,4 +1,5 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+local Sidebar = require(Hoarcekat.Plugin.Components.Sidebar)
 local React = require(Hoarcekat.Packages.React)
 
 local e = React.createElement
@@ -17,6 +18,8 @@ local function App(props: Props)
 			Left = e("Frame", {
 				BackgroundColor3 = Color3.fromRGB(14, 14, 14),
 				Size = UDim2.fromScale(1, 1),
+			}, {
+				Sidebar = e(Sidebar),
 			}),
 			Right = e("Frame", {
 				BackgroundColor3 = Color3.fromRGB(25, 25, 25),
