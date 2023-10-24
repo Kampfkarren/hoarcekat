@@ -3,26 +3,26 @@ local React = require(Hoarcekat.Packages.React)
 
 local USER_SERVICES = require(Hoarcekat.Plugin.Config).userServices
 
-local StoryCollection = require(script.StoryCollection)
+local StoryObserver = require(script.StoryCollection)
 
 local function useStoryCollection()
 	local storyScripts, setStoryScripts = React.useState({})
 
 	React.useEffect(function()
-		local storyCollection = StoryCollection.new(setStoryScripts)
+		local storyObserver = StoryObserver.new(setStoryScripts)
 
 		local connections: { RBXScriptConnection } = {}
 
 		for _, serviceName in ipairs(USER_SERVICES) do
 			local service = game:GetService(serviceName)
 
-			storyCollection:lookForStories(service)
+			storyObserver:lookForStories(service)
 
 			table.insert(
 				connections,
 				service.DescendantAdded:Connect(function(child)
-					storyCollection:lookForStories(child)
-					storyCollection:checkStory(child)
+					storyObserver:lookForStories(child)
+					storyObserver:checkStory(child)
 				end)
 			)
 		end

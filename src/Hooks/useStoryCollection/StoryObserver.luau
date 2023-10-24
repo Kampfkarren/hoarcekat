@@ -4,16 +4,16 @@ local function isStoryScript(instance)
 	return instance:IsA("ModuleScript") and instance.Name:match("%.story$")
 end
 
-local StoryCollection = {}
-StoryCollection.__index = StoryCollection
+local StoryObserver = {}
+StoryObserver.__index = StoryObserver
 
-function StoryCollection.new(setStoryScripts)
-	local self = setmetatable({}, StoryCollection)
+function StoryObserver.new(setStoryScripts)
+	local self = setmetatable({}, StoryObserver)
 	self.setStoryScripts = setStoryScripts
 	return self
 end
 
-function StoryCollection:patchStoryScripts(patch)
+function StoryObserver:patchStoryScripts(patch)
 	if self.cleaning then
 		return
 	end
@@ -46,13 +46,13 @@ function StoryCollection:patchStoryScripts(patch)
 	end)
 end
 
-function StoryCollection:lookForStories(instance)
+function StoryObserver:lookForStories(instance)
 	for _, child in ipairs(instance:GetDescendants()) do
 		self:checkStory(child)
 	end
 end
 
-function StoryCollection:checkStory(instance)
+function StoryObserver:checkStory(instance)
 	if isStoryScript(instance) then
 		self:addStoryScript(instance)
 	else
@@ -60,7 +60,7 @@ function StoryCollection:checkStory(instance)
 	end
 end
 
-function StoryCollection:addStoryScript(storyScript)
+function StoryObserver:addStoryScript(storyScript)
 	local connectionA, connectionB
 
 	local function clean()
@@ -88,7 +88,7 @@ function StoryCollection:addStoryScript(storyScript)
 	})
 end
 
-function StoryCollection:removeStoryScript(storyScript)
+function StoryObserver:removeStoryScript(storyScript)
 	self:patchStoryScripts({
 		[storyScript] = NONE,
 	})
@@ -105,4 +105,4 @@ function StoryCollection:removeStoryScript(storyScript)
 	end
 end
 
-return StoryCollection
+return StoryObserver
