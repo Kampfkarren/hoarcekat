@@ -42,6 +42,9 @@ function Collapsible(props)
 				Position = UDim2.fromOffset(OFFSET, 0),
 			},
 			layoutClass = "UIListLayout",
+			layoutProps = {
+				Padding = UDim.new(0, 5),
+			},
 		}, {
 			UIPadding = e("UIPadding", {
 				PaddingLeft = UDim.new(0, OFFSET),
