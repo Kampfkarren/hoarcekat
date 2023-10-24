@@ -2,8 +2,8 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
-local FitComponent = require(Hoarcekat.Components.FitComponent)
-local IconListItem = require(Hoarcekat.Components.IconListItem)
+local FitComponent = require(Hoarcekat.Plugin.Components.FitComponent)
+local IconListItem = require(Hoarcekat.Plugin.Components.IconListItem)
 
 local OFFSET = 8
 
@@ -15,33 +15,33 @@ function Collapsible(props)
 	local content = open and props.children
 
 	return e(FitComponent, {
-		ContainerClass = "Frame",
-		ContainerProps = {
+		containerClass = "Frame",
+		containerProps = {
 			BackgroundTransparency = 1,
 		},
-		LayoutClass = "UIListLayout",
-		LayoutProps = {
+		layoutClass = "UIListLayout",
+		layoutProps = {
 			Padding = UDim.new(0, 5),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 		},
 	}, {
 		Topbar = e(IconListItem, {
-			Activated = function()
+			activated = function()
 				setOpen(function(current)
 					return not current
 				end)
 			end,
-			Icon = open and Assets.collapse_down or Assets.collapse_right,
-			Text = props.title,
+			icon = open and Assets.collapse_down or Assets.collapse_right,
+			text = props.title,
 		}),
 
 		Content = content and e(FitComponent, {
-			ContainerClass = "Frame",
-			ContainerProps = {
+			containerClass = "Frame",
+			containerProps = {
 				BackgroundTransparency = 1,
 				Position = UDim2.fromOffset(OFFSET, 0),
 			},
-			LayoutClass = "UIListLayout",
+			layoutClass = "UIListLayout",
 		}, {
 			UIPadding = e("UIPadding", {
 				PaddingLeft = UDim.new(0, OFFSET),
