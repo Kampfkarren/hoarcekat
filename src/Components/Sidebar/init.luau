@@ -6,10 +6,13 @@ local TextLabel = require(script.Parent.TextLabel)
 local SidebarList = require(script.SidebarList)
 
 local e = React.createElement
+local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)
 
 local useStoryCollection = require(Hoarcekat.Plugin.Hooks.useStoryCollection)
 
 function Sidebar(props)
+	local theme = React.useContext(StudioTheme.Context)
+
 	local storyTree = useStoryCollection()
 
 	local storyLists = {}
@@ -23,7 +26,7 @@ function Sidebar(props)
 	end
 
 	return e("Frame", {
-		-- BackgroundColor3 = theme:GetColor("ScrollBarBackground", "Default"),
+		BackgroundColor3 = theme.sideBar.background,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Size = UDim2.fromScale(1, 1),
@@ -41,7 +44,7 @@ function Sidebar(props)
 			font = Enum.Font.SourceSansBold,
 			layoutOrder = 1,
 			text = "STORIES",
-			-- TextColor3 = theme:GetColor("DimmedText", "Default"),
+			textColor3 = theme.sideBar.storiesLabelTextColor,
 		}),
 
 		StoryLists = e(AutomatedScrollingFrame, {

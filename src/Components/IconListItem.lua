@@ -6,10 +6,13 @@ local BAR_HEIGHT = 24
 local ICON_SIZE = 16
 
 local e = React.createElement
+local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)
 
 local function IconListItem(props)
+	local theme = React.useContext(StudioTheme.Context)
+
 	return e("TextButton", {
-		-- BackgroundColor3 = theme:GetColor("CurrentMarker", "Selected"),
+		BackgroundColor3 = theme.iconListItem.buttonColor,
 		BackgroundTransparency = props.selected and 0.5 or 1,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 0, BAR_HEIGHT),
@@ -37,7 +40,7 @@ local function IconListItem(props)
 				Size = UDim2.fromOffset(ICON_SIZE, ICON_SIZE),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Image = props.icon,
-				-- ImageColor3 = theme:GetColor("BrightText", "Default"),
+				ImageColor3 = theme.iconListItem.iconColor,
 			}),
 		}),
 
@@ -47,7 +50,7 @@ local function IconListItem(props)
 			LayoutOrder = 2,
 			Size = UDim2.new(1, -BAR_HEIGHT, 0, BAR_HEIGHT),
 			Text = props.text,
-			-- TextColor3 = theme:GetColor("BrightText", "Default"),
+			TextColor3 = theme.iconListItem.textColor,
 			TextXAlignment = Enum.TextXAlignment.Left,
 		}),
 	})

@@ -2,17 +2,19 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
-local e = React.createElement
-
-local HANDLE_WIDTH = 3
+local HANDLE_WIDTH = 6
 local DEFAULT_ALPHA = 0.2
 
+local e = React.createElement
+local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)
 type Props = {
 	mouse: PluginMouse,
 	size: UDim2,
 }
 
 local function VerticalSplitter(props: Props)
+	local theme = React.useContext(StudioTheme.Context)
+
 	local containerRef = React.useRef(nil)
 	local hovering, setHovering = React.useState(false)
 	local dragging, setDragging = React.useState(false)
@@ -93,23 +95,23 @@ local function VerticalSplitter(props: Props)
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.fromScale(alpha, 0),
 			Size = UDim2.new(0, HANDLE_WIDTH, 1, 0),
-			-- BackgroundColor3 = theme:GetColor("DialogButtonBorder"),
+			BackgroundColor3 = theme.verticalSplitter.grabber,
 			BorderSizePixel = 0,
 			ZIndex = 1,
 			[React.Event.InputBegan] = onInputBegan,
 			[React.Event.InputEnded] = onInputEnded,
 		}, {
-			BorderLeft = e("Frame", {
+			LeftBorder = e("Frame", {
 				Position = UDim2.fromOffset(-1, 0),
 				Size = UDim2.new(0, 1, 1, 0),
-				-- BackgroundColor3 = theme:GetColor("ScriptRuler"),
+				BackgroundColor3 = theme.verticalSplitter.border,
 				BorderSizePixel = 0,
 				Visible = hovering or dragging,
 			}),
-			BorderRight = e("Frame", {
+			RightBorder = e("Frame", {
 				Position = UDim2.fromScale(1, 0),
 				Size = UDim2.new(0, 1, 1, 0),
-				-- BackgroundColor3 = theme:GetColor("ScriptRuler"),
+				BackgroundColor3 = theme.verticalSplitter.border,
 				BorderSizePixel = 0,
 				Visible = hovering or dragging,
 			}),
