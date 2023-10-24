@@ -1,5 +1,3 @@
-local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
-
 local NONE = newproxy(true)
 
 local function isStoryScript(instance)
