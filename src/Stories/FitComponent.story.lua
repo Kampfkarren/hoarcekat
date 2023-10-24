@@ -19,13 +19,13 @@ end
 
 local function TestFitComponent()
 	return e(FitComponent, {
-		ContainerClass = "Frame",
-		ContainerProps = {
+		containerClass = "Frame",
+		containerProps = {
 			BackgroundColor3 = Color3.new(1, 0, 0), -- We should see red seep through
 			ClipsDescendants = true, -- If size doesn't change, we won't see anything
 		},
-		LayoutClass = "UIListLayout",
-		LayoutProps = {
+		layoutClass = "UIListLayout",
+		layoutProps = {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 		},
 	}, {
