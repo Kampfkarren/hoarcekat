@@ -2,7 +2,7 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local React = require(Hoarcekat.Packages.React)
 
-local BAR_HEIGHT = 24
+local BAR_HEIGHT = 20
 local ICON_SIZE = 16
 
 local e = React.createElement
@@ -25,6 +25,10 @@ local function IconListItem(props)
 			FillDirection = Enum.FillDirection.Horizontal,
 			Padding = UDim.new(0, 5),
 			SortOrder = Enum.SortOrder.LayoutOrder,
+		}),
+
+		UICorner = e("UICorner", {
+			CornerRadius = UDim.new(0, 4),
 		}),
 
 		IconFrame = e("Frame", {
