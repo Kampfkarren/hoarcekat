@@ -2,7 +2,9 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local NONE = newproxy(true)
 
-local isStoryScript = require(Hoarcekat.Plugin.Functions.isStoryScript)
+local function isStoryScript(instance)
+	return instance:IsA("ModuleScript") and instance.Name:match("%.story$")
+end
 
 local StoryCollection = {}
 StoryCollection.__index = StoryCollection
