@@ -4,7 +4,7 @@ local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
 local e = React.createElement
-local AutomatedScrollingFrame = require(script.Parent.AutomatedScrollingFrame)
+local AutomatedScrollingFrame = require(Hoarcekat.Plugin.Components.AutomatedScrollingFrame)
 
 local function Cruft()
 	return e("Frame", {
@@ -15,8 +15,8 @@ end
 
 local function TestScrollingFrame()
 	return e(AutomatedScrollingFrame, {
-		LayoutClass = "UIListLayout",
-		Native = {
+		layoutClass = "UIListLayout",
+		native = {
 			Size = UDim2.fromScale(0.8, 0.8),
 		},
 	}, {
