@@ -14,9 +14,14 @@ function Sidebar()
 
 	local storyTree = useStoryCollection()
 
-	local storyLists = {}
+	local storyListChildren = {
+		UIPadding = e("UIPadding", {
+			PaddingRight = UDim.new(0, 8),
+		}),
+	}
+
 	for parent, children in pairs(storyTree) do
-		storyLists[parent] = e(SidebarList, {
+		storyListChildren[parent] = e(SidebarList, {
 			title = parent,
 			children = children,
 		})
@@ -63,7 +68,7 @@ function Sidebar()
 				LayoutOrder = 2,
 				Size = UDim2.new(1, 0, 1, -20),
 			},
-		}, storyLists),
+		}, storyListChildren),
 	})
 end
 
