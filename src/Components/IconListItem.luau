@@ -1,5 +1,4 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
-
 local React = require(Hoarcekat.Packages.React)
 
 local BAR_HEIGHT = 24

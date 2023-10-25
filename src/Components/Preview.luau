@@ -3,9 +3,9 @@ local CoreGui = game:GetService("CoreGui")
 local Selection = game:GetService("Selection")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+local React = require(Hoarcekat.Packages.React)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
-local React = require(Hoarcekat.Packages.React)
 
 local e = React.createElement
 local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)

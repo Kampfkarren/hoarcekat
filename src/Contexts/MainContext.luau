@@ -1,4 +1,3 @@
-local ServerStorage = game:GetService("ServerStorage")
 local Hoarcekat = script.Parent:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 

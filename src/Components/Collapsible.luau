@@ -1,13 +1,13 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
-local Assets = require(Hoarcekat.Plugin.Assets)
-local FitComponent = require(Hoarcekat.Plugin.Components.FitComponent)
-local IconListItem = require(Hoarcekat.Plugin.Components.IconListItem)
-
 local OFFSET = 8
 
+local Assets = require(Hoarcekat.Plugin.Assets)
+
 local e = React.createElement
+local FitComponent = require(Hoarcekat.Plugin.Components.FitComponent)
+local IconListItem = require(Hoarcekat.Plugin.Components.IconListItem)
 
 function Collapsible(props)
 	local open, setOpen = React.useState(false)
