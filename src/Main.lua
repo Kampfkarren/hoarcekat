@@ -1,8 +1,10 @@
 --!nonstrict
 local RunService = game:GetService("RunService")
+local ServerStorage = game:GetService("ServerStorage")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
+local MainContext = require(ServerStorage.Hoarcekat.Plugin.Contexts.MainContext)
 local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
@@ -22,8 +24,6 @@ local function Main(plugin, savedState)
 
 	local toggleButton = plugin:button(toolbar, "Hoarcekat", "Open the Hoarcekat window", "rbxassetid://4621571957")
 
-	-- local store = Rodux.Store.new(Reducer, savedState)
-
 	local info = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, false, 0, 0)
 	local gui = plugin:createDockWidgetPluginGui("Hoarcekat" .. nameSuffix, info)
 	gui.Name = "Hoarcekat" .. nameSuffix
@@ -36,18 +36,18 @@ local function Main(plugin, savedState)
 		toggleButton:SetActive(gui.Enabled)
 	end)
 
-	local app = React.createElement(App, {
-		mouse = plugin:getMouse(),
-	})
-
 	local root = ReactRoblox.createRoot(Instance.new("Folder"))
-	root:render(ReactRoblox.createPortal(app, gui, "Hoarcekat"))
 
-	plugin:beforeUnload(function()
-		root:unmount()
-		connection:Disconnect()
-		return "TODO: context state instead of Rodux state"
-	end)
+	local function PluginApp()
+		return React.createElement(App, {
+			mouse = plugin:getMouse(),
+			savedState = savedState,
+			plugin = plugin,
+			root = root,
+		})
+	end
+
+	root:render(ReactRoblox.createPortal(React.createElement(PluginApp), gui, "Hoarcekat"))
 
 	if RunService:IsRunning() then
 		return
@@ -57,6 +57,7 @@ local function Main(plugin, savedState)
 	unloadConnection = gui.AncestryChanged:Connect(function()
 		print("New Hoarcekat version coming online; unloading the old version")
 		unloadConnection:Disconnect()
+		connection:Disconnect()
 		plugin:unload()
 	end)
 end
