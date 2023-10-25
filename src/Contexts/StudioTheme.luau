@@ -57,7 +57,7 @@ local function ThemeProvider(props)
 				connection:Disconnect()
 			end
 		end
-	end, {})
+	end, { theme })
 
 	return React.createElement(Context.Provider, {
 		value = theme,
