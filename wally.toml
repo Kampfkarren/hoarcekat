@@ -6,4 +6,4 @@ realm = "shared"
 
 [dependencies]
 React = "jsdotlua/react@17.0.2"
-ReactRoblox = "jsdotlua/react-roblox@17.0.2"#
+ReactRoblox = "jsdotlua/react-roblox@17.0.2"
