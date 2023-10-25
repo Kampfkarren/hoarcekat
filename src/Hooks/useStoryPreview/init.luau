@@ -9,6 +9,8 @@ local function useStoryPreview(rootRef, selectedStory, expand, setCurrentPreview
 
 	React.useEffect(function()
 		if storyPreviewer.current then
+			storyPreviewer.current:setSelectedStory(selectedStory)
+			storyPreviewer.current:setExpand(expand)
 			storyPreviewer.current:refreshPreview()
 		end
 
