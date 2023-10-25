@@ -1,3 +1,4 @@
+local ServerStorage = game:GetService("ServerStorage")
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
@@ -6,19 +7,25 @@ local ICON_SIZE = 16
 
 local e = React.createElement
 local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)
+local useButtonBehaviour = require(Hoarcekat.Plugin.Hooks.useButtonBehaviour)
 
 local function IconListItem(props)
 	local theme = React.useContext(StudioTheme.Context)
+	local button = useButtonBehaviour()
+	local transparency = if props.selected then 0.5 elseif button.hovering then 0.85 else 1
 
 	return e("TextButton", {
+		AutoButtonColor = false,
 		BackgroundColor3 = theme.iconListItem.buttonColor,
-		BackgroundTransparency = if props.selected then 0.5 else 1,
+		BackgroundTransparency = transparency,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 0, BAR_HEIGHT),
 		LayoutOrder = props.layoutOrder,
 		Text = "",
 		ClipsDescendants = true,
 
+		[React.Event.MouseEnter] = button.onMouseEnter,
+		[React.Event.MouseLeave] = button.onMouseLeave,
 		[React.Event.Activated] = props.activated,
 	}, {
 		Layout = e("UIListLayout", {
