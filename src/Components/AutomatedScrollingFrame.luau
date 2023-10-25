@@ -4,7 +4,7 @@ local React = require(Hoarcekat.Packages.React)
 local e = React.createElement
 
 function AutomatedScrollingFrame(props)
-	local canvasSize, updateCanvasSize = React.useBinding(UDim2.new())
+	local canvasSize, updateCanvasSize = React.useBinding(Vector2.new())
 
 	local resize = React.useCallback(function(rbx)
 		updateCanvasSize(rbx.AbsoluteContentSize)
@@ -18,7 +18,7 @@ function AutomatedScrollingFrame(props)
 	end
 
 	local nativeProps = {}
-	nativeProps.CanvasSize = canvasSize:map(function(size)
+	nativeProps.CanvasSize = canvasSize:map(function(size: Vector2)
 		return UDim2.fromOffset(size.X, size.Y)
 	end)
 
