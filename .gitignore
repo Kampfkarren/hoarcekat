@@ -1,4 +1,5 @@
-place.rbxlx*
+*.rbxl*
+*.rbxm*
 Packages
 .vscode
 sourcemap.json
