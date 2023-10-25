@@ -2,7 +2,7 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local React = require(Hoarcekat.Packages.React)
 
-local BAR_HEIGHT = 20
+local BAR_HEIGHT = 24
 local ICON_SIZE = 16
 
 local e = React.createElement
