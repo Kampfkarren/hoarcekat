@@ -13,11 +13,12 @@ local function IconListItem(props)
 
 	return e("TextButton", {
 		BackgroundColor3 = theme.iconListItem.buttonColor,
-		BackgroundTransparency = props.selected and 0.5 or 1,
+		BackgroundTransparency = if props.selected then 0.5 else 1,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 0, BAR_HEIGHT),
 		LayoutOrder = props.layoutOrder,
 		Text = "",
+		ClipsDescendants = true,
 
 		[React.Event.Activated] = props.activated,
 	}, {
