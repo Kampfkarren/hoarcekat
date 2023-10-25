@@ -5,7 +5,7 @@ local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 local Assets = require(Hoarcekat.Plugin.Assets)
 
 local e = React.createElement
-local FloatingButton = require(Hoarcekat.Plugin.Components.FloatingButton)
+local FloatingButton = require(Hoarcekat.Plugin.Gui.Components.FloatingButton)
 
 local function TestFloatingButton()
 	return e(FloatingButton, {

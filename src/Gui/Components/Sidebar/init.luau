@@ -1,12 +1,13 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
-local React = require(Hoarcekat.Packages.React)
 
-local e = React.createElement
-local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)
 local AutomatedScrollingFrame = require(script.Parent.AutomatedScrollingFrame)
+local React = require(Hoarcekat.Packages.React)
 local SidebarList = require(script.SidebarList)
 
-local useStoryCollection = require(Hoarcekat.Plugin.Hooks.useStoryCollection)
+local e = React.createElement
+local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
+
+local useStoryCollection = require(Hoarcekat.Plugin.Gui.Hooks.useStoryCollection)
 
 function Sidebar()
 	local theme = React.useContext(StudioTheme.Context)
@@ -18,7 +19,6 @@ function Sidebar()
 			PaddingRight = UDim.new(0, 8),
 		}),
 	}
-
 	for parent, children in pairs(storyTree) do
 		storyListChildren[parent] = e(SidebarList, {
 			title = parent,

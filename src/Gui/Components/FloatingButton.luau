@@ -4,8 +4,8 @@ local React = require(Hoarcekat.Packages.React)
 local Assets = require(Hoarcekat.Plugin.Assets)
 
 local e = React.createElement
-local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)
-local useButtonBehaviour = require(Hoarcekat.Plugin.Hooks.useButtonBehaviour)
+local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
+local useButtonBehaviour = require(Hoarcekat.Plugin.Gui.Hooks.useButtonBehaviour)
 
 function FloatingButton(props)
 	local theme = React.useContext(StudioTheme.Context)

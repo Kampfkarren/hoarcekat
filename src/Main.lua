@@ -6,7 +6,7 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
-local App = require(Hoarcekat.Plugin.App)
+local App = require(Hoarcekat.Plugin.Gui.App)
 
 local function getSuffix(plugin)
 	if plugin.isDev then

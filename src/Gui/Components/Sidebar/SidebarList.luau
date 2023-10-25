@@ -3,12 +3,10 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
-
 local e = React.createElement
-local MainContext = require(Hoarcekat.Plugin.Contexts.MainContext)
-local Collapsible = require(Hoarcekat.Plugin.Components.Collapsible)
-local IconListItem = require(Hoarcekat.Plugin.Components.IconListItem)
-
+local Collapsible = require(Hoarcekat.Plugin.Gui.Components.Collapsible)
+local IconListItem = require(Hoarcekat.Plugin.Gui.Components.IconListItem)
+local MainContext = require(Hoarcekat.Plugin.Gui.Contexts.MainContext).Plugin.Gui.Components
 local function SidebarList(props)
 	local mainContext = React.useContext(MainContext.Context)
 	local selectedStory, setSelectedStory = mainContext.selectedStory, mainContext.setSelectedStory

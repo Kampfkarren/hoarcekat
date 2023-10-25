@@ -6,8 +6,8 @@ local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 local Assets = require(Hoarcekat.Plugin.Assets)
 
 local e = React.createElement
-local Collapsible = require(Hoarcekat.Plugin.Components.Collapsible)
-local IconListItem = require(Hoarcekat.Plugin.Components.IconListItem)
+local Collapsible = require(Hoarcekat.Plugin.Gui.Components.Collapsible)
+local IconListItem = require(Hoarcekat.Plugin.Gui.Components.IconListItem)
 
 local function CollapsibleChildrenFragment(props)
 	local elements = {}

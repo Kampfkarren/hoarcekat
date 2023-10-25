@@ -3,7 +3,7 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
-local useFirstMountState = require(Hoarcekat.Plugin.Hooks.useFirstMountState)
+local useFirstMountState = require(Hoarcekat.Plugin.Gui.Hooks.useFirstMountState)
 
 local function useUpdateEffect(effect, dependencies)
 	local isFirstMount = useFirstMountState()

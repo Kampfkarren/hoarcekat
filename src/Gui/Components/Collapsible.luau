@@ -6,8 +6,8 @@ local OFFSET = 8
 local Assets = require(Hoarcekat.Plugin.Assets)
 
 local e = React.createElement
-local FitComponent = require(Hoarcekat.Plugin.Components.FitComponent)
-local IconListItem = require(Hoarcekat.Plugin.Components.IconListItem)
+local FitComponent = require(Hoarcekat.Plugin.Gui.Components.FitComponent)
+local IconListItem = require(Hoarcekat.Plugin.Gui.Components.IconListItem)
 
 type Props = {
 	children: any?,

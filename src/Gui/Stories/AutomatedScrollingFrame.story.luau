@@ -4,7 +4,7 @@ local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
 local e = React.createElement
-local AutomatedScrollingFrame = require(Hoarcekat.Plugin.Components.AutomatedScrollingFrame)
+local AutomatedScrollingFrame = require(Hoarcekat.Plugin.Gui.Components.AutomatedScrollingFrame)
 
 local function Cruft()
 	return e("Frame", {

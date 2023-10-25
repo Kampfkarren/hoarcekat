@@ -3,11 +3,11 @@ local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 local React = require(Hoarcekat.Packages.React)
 
 local e = React.createElement
-local MainContext = require(Hoarcekat.Plugin.Contexts.MainContext)
-local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)
-local VerticalSplitter = require(Hoarcekat.Plugin.Components.VerticalSplitter)
-local Sidebar = require(Hoarcekat.Plugin.Components.Sidebar)
-local Preview = require(Hoarcekat.Plugin.Components.Preview)
+local MainContext = require(Hoarcekat.Plugin.Gui.Contexts.MainContext)
+local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
+local VerticalSplitter = require(Hoarcekat.Plugin.Gui.Components.VerticalSplitter)
+local Sidebar = require(Hoarcekat.Plugin.Gui.Components.Sidebar)
+local Preview = require(Hoarcekat.Plugin.Gui.Components.Preview)
 
 type Props = {
 	root: ReactRoblox.RootType,

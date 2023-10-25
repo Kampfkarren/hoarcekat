@@ -2,7 +2,7 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
 local StoryPreviewer = require(script.StoryPreviewer)
-local useUpdateEffect = require(Hoarcekat.Plugin.Hooks.useUpdateEffect)
+local useUpdateEffect = require(Hoarcekat.Plugin.Gui.Hooks.useUpdateEffect)
 
 local function useStoryPreview(rootRef, selectedStory, expand, setCurrentPreview)
 	local storyPreviewer = React.useRef(StoryPreviewer.new(rootRef, setCurrentPreview))
