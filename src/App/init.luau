@@ -1,4 +1,6 @@
+local ServerStorage = game:GetService("ServerStorage")
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+local ReactRoblox = require(ServerStorage.Hoarcekat.Packages.ReactRoblox)
 local React = require(Hoarcekat.Packages.React)
 
 local e = React.createElement
@@ -8,13 +10,23 @@ local VerticalSplitter = require(Hoarcekat.Plugin.Components.VerticalSplitter)
 local Sidebar = require(Hoarcekat.Plugin.Components.Sidebar)
 local Preview = require(Hoarcekat.Plugin.Components.Preview)
 
-type Props = { children: any?, mouse: PluginMouse }
+type Props = {
+	root: ReactRoblox.RootType,
+	plugin: any,
+	children: any?,
+	mouse: PluginMouse,
+	savedState: { selectedStory: Instance? }?,
+}
 
 local function App(props: Props)
 	local theme = React.useContext(StudioTheme.Context)
 
 	return e(StudioTheme.Provider, nil, {
-		MainContext = e(MainContext.Provider, nil, {
+		MainContext = e(MainContext.Provider, {
+			root = props.root,
+			plugin = props.plugin,
+			savedState = props.savedState,
+		}, {
 			HoarcekatHolder = e("Frame", {
 				BackgroundColor3 = theme.holder.background,
 				Size = UDim2.fromScale(1, 1),

@@ -3,8 +3,26 @@ local React = require(Hoarcekat.Packages.React)
 
 local Context = React.createContext(nil)
 
-function Provider(props)
-	local selectedStory, setSelectedStory = React.useState(nil)
+type Props = {
+	root: any,
+	savedState: { selectedStory: Instance? }?,
+	plugin: any,
+	children: any,
+}
+
+function Provider(props: Props)
+	local savedState = props.savedState
+	local initialValue = if savedState and savedState.selectedStory then savedState.selectedStory else nil
+	local selectedStory: Instance | nil, setSelectedStory = React.useState(initialValue)
+
+	React.useEffect(function()
+		props.plugin:beforeUnload(function()
+			props.root:unmount()
+			return {
+				selectedStory = selectedStory,
+			}
+		end)
+	end, { selectedStory, props.plugin, props.root })
 
 	React.useEffect(function()
 		local connection
