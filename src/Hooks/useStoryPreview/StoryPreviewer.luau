@@ -1,7 +1,4 @@
 --!nonstrict
-local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
-local Maid = require(Hoarcekat.Plugin.Maid)
-
 local ERROR_DELAY = 1
 
 local StoryPreviewer = {}
@@ -91,7 +88,7 @@ function StoryPreviewer:clearPreview()
 	end
 	state:destroy()
 	self.currentPreview = nil
-	self.setCurrentPreview(nil)
+	self.setCurrentPreview(self.currentPreview)
 end
 
 function StoryPreviewer:prepareState(selectedStory)
@@ -99,12 +96,14 @@ function StoryPreviewer:prepareState(selectedStory)
 		cleanup = nil,
 		monkeyRequireCache = {},
 		monkeyGlobalTable = {},
-		monkeyRequireMaid = Maid.new(),
+		otherScriptChangedConnection = nil,
 		target = nil,
 	}
 
 	function state:destroy()
-		self.monkeyRequireMaid:DoCleaning()
+		if self.otherScriptChangedConnection then
+			self.otherScriptChangedConnection:Disconnect()
+		end
 
 		if self.cleanup then
 			local ok, result = pcall(self.cleanup)
@@ -125,9 +124,13 @@ function StoryPreviewer:prepareState(selectedStory)
 			return state.monkeyRequireCache[otherScript]
 		end
 
-		state.monkeyRequireMaid:GiveTask(otherScript.Changed:connect(function()
+		if state.otherScriptChangedConnection then
+			state.otherScriptChangedConnection:Disconnect()
+		end
+
+		state.otherScriptChangedConnection = otherScript.Changed:connect(function()
 			self:refreshPreview()
-		end))
+		end)
 
 		-- loadstring is used to avoid cache while preserving `script` (which requiring a clone wouldn't do)
 		local result, parseError = loadstring(otherScript.Source, otherScript:GetFullName())
