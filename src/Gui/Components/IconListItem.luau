@@ -18,6 +18,7 @@ local function IconListItem(props)
 		Size = UDim2.new(1, 0, 0, BAR_HEIGHT),
 		LayoutOrder = props.layoutOrder,
 		Text = "",
+		ClipsDescendants = true,
 
 		[React.Event.Activated] = props.activated,
 	}, {
