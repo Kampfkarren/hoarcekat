@@ -1,7 +1,7 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+local React = require(Hoarcekat.Packages.React)
 
 local AutomatedScrollingFrame = require(script.Parent.AutomatedScrollingFrame)
-local React = require(Hoarcekat.Packages.React)
 local SidebarList = require(script.SidebarList)
 
 local e = React.createElement
