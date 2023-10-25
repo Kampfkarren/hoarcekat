@@ -21,7 +21,7 @@ function Provider(props)
 				connection:Disconnect()
 			end
 		end
-	end, {})
+	end, { selectedStory })
 
 	return React.createElement(Context.Provider, {
 		value = {
