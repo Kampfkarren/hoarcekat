@@ -1,3 +1,5 @@
+-- Inspired by: https://github.com/streamich/react-use/blob/master/src/useFirstMountState.ts
+
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
