@@ -9,7 +9,7 @@ local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)
 
 local useStoryCollection = require(Hoarcekat.Plugin.Hooks.useStoryCollection)
 
-function Sidebar(props)
+function Sidebar()
 	local theme = React.useContext(StudioTheme.Context)
 
 	local storyTree = useStoryCollection()
@@ -18,8 +18,6 @@ function Sidebar(props)
 	for parent, children in pairs(storyTree) do
 		storyLists[parent] = e(SidebarList, {
 			title = parent,
-			selectStory = props.selectStory,
-			selectedStory = props.selectedStory,
 			children = children,
 		})
 	end

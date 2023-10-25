@@ -1,3 +1,4 @@
+--!nonstrict
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
@@ -5,24 +6,29 @@ local Assets = require(Hoarcekat.Plugin.Assets)
 local e = React.createElement
 local Collapsible = require(Hoarcekat.Plugin.Components.Collapsible)
 local IconListItem = require(Hoarcekat.Plugin.Components.IconListItem)
+local MainContext = require(Hoarcekat.Plugin.Contexts.MainContext)
 
 local function SidebarList(props)
+	local mainContext = React.useContext(MainContext.Context)
+	local selectedStory, setSelectedStory = mainContext.selectedStory, mainContext.setSelectedStory
 	local contents = {}
 
 	for childName, child in pairs(props.children) do
 		if typeof(child) == "Instance" then
 			contents["Instance" .. child.Name] = e(IconListItem, {
 				activated = function()
-					props.selectStory(child)
+					if selectedStory == child then
+						setSelectedStory(nil)
+					else
+						setSelectedStory(child)
+					end
 				end,
 				icon = Assets.hamburger,
-				selected = props.selectedStory == child,
+				selected = selectedStory == child,
 				text = child.Name:sub(1, #child.Name - #".story"),
 			})
 		else
 			contents["Folder" .. childName] = e(SidebarList, {
-				selectStory = props.selectStory,
-				selectedStory = props.selectedStory,
 				title = childName,
 			}, child)
 		end
