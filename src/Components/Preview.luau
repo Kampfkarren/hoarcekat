@@ -14,7 +14,7 @@ local FloatingButton = require(Hoarcekat.Plugin.Components.FloatingButton)
 
 local useStoryPreview = require(Hoarcekat.Plugin.Hooks.useStoryPreview)
 
-function Preview(props)
+function Preview()
 	local mainContext = React.useContext(MainContext.Context)
 	local selectedStory = mainContext.selectedStory
 
@@ -70,7 +70,7 @@ function Preview(props)
 		ExpandButton = e("Frame", {
 			AnchorPoint = Vector2.new(1, 1),
 			BackgroundTransparency = 1,
-			Position = UDim2.new(0.99, -45, 0.99),
+			Position = UDim2.new(0.99, -45, 0.99, 0),
 			Size = UDim2.fromOffset(40, 40),
 			ZIndex = 2,
 		}, {
