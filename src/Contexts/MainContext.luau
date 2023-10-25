@@ -1,6 +1,5 @@
 local ServerStorage = game:GetService("ServerStorage")
 local Hoarcekat = script.Parent:FindFirstAncestor("Hoarcekat")
-local useEventConnection = require(ServerStorage.Hoarcekat.Plugin.Hooks.useEventConnection)
 local React = require(Hoarcekat.Packages.React)
 
 local Context = React.createContext(nil)
@@ -8,10 +7,22 @@ local Context = React.createContext(nil)
 function Provider(props)
 	local selectedStory, setSelectedStory = React.useState(nil)
 
-	local ancestryChanged = if selectedStory then selectedStory.AncestryChanged else nil
-	useEventConnection(ancestryChanged, function()
-		setSelectedStory(nil)
-	end, { setSelectedStory })
+	React.useEffect(function()
+		local connection
+
+		if selectedStory then
+			connection = selectedStory.AncestryChanged:Connect(function()
+				setSelectedStory(nil)
+				connection:Disconnect()
+			end)
+		end
+
+		return function()
+			if connection then
+				connection:Disconnect()
+			end
+		end
+	end, {})
 
 	return React.createElement(Context.Provider, {
 		value = {

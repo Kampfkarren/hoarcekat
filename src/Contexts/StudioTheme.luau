@@ -1,8 +1,6 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
-local useEventConnection = require(Hoarcekat.Plugin.Hooks.useEventConnection)
-
 local function deriveHoarcekatTheme(studioTheme: StudioTheme)
 	return {
 		holder = {
@@ -45,8 +43,20 @@ local Context = React.createContext(deriveHoarcekatTheme(studioSettings.Theme))
 local function ThemeProvider(props)
 	local theme, setTheme = React.useState(deriveHoarcekatTheme(studioSettings.Theme))
 
-	useEventConnection(studioSettings.ThemeChanged, function()
-		setTheme(deriveHoarcekatTheme(studioSettings.Theme))
+	React.useEffect(function()
+		local connection
+
+		if theme then
+			connection = studioSettings.ThemeChanged:Connect(function()
+				setTheme(deriveHoarcekatTheme(studioSettings.Theme))
+			end)
+		end
+
+		return function()
+			if connection then
+				connection:Disconnect()
+			end
+		end
 	end, {})
 
 	return React.createElement(Context.Provider, {
