@@ -9,8 +9,13 @@ local e = React.createElement
 local FitComponent = require(Hoarcekat.Plugin.Components.FitComponent)
 local IconListItem = require(Hoarcekat.Plugin.Components.IconListItem)
 
-function Collapsible(props)
-	local open, setOpen = React.useState(false)
+type Props = {
+	children: any?,
+	title: string,
+}
+
+function Collapsible(props: Props)
+	local open, setOpen = React.useState(true)
 
 	local content = open and props.children
 
