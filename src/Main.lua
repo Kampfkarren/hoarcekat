@@ -1,10 +1,8 @@
 --!nonstrict
 local RunService = game:GetService("RunService")
-local ServerStorage = game:GetService("ServerStorage")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
-local MainContext = require(ServerStorage.Hoarcekat.Plugin.Contexts.MainContext)
 local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 

@@ -1,6 +1,5 @@
-local ServerStorage = game:GetService("ServerStorage")
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
-local ReactRoblox = require(ServerStorage.Hoarcekat.Packages.ReactRoblox)
+local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 local React = require(Hoarcekat.Packages.React)
 
 local e = React.createElement

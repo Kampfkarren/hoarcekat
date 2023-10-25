@@ -1,7 +1,5 @@
 --!nonstrict
-local ServerStorage = game:GetService("ServerStorage")
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
-local IconListItem = require(ServerStorage.Hoarcekat.Plugin.Components.IconListItem)
 local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
@@ -9,6 +7,7 @@ local Assets = require(Hoarcekat.Plugin.Assets)
 
 local e = React.createElement
 local Collapsible = require(Hoarcekat.Plugin.Components.Collapsible)
+local IconListItem = require(Hoarcekat.Plugin.Components.IconListItem)
 
 local function CollapsibleChildrenFragment(props)
 	local elements = {}
