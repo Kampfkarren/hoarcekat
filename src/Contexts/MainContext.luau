@@ -7,7 +7,7 @@ type Props = {
 	root: any,
 	savedState: { selectedStory: Instance? }?,
 	plugin: any,
-	children: any,
+	children: any?,
 }
 
 function Provider(props: Props)
