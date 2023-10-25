@@ -10,6 +10,7 @@ local StudioTheme = require(Hoarcekat.Plugin.Contexts.StudioTheme)
 type Props = {
 	mouse: PluginMouse,
 	size: UDim2,
+	children: any?,
 }
 
 local function VerticalSplitter(props: Props)
