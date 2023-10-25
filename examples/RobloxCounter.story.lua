@@ -10,6 +10,7 @@ return function(target)
 		counter = counter + 1
 		instance.Text = counter
 	end)
+
 	instance.Parent = target
 
 	return function()
