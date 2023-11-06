@@ -19,7 +19,7 @@ local function useStoryPreview(rootRef, selectedStory, expand, setCurrentPreview
 				storyPreviewer.current:clearPreview()
 			end
 		end
-	end, {})
+	end, { selectedStory, expand })
 
 	return storyPreviewer.current
 end

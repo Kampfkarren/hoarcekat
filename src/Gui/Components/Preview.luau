@@ -9,7 +9,6 @@ local React = require(Hoarcekat.Packages.React)
 local Assets = require(Hoarcekat.Plugin.Assets)
 local FloatingButton = require(Hoarcekat.Plugin.Gui.Components.FloatingButton)
 local MainContext = require(Hoarcekat.Plugin.Gui.Contexts.MainContext)
-local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 local useStoryPreview = require(Hoarcekat.Plugin.Gui.Hooks.useStoryPreview)
 
 local e = React.createElement
@@ -17,8 +16,6 @@ local e = React.createElement
 function Preview()
 	local mainContext = React.useContext(MainContext.Context)
 	local selectedStory = mainContext.selectedStory
-
-	local theme = React.useContext(StudioTheme.Context)
 
 	local rootRef = React.useRef(nil)
 

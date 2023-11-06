@@ -68,7 +68,7 @@ local function VerticalSplitter(props: Props)
 		return function()
 			pluginMouse.Icon = ""
 		end
-	end, { hovering, dragging })
+	end, { props.mouse, hovering, dragging })
 
 	return e("Frame", {
 		Size = props.size,
