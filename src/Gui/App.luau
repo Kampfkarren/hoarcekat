@@ -1,13 +1,15 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 local React = require(Hoarcekat.Packages.React)
 
-local e = React.createElement
 local MainContext = require(Hoarcekat.Plugin.Gui.Contexts.MainContext)
+local Preview = require(Hoarcekat.Plugin.Gui.Components.Preview)
+local Sidebar = require(Hoarcekat.Plugin.Gui.Components.Sidebar)
 local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 local VerticalSplitter = require(Hoarcekat.Plugin.Gui.Components.VerticalSplitter)
-local Sidebar = require(Hoarcekat.Plugin.Gui.Components.Sidebar)
-local Preview = require(Hoarcekat.Plugin.Gui.Components.Preview)
+
+local e = React.createElement
 
 type Props = {
 	root: ReactRoblox.RootType,

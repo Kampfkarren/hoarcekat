@@ -1,13 +1,15 @@
 --!nonstrict
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+
 local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
 
-local e = React.createElement
 local Collapsible = require(Hoarcekat.Plugin.Gui.Components.Collapsible)
 local IconListItem = require(Hoarcekat.Plugin.Gui.Components.IconListItem)
+
+local e = React.createElement
 
 local function CollapsibleChildrenFragment(props)
 	local elements = {}

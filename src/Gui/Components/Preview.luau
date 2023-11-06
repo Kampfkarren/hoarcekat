@@ -3,16 +3,16 @@ local CoreGui = game:GetService("CoreGui")
 local Selection = game:GetService("Selection")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+
 local React = require(Hoarcekat.Packages.React)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
+local FloatingButton = require(Hoarcekat.Plugin.Gui.Components.FloatingButton)
+local MainContext = require(Hoarcekat.Plugin.Gui.Contexts.MainContext)
+local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
+local useStoryPreview = require(Hoarcekat.Plugin.Gui.Hooks.useStoryPreview)
 
 local e = React.createElement
-local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
-local MainContext = require(Hoarcekat.Plugin.Gui.Contexts.MainContext)
-local FloatingButton = require(Hoarcekat.Plugin.Gui.Components.FloatingButton)
-
-local useStoryPreview = require(Hoarcekat.Plugin.Gui.Hooks.useStoryPreview)
 
 function Preview()
 	local mainContext = React.useContext(MainContext.Context)

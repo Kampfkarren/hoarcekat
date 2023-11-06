@@ -3,8 +3,9 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
-local e = React.createElement
 local AutomatedScrollingFrame = require(Hoarcekat.Plugin.Gui.Components.AutomatedScrollingFrame)
+
+local e = React.createElement
 
 local function Cruft()
 	return e("Frame", {

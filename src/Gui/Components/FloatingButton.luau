@@ -1,11 +1,12 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+
 local React = require(Hoarcekat.Packages.React)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
-
-local e = React.createElement
 local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 local useButtonBehaviour = require(Hoarcekat.Plugin.Gui.Hooks.useButtonBehaviour)
+
+local e = React.createElement
 
 function FloatingButton(props)
 	local theme = React.useContext(StudioTheme.Context)

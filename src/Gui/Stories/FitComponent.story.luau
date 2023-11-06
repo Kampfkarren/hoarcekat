@@ -3,8 +3,9 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
-local e = React.createElement
 local FitComponent = require(Hoarcekat.Plugin.Gui.Components.FitComponent)
+
+local e = React.createElement
 
 local function Content(props)
 	return e("TextLabel", {

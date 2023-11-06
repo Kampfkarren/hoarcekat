@@ -1,12 +1,15 @@
 --!nonstrict
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+
 local React = require(Hoarcekat.Packages.React)
 
-local HANDLE_WIDTH = 4
 local DEFAULT_ALPHA = 0.2
+local HANDLE_WIDTH = 4
+
+local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 
 local e = React.createElement
-local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
+
 type Props = {
 	mouse: PluginMouse,
 	size: UDim2,

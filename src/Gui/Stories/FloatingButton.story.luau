@@ -1,11 +1,12 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+
 local React = require(Hoarcekat.Packages.React)
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
+local FloatingButton = require(Hoarcekat.Plugin.Gui.Components.FloatingButton)
 
 local e = React.createElement
-local FloatingButton = require(Hoarcekat.Plugin.Gui.Components.FloatingButton)
 
 local function TestFloatingButton()
 	return e(FloatingButton, {

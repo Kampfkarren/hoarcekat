@@ -1,13 +1,14 @@
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+
 local React = require(Hoarcekat.Packages.React)
 
 local BAR_HEIGHT = 24
 local ICON_SIZE = 16
 
-local e = React.createElement
 local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 local useButtonBehaviour = require(Hoarcekat.Plugin.Gui.Hooks.useButtonBehaviour)
 
+local e = React.createElement
 type Props = {
 	selected: boolean?,
 	layoutOrder: number?,
