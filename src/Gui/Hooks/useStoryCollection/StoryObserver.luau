@@ -1,3 +1,4 @@
+--!nonstrict
 local NONE = newproxy(true)
 
 local function isStoryScript(instance)
