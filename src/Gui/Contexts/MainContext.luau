@@ -10,14 +10,12 @@ local Context = React.createContext({
 	setSelectedStory: (any) -> (),
 })
 
-type Props = {
+local function Provider(props: {
 	root: any,
 	savedState: { selectedStory: Instance? }?,
 	plugin: any,
 	children: any?,
-}
-
-local function Provider(props: Props)
+})
 	local savedState = props.savedState
 	local initialValue = if savedState and savedState.selectedStory then savedState.selectedStory else nil
 	local selectedStory: Instance | nil, setSelectedStory = React.useState(initialValue)
