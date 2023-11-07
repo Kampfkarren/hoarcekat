@@ -7,7 +7,7 @@ StoryPreviewer.__index = StoryPreviewer
 function StoryPreviewer.new(rootRef, setCurrentPreview)
 	local self = setmetatable({}, StoryPreviewer)
 
-	self.errorID = 0
+	self.errorId = 0
 
 	local display = Instance.new("ScreenGui")
 	display.Name = "HoarcekatDisplay"
@@ -25,10 +25,10 @@ function StoryPreviewer:setDisplayParent(newParent: Instance)
 end
 
 function StoryPreviewer:setError(err)
-	local id = self.errorID + 1
-	self.errorID = id
+	local id = self.errorId + 1
+	self.errorId = id
 	task.delay(ERROR_DELAY, function()
-		if self.errorID ~= id then
+		if self.errorId ~= id then
 			-- Error was canceled or replaced.
 			return
 		end
@@ -37,7 +37,7 @@ function StoryPreviewer:setError(err)
 end
 
 function StoryPreviewer:cancelError()
-	self.errorID += 1
+	self.errorId += 1
 end
 
 function StoryPreviewer:setExpand(expand: boolean)
