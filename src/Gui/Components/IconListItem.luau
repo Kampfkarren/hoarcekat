@@ -43,6 +43,10 @@ local function IconListItem(props: Props)
 			SortOrder = Enum.SortOrder.LayoutOrder,
 		}),
 
+		UIPadding = e("UIPadding", {
+			PaddingLeft = UDim.new(0, 5),
+		}),
+
 		UICorner = e("UICorner", {
 			CornerRadius = UDim.new(0, 4),
 		}),

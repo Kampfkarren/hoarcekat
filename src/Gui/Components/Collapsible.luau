@@ -5,7 +5,6 @@ local React = require(Hoarcekat.Packages.React)
 local OFFSET = 8
 
 local Assets = require(Hoarcekat.Plugin.Assets)
-local FitComponent = require(Hoarcekat.Plugin.Gui.Components.FitComponent)
 local IconListItem = require(Hoarcekat.Plugin.Gui.Components.IconListItem)
 
 local e = React.createElement
@@ -20,17 +19,16 @@ function Collapsible(props: Props)
 
 	local content = open and props.children
 
-	return e(FitComponent, {
-		containerClass = "Frame",
-		containerProps = {
-			BackgroundTransparency = 1,
-		},
-		layoutClass = "UIListLayout",
-		layoutProps = {
-			Padding = UDim.new(0, 5),
-			SortOrder = Enum.SortOrder.LayoutOrder,
-		},
+	return e("Frame", {
+		AutomaticSize = Enum.AutomaticSize.Y,
+		Size = UDim2.fromScale(1, 0),
+		BackgroundTransparency = 1,
 	}, {
+		UIListLayout = e("UIListLayout", {
+			Padding = UDim.new(0, 0),
+			SortOrder = Enum.SortOrder.LayoutOrder,
+		}),
+
 		Topbar = e(IconListItem, {
 			activated = function()
 				setOpen(function(current)
@@ -39,24 +37,25 @@ function Collapsible(props: Props)
 			end,
 			icon = open and Assets.collapse_down or Assets.collapse_right,
 			text = props.title,
+			layoutOrder = 1,
 		}),
 
-		Content = content and e(FitComponent, {
-			containerClass = "Frame",
-			containerProps = {
-				BackgroundTransparency = 1,
-				Position = UDim2.fromOffset(OFFSET, 0),
-			},
-			layoutClass = "UIListLayout",
-			layoutProps = {
-				Padding = UDim.new(0, 5),
-			},
+		Content = e("Frame", {
+			AutomaticSize = Enum.AutomaticSize.Y,
+			Size = UDim2.fromScale(1, 0),
+			BackgroundTransparency = 1,
+			Position = UDim2.fromOffset(OFFSET, 0),
+			LayoutOrder = 2,
 		}, {
+			UIListLayout = e("UIListLayout", {
+				Padding = UDim.new(0, 5),
+			}),
+
 			UIPadding = e("UIPadding", {
 				PaddingLeft = UDim.new(0, OFFSET),
 			}),
 
-			Content = e(React.Fragment, nil, content),
+			Content = content and e(React.Fragment, nil, content),
 		}),
 	})
 end

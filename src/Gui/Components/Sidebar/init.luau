@@ -6,6 +6,7 @@ local SidebarList = require(script.SidebarList)
 local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 local useStoryCollection = require(Hoarcekat.Plugin.Gui.Hooks.useStoryCollection)
 
+local SCROLL_BAR_THICKNESS = 8
 local e = React.createElement
 
 function Sidebar()
@@ -38,21 +39,20 @@ function Sidebar()
 		}),
 
 		UIPadding = e("UIPadding", {
-			PaddingLeft = UDim.new(0, 3),
+			PaddingLeft = UDim.new(0, 5),
 			PaddingTop = UDim.new(0, 2),
-			PaddingRight = UDim.new(0, 8),
+			PaddingRight = UDim.new(0, 5),
 		}),
 
 		StoriesLabel = e("TextLabel", {
-			AutomaticSize = Enum.AutomaticSize.X,
-			Size = UDim2.fromOffset(0, 20),
+			AutomaticSize = Enum.AutomaticSize.XY,
 			Position = UDim2.fromScale(0, 0),
 			AnchorPoint = Vector2.new(0, 0),
 			Font = Enum.Font.SourceSansBold,
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			Text = `STORIES`,
-			TextSize = 21,
+			TextSize = 20,
 			TextColor3 = theme.sideBar.storiesLabelTextColor,
 		}, {
 			UIPadding = e("UIPadding", {
@@ -64,9 +64,11 @@ function Sidebar()
 		StoryLists = e("ScrollingFrame", {
 			AutomaticCanvasSize = Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
-			CanvasSize = UDim2.fromScale(1, 0),
+			CanvasSize = UDim2.fromScale(0, 0),
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 1, -20),
+			BorderSizePixel = 0,
+			ScrollBarThickness = SCROLL_BAR_THICKNESS,
+			Size = UDim2.new(1, 0, 1, -30),
 		}, storyListChildren),
 	})
 end
