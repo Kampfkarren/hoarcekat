@@ -38,7 +38,11 @@ local function useStoryCollection()
 	return React.useMemo(function()
 		local storyTree = {}
 
-		for storyScript in storyScripts or {} do
+		if storyScripts == nil then
+			return storyTree
+		end
+
+		for storyScript in storyScripts do
 			local hierarchy = {}
 			local parent = storyScript
 
