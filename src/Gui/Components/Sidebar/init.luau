@@ -40,6 +40,7 @@ function Sidebar()
 		UIPadding = e("UIPadding", {
 			PaddingLeft = UDim.new(0, 3),
 			PaddingTop = UDim.new(0, 2),
+			PaddingRight = UDim.new(0, 8),
 		}),
 
 		StoriesLabel = e("TextLabel", {
