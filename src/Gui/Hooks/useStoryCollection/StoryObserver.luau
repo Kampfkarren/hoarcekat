@@ -22,13 +22,13 @@ function StoryObserver:patchStoryScripts(patch)
 	self.setStoryScripts(function(current)
 		local storyScripts = {}
 
-		for storyScript in pairs(current or {}) do
+		for storyScript in current or {} do
 			storyScripts[storyScript] = true
 		end
 
 		local modified = false
 
-		for key, value in pairs(patch) do
+		for key, value in patch do
 			if value == NONE then
 				value = nil
 			end
@@ -48,7 +48,7 @@ function StoryObserver:patchStoryScripts(patch)
 end
 
 function StoryObserver:lookForStories(instance)
-	for _, child in ipairs(instance:GetDescendants()) do
+	for _, child in instance:GetDescendants() do
 		self:checkStory(child)
 	end
 end

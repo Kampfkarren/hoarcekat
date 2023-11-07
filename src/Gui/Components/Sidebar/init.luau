@@ -20,7 +20,7 @@ local function Sidebar()
 			SortOrder = Enum.SortOrder.Name,
 		}),
 	}
-	for parent, children in pairs(storyTree) do
+	for parent, children in storyTree do
 		storyListChildren[parent] = e(SidebarList, {
 			title = parent,
 			children = children,

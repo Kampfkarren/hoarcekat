@@ -14,7 +14,7 @@ local function useStoryCollection()
 
 		local connections: { RBXScriptConnection } = {}
 
-		for _, serviceName in ipairs(USER_SERVICES) do
+		for _, serviceName in USER_SERVICES do
 			local service = game:GetService(serviceName)
 
 			storyObserver:lookForStories(service)
@@ -38,7 +38,7 @@ local function useStoryCollection()
 	return React.useMemo(function()
 		local storyTree = {}
 
-		for storyScript in pairs(storyScripts or {}) do
+		for storyScript in storyScripts or {} do
 			local hierarchy = {}
 			local parent = storyScript
 
@@ -48,7 +48,7 @@ local function useStoryCollection()
 			until parent == game or parent == nil
 
 			local current = storyTree
-			for _, node in ipairs(hierarchy) do
+			for _, node in hierarchy do
 				if node == storyScript then
 					table.insert(current, storyScript)
 					break

@@ -14,7 +14,7 @@ local function SidebarList(props: { title: string, children: React.ReactNode })
 	local selectedStory, setSelectedStory = mainContext.selectedStory, mainContext.setSelectedStory
 	local contents = {}
 
-	for childName, child in pairs(props.children) do
+	for childName, child in props.children do
 		if typeof(child) == "Instance" then
 			contents["Instance" .. child.Name] = e(IconListItem, {
 				activated = function()
