@@ -9,7 +9,7 @@ local useStoryCollection = require(Hoarcekat.Plugin.Gui.Hooks.useStoryCollection
 local SCROLL_BAR_THICKNESS = 8
 local e = React.createElement
 
-function Sidebar()
+local function Sidebar()
 	local theme = React.useContext(StudioTheme.Context)
 
 	local storyTree = useStoryCollection()

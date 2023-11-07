@@ -17,7 +17,7 @@ type Props = {
 	children: any?,
 }
 
-function Provider(props: Props)
+local function Provider(props: Props)
 	local savedState = props.savedState
 	local initialValue = if savedState and savedState.selectedStory then savedState.selectedStory else nil
 	local selectedStory: Instance | nil, setSelectedStory = React.useState(initialValue)

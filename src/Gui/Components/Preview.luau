@@ -12,7 +12,7 @@ local useStoryPreview = require(Hoarcekat.Plugin.Gui.Hooks.useStoryPreview)
 
 local e = React.createElement
 
-function Preview()
+local function Preview()
 	local mainContext = React.useContext(MainContext.Context)
 	local selectedStory = mainContext.selectedStory
 

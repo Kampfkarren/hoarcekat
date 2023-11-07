@@ -8,7 +8,7 @@ local useButtonBehaviour = require(Hoarcekat.Plugin.Gui.Hooks.useButtonBehaviour
 
 local e = React.createElement
 
-function FloatingButton(props)
+local function FloatingButton(props)
 	local theme = React.useContext(StudioTheme.Context)
 	local button = useButtonBehaviour()
 
