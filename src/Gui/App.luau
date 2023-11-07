@@ -11,15 +11,13 @@ local VerticalSplitter = require(Hoarcekat.Plugin.Gui.Components.VerticalSplitte
 
 local e = React.createElement
 
-type Props = {
+local function App(props: {
 	root: ReactRoblox.RootType,
 	plugin: any,
 	children: any?,
 	mouse: PluginMouse,
 	savedState: { selectedStory: Instance? }?,
-}
-
-local function App(props: Props)
+})
 	local theme = React.useContext(StudioTheme.Context)
 
 	return e(
@@ -44,6 +42,7 @@ local function App(props: Props)
 					}, {
 						Sidebar = e(Sidebar),
 					}),
+
 					Right = e("Frame", {
 						BackgroundColor3 = theme.holder.background,
 						Size = UDim2.fromScale(1, 1),
