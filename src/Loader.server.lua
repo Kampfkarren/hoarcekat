@@ -173,7 +173,7 @@ function PluginFacade:_watch(instance)
 
 	self._watching[instance] = connections
 
-	for _, child in ipairs(instance:GetChildren()) do
+	for _, child in instance:GetChildren() do
 		self:_watch(child)
 	end
 end
