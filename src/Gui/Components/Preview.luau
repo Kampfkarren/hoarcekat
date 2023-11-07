@@ -1,4 +1,3 @@
---!nonstrict
 local CoreGui = game:GetService("CoreGui")
 local Selection = game:GetService("Selection")
 
@@ -33,8 +32,12 @@ function Preview()
 	local expandSelection = React.useCallback(function()
 		setExpand(function(current)
 			local newExpandValue = not current
-			storyPreviewer:setDisplayParent(if newExpandValue then CoreGui else nil)
-			storyPreviewer:updateDisplay()
+
+			if storyPreviewer then
+				storyPreviewer:setDisplayParent(if newExpandValue then CoreGui else nil)
+				storyPreviewer:updateDisplay()
+			end
+
 			return newExpandValue
 		end)
 	end, { storyPreviewer })
