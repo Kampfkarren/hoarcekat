@@ -22,7 +22,7 @@ local function FloatingButton(props: {
 		Image = Assets.button_fill,
 		ImageColor3 = theme.floatingButton[if button.pressed
 			then "pressed"
-			elseif button.hovering then "hover"
+			elseif button.hovering then "hovered"
 			else "default"],
 		Size = UDim2.new(props.size, props.size),
 

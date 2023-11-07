@@ -29,11 +29,11 @@ local function deriveHoarcekatTheme(studioTheme: StudioTheme)
 
 		floatingButton = {
 			default = studioTheme:GetColor(Enum.StudioStyleGuideColor.MainButton),
-			hovered = studioTheme:GetColor(Enum.StudioStyleGuideColor.MainButton, Enum.StudioStyleGuideModifier.Hover),
-			pressed = studioTheme:GetColor(
+			hovered = studioTheme:GetColor(
 				Enum.StudioStyleGuideColor.MainButton,
 				Enum.StudioStyleGuideModifier.Pressed
 			),
+			pressed = studioTheme:GetColor(Enum.StudioStyleGuideColor.MainButton, Enum.StudioStyleGuideModifier.Hover),
 		},
 	}
 end
