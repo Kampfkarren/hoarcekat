@@ -15,6 +15,11 @@ function Sidebar()
 	local storyTree = useStoryCollection()
 
 	local storyListChildren = {
+		UIListLayout = e("UIListLayout", {
+			Padding = UDim.new(0, 5),
+			SortOrder = Enum.SortOrder.Name,
+		}),
+
 		UIPadding = e("UIPadding", {
 			PaddingRight = UDim.new(0, 8),
 		}),
@@ -60,13 +65,11 @@ function Sidebar()
 			}),
 		}),
 
-		StoryLists = e(AutomatedScrollingFrame, {
-			layoutClass = "UIListLayout",
-			native = {
-				BackgroundTransparency = 1,
-				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 1, -20),
-			},
+		StoryLists = e("ScrollingFrame", {
+			AutomaticCanvasSize = Enum.AutomaticSize.XY,
+			BackgroundTransparency = 1,
+			LayoutOrder = 2,
+			Size = UDim2.new(1, 0, 1, -20),
 		}, storyListChildren),
 	})
 end
