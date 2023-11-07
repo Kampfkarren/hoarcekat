@@ -1,4 +1,3 @@
---!nonstrict
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local React = require(Hoarcekat.Packages.React)
@@ -50,10 +49,14 @@ local function VerticalSplitter(props: Props)
 		end
 
 		local container = containerRef.current
-		local width = container.AbsoluteSize.x
-		local offset = input.Position.X - container.AbsolutePosition.X
-		offset = math.clamp(offset, HANDLE_WIDTH, width - HANDLE_WIDTH)
-		setAlpha(offset / width)
+
+		if container then
+			local width = container.AbsoluteSize.x
+			local x: number = input.Position.X
+			local offset = x - container.AbsolutePosition.X
+			offset = math.clamp(offset, HANDLE_WIDTH, width - HANDLE_WIDTH)
+			setAlpha(offset / width)
+		end
 	end, { dragging })
 
 	React.useEffect(function()
@@ -68,7 +71,7 @@ local function VerticalSplitter(props: Props)
 		return function()
 			pluginMouse.Icon = ""
 		end
-	end, { props.mouse, hovering, dragging })
+	end, { hovering, dragging, props.mouse } :: { unknown })
 
 	return e("Frame", {
 		Size = props.size,
