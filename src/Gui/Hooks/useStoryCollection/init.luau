@@ -33,7 +33,7 @@ local function useStoryCollection()
 				connection:Disconnect()
 			end
 		end
-	end, { setStoryScripts })
+	end, {})
 
 	return React.useMemo(function()
 		local storyTree = {}
