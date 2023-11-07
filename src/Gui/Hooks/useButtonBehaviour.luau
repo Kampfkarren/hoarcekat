@@ -22,14 +22,23 @@ local function useButtonBehaviour()
 		setPressed(false)
 	end, {})
 
-	return {
-		pressed = pressed,
-		hovering = hovering,
-		onMouseEnter = onMouseEnter,
-		onMouseLeave = onMouseLeave,
-		onMouseButton1Down = onMouseButton1Down,
-		onMouseButton1Up = onMouseButton1Up,
-	}
+	return React.useMemo(function()
+		return {
+			pressed = pressed,
+			hovering = hovering,
+			onMouseEnter = onMouseEnter,
+			onMouseLeave = onMouseLeave,
+			onMouseButton1Down = onMouseButton1Down,
+			onMouseButton1Up = onMouseButton1Up,
+		}
+	end, {
+		pressed,
+		hovering,
+		onMouseEnter,
+		onMouseLeave,
+		onMouseButton1Down,
+		onMouseButton1Up,
+	} :: { unknown })
 end
 
 return useButtonBehaviour
