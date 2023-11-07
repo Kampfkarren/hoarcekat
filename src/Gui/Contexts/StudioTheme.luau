@@ -41,7 +41,7 @@ end
 local studioSettings = settings().Studio
 local Context = React.createContext(deriveHoarcekatTheme(studioSettings.Theme))
 
-local function ThemeProvider(props)
+local function ThemeProvider(props: { children: React.ReactNode })
 	local theme, setTheme = React.useState(deriveHoarcekatTheme(studioSettings.Theme))
 
 	React.useEffect(function()

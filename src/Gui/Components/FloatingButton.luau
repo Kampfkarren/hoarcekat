@@ -8,7 +8,12 @@ local useButtonBehaviour = require(Hoarcekat.Plugin.Gui.Hooks.useButtonBehaviour
 
 local e = React.createElement
 
-local function FloatingButton(props)
+local function FloatingButton(props: {
+	size: UDim,
+	activated: () -> (),
+	image: string,
+	imageSize: UDim,
+})
 	local theme = React.useContext(StudioTheme.Context)
 	local button = useButtonBehaviour()
 
@@ -17,7 +22,7 @@ local function FloatingButton(props)
 		Image = Assets.button_fill,
 		ImageColor3 = theme.floatingButton[if button.pressed
 			then "pressed"
-			elseif button.hovered then "hover"
+			elseif button.hovering then "hover"
 			else "default"],
 		Size = UDim2.new(props.size, props.size),
 

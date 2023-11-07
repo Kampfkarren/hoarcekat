@@ -9,15 +9,14 @@ local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 local useButtonBehaviour = require(Hoarcekat.Plugin.Gui.Hooks.useButtonBehaviour)
 
 local e = React.createElement
-type Props = {
+
+local function IconListItem(props: {
 	selected: boolean?,
 	layoutOrder: number?,
-	activated: () -> () | nil,
+	activated: () -> (),
 	text: string,
 	icon: string,
-}
-
-local function IconListItem(props: Props)
+})
 	local theme = React.useContext(StudioTheme.Context)
 	local button = useButtonBehaviour()
 	local transparency = if props.selected then 0.5 elseif button.hovering then 0.85 else 1

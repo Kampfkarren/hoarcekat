@@ -9,13 +9,11 @@ local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 
 local e = React.createElement
 
-type Props = {
+local function VerticalSplitter(props: {
 	mouse: PluginMouse,
 	size: UDim2,
-	children: any?,
-}
-
-local function VerticalSplitter(props: Props)
+	children: { Left: React.ReactNode, Right: React.ReactNode },
+})
 	local theme = React.useContext(StudioTheme.Context)
 
 	local containerRef = React.useRef(nil)

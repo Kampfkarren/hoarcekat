@@ -9,7 +9,7 @@ local MainContext = require(Hoarcekat.Plugin.Gui.Contexts.MainContext)
 
 local e = React.createElement
 
-local function SidebarList(props)
+local function SidebarList(props: { title: string, children: React.ReactNode })
 	local mainContext = React.useContext(MainContext.Context)
 	local selectedStory, setSelectedStory = mainContext.selectedStory, mainContext.setSelectedStory
 	local contents = {}
