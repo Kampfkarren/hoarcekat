@@ -47,18 +47,16 @@ local function ThemeProvider(props: { children: React.ReactNode })
 	React.useEffect(function()
 		local connection
 
-		if theme then
-			connection = studioSettings.ThemeChanged:Connect(function()
-				setTheme(deriveHoarcekatTheme(studioSettings.Theme))
-			end)
-		end
+		connection = studioSettings.ThemeChanged:Connect(function()
+			setTheme(deriveHoarcekatTheme(studioSettings.Theme))
+		end)
 
 		return function()
 			if connection then
 				connection:Disconnect()
 			end
 		end
-	end, { theme })
+	end, {})
 
 	return React.createElement(Context.Provider, {
 		value = theme,
