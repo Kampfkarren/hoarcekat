@@ -35,20 +35,20 @@ local function App(props: {
 				Splitter = e(VerticalSplitter, {
 					mouse = props.mouse,
 					size = UDim2.fromScale(1, 1),
-				}, {
-					Left = e("Frame", {
+
+					left = e("Frame", {
 						BackgroundColor3 = Color3.fromRGB(14, 14, 14),
 						Size = UDim2.fromScale(1, 1),
 					}, {
 						Sidebar = e(Sidebar),
-					}),
+					}) :: React.ReactNode,
 
-					Right = e("Frame", {
+					right = e("Frame", {
 						BackgroundColor3 = theme.holder.background,
 						Size = UDim2.fromScale(1, 1),
 					}, {
 						Preview = e(Preview),
-					}),
+					}) :: React.ReactNode,
 				}),
 			}),
 		})

@@ -12,7 +12,8 @@ local e = React.createElement
 local function VerticalSplitter(props: {
 	mouse: PluginMouse,
 	size: UDim2,
-	children: { Left: React.ReactNode, Right: React.ReactNode },
+	left: React.ReactNode,
+	right: React.ReactNode,
 })
 	local theme = React.useContext(StudioTheme.Context)
 
@@ -84,7 +85,7 @@ local function VerticalSplitter(props: {
 			Size = UDim2.new(alpha, -HANDLE_WIDTH / 2, 1, 0),
 			BackgroundTransparency = 1,
 			ZIndex = 0,
-		}, { props.children.Left }),
+		}, props.left),
 
 		Right = e("Frame", {
 			AnchorPoint = Vector2.new(1, 0),
@@ -92,7 +93,7 @@ local function VerticalSplitter(props: {
 			Size = UDim2.new(1 - alpha, -HANDLE_WIDTH / 2, 1, 0),
 			BackgroundTransparency = 1,
 			ZIndex = 0,
-		}, { props.children.Right }),
+		}, props.right),
 
 		Grabber = e("TextButton", {
 			AutoButtonColor = false,
