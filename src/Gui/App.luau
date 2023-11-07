@@ -22,8 +22,10 @@ type Props = {
 local function App(props: Props)
 	local theme = React.useContext(StudioTheme.Context)
 
-	return e(StudioTheme.Provider, nil, {
-		MainContext = e(MainContext.Provider, {
+	return e(
+		StudioTheme.Provider,
+		nil,
+		e(MainContext.Provider, {
 			root = props.root,
 			plugin = props.plugin,
 			savedState = props.savedState,
@@ -50,8 +52,8 @@ local function App(props: Props)
 					}),
 				}),
 			}),
-		}),
-	})
+		})
+	)
 end
 
 return App
