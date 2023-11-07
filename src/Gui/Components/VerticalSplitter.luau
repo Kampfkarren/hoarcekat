@@ -2,7 +2,7 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local React = require(Hoarcekat.Packages.React)
 
-local DEFAULT_ALPHA = 0.2
+local DEFAULT_ALPHA = 0.25
 local HANDLE_WIDTH = 4
 
 local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)

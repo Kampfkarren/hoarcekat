@@ -54,6 +54,7 @@ function Collapsible(props: Props)
 		}, {
 			UIPadding = e("UIPadding", {
 				PaddingLeft = UDim.new(0, OFFSET),
+				PaddingRight = UDim.new(0, OFFSET / 2),
 			}),
 
 			Content = e(React.Fragment, nil, content),

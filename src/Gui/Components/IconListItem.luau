@@ -23,6 +23,7 @@ local function IconListItem(props: Props)
 	local transparency = if props.selected then 0.5 elseif button.hovering then 0.85 else 1
 
 	return e("TextButton", {
+		AutomaticSize = Enum.AutomaticSize.X,
 		AutoButtonColor = false,
 		BackgroundColor3 = theme.iconListItem.buttonColor,
 		BackgroundTransparency = transparency,
@@ -64,10 +65,11 @@ local function IconListItem(props: Props)
 		}),
 
 		Title = e("TextLabel", {
+			AutomaticSize = Enum.AutomaticSize.X,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 2,
-			Size = UDim2.new(1, -BAR_HEIGHT, 0, BAR_HEIGHT),
+			Size = UDim2.new(0, 0, 0, BAR_HEIGHT),
 			Text = props.text,
 			TextColor3 = theme.iconListItem.textColor,
 			TextXAlignment = Enum.TextXAlignment.Left,

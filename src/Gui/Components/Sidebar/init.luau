@@ -18,10 +18,6 @@ function Sidebar()
 			Padding = UDim.new(0, 5),
 			SortOrder = Enum.SortOrder.Name,
 		}),
-
-		UIPadding = e("UIPadding", {
-			PaddingRight = UDim.new(0, 8),
-		}),
 	}
 	for parent, children in pairs(storyTree) do
 		storyListChildren[parent] = e(SidebarList, {
@@ -67,6 +63,7 @@ function Sidebar()
 		StoryLists = e("ScrollingFrame", {
 			AutomaticCanvasSize = Enum.AutomaticSize.XY,
 			BackgroundTransparency = 1,
+			CanvasSize = UDim2.fromScale(1, 0),
 			LayoutOrder = 2,
 			Size = UDim2.new(1, 0, 1, -20),
 		}, storyListChildren),
