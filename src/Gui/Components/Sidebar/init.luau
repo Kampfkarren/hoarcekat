@@ -22,8 +22,8 @@ local function Sidebar()
 	}
 	for parent, children in storyTree do
 		storyListChildren[parent] = e(SidebarList, {
-			title = parent,
-			children = children,
+			title = tostring(parent),
+			instanceChildren = children,
 		})
 	end
 

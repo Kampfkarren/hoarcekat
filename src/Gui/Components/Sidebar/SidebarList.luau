@@ -1,3 +1,4 @@
+--!nonstrict
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local React = require(Hoarcekat.Packages.React)
@@ -9,12 +10,12 @@ local MainContext = require(Hoarcekat.Plugin.Gui.Contexts.MainContext)
 
 local e = React.createElement
 
-local function SidebarList(props: { title: string, children: React.ReactNode })
+local function SidebarList(props: { title: string, instanceChildren: { Instance } })
 	local mainContext = React.useContext(MainContext.Context)
 	local selectedStory, setSelectedStory = mainContext.selectedStory, mainContext.setSelectedStory
 	local contents = {}
 
-	for childName, child in props.children do
+	for childName, child in props.instanceChildren do
 		if typeof(child) == "Instance" then
 			contents["Instance" .. child.Name] = e(IconListItem, {
 				activated = function()
@@ -31,7 +32,8 @@ local function SidebarList(props: { title: string, children: React.ReactNode })
 		else
 			contents["Folder" .. childName] = e(SidebarList, {
 				title = childName,
-			}, child)
+				instanceChildren = child,
+			})
 		end
 	end
 
