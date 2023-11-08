@@ -33,6 +33,8 @@ if useDevSource then
 	if devSource ~= nil then
 		source = devSource
 		currentRoot = source
+
+		-- selene: allow(global_usage)
 		_G.__DEV__ = true
 	else
 		warn("Hoarcekat development source is not present, running using built-in source.")
