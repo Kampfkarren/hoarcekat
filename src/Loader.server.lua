@@ -78,7 +78,8 @@ function PluginFacade:button(toolbar, name, tooltip, icon)
 			return existingButton
 		end
 	else
-		self._buttons[toolbar] = {}
+		existingButtons = {}
+		self._buttons[toolbar] = existingButtons
 	end
 
 	local button = toolbar:CreateButton(name, tooltip, icon)
