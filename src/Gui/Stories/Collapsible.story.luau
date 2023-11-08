@@ -1,4 +1,3 @@
---!nonstrict
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local React = require(Hoarcekat.Packages.React)
@@ -11,17 +10,27 @@ local IconListItem = require(Hoarcekat.Plugin.Gui.Components.IconListItem)
 
 local e = React.createElement
 
-local function CollapsibleChildrenFragment(props)
+local function CollapsibleChildrenFragment(props: {
+	selectedIndex: number?,
+	setSelectedIndex: ((any) -> any) -> (),
+})
 	local elements = {}
 
 	for i = 1, 5 do
 		elements[i] = e(IconListItem, {
 			activated = function()
-				props.setSelectedIndex(i)
+				props.setSelectedIndex(function(current)
+					if current == i then
+						return nil
+					end
+
+					return i
+				end)
 			end,
 			layoutOrder = i,
 			selected = props.selectedIndex == i,
 			icon = Assets.hamburger,
+			text = "Story Number " .. i,
 		})
 	end
 
