@@ -6,8 +6,10 @@ local USER_SERVICES = require(Hoarcekat.Plugin.Config).userServices
 
 local StoryObserver = require(script.StoryObserver)
 
+-- TODO: FIX TYPE ISSUES IN THIS SCRIPT (LINE G7 ONWARDS)
+
 local function useStoryCollection()
-	local storyScripts, setStoryScripts = React.useState({})
+	local storyScripts, setStoryScripts = React.useState({} :: { [Instance]: boolean })
 
 	React.useEffect(function()
 		local storyObserver = StoryObserver.new(setStoryScripts)
@@ -38,20 +40,22 @@ local function useStoryCollection()
 	return React.useMemo(function()
 		local storyTree = {}
 
-		if storyScripts == nil then
-			return storyTree
-		end
-
 		for storyScript in storyScripts do
 			local hierarchy = {}
-			local parent = storyScript
+			local parent: Instance? = storyScript
 
-			repeat
+			while parent ~= game and parent ~= nil do
 				table.insert(hierarchy, 1, parent)
-				parent = parent.Parent
-			until parent == game or parent == nil
+
+				if parent and parent.Parent then
+					parent = parent.Parent
+				else
+					break
+				end
+			end
 
 			local current = storyTree
+
 			for _, node in hierarchy do
 				if node == storyScript then
 					table.insert(current, storyScript)
