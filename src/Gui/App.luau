@@ -7,6 +7,7 @@ local MainContext = require(Hoarcekat.Plugin.Gui.Contexts.MainContext)
 local Preview = require(Hoarcekat.Plugin.Gui.Components.Preview)
 local Sidebar = require(Hoarcekat.Plugin.Gui.Components.Sidebar)
 local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
+local Types = require(Hoarcekat.Plugin.Types)
 local VerticalSplitter = require(Hoarcekat.Plugin.Gui.Components.VerticalSplitter)
 
 local e = React.createElement
@@ -15,10 +16,10 @@ local e = React.createElement
 
 local function App(props: {
 	root: ReactRoblox.RootType,
-	plugin: any,
+	plugin: Types.PluginFacade,
 	children: React.ReactNode,
 	mouse: PluginMouse,
-	savedState: { selectedStory: Instance? }?,
+	savedState: Types.SaveState,
 })
 	local theme = React.useContext(StudioTheme.Context)
 

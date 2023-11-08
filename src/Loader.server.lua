@@ -76,8 +76,7 @@ function PluginFacade:button(toolbar, name, tooltip, icon)
 			return existingButton
 		end
 	else
-		existingButtons = {}
-		self._buttons[toolbar] = existingButtons
+		self._buttons[toolbar] = {}
 	end
 
 	local button = toolbar:CreateButton(name, tooltip, icon)
@@ -134,18 +133,19 @@ function PluginFacade._load(_, savedState)
 end
 
 function PluginFacade:unload()
-	if self._beforeUnload then
-		local saveState = self._beforeUnload()
-		self._beforeUnload = nil
+	local saveState
 
-		return saveState
+	if self._beforeUnload then
+		saveState = self._beforeUnload()
+		self._beforeUnload = nil
 	end
+
+	return saveState
 end
 
 function PluginFacade:_reload()
 	local saveState = self:unload()
 	currentRoot = source:Clone()
-
 	self:_load(saveState)
 end
 

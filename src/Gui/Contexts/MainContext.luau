@@ -12,10 +12,12 @@ local Context = React.createContext({
 	setSelectedStory: (any) -> (),
 })
 
+local Types = require(Hoarcekat.Plugin.Types)
+
 local function Provider(props: {
 	root: ReactRoblox.RootType,
-	savedState: { selectedStory: Instance? }?,
-	plugin: any,
+	savedState: Types.SaveState,
+	plugin: Types.PluginFacade,
 	children: React.ReactNode,
 })
 	local savedState = props.savedState
