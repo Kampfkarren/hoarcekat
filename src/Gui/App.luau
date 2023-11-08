@@ -12,8 +12,6 @@ local VerticalSplitter = require(Hoarcekat.Plugin.Gui.Components.VerticalSplitte
 
 local e = React.createElement
 
--- TODO: FIX PLUGIN TYPE (CREATE TYPE BASED ON PluginFacade.lua)
-
 local function App(props: {
 	root: ReactRoblox.RootType,
 	plugin: Types.PluginFacade,

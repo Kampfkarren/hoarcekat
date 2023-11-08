@@ -10,7 +10,7 @@ Developers write "stories" that explain how their UI should be previewed. It run
 
 Stories are ModuleScripts whose name ends with `.story`. These ModuleScripts return a function that takes an Instance (the preview frame) that then returns a destructor function, which cleans up the instance of anything the component put in.
 
-It's much simpler to understand when you look at [an example story](https://github.com/Kampfkarren/hoarcekat/blob/master/examples/Counter.story.lua).
+It's much simpler to understand when you look at [an example story](https://github.com/Kampfkarren/hoarcekat/blob/master/examples/RobloxCounter.story.luau).
 
 ## How do I download it?
 

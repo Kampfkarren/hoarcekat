@@ -3,5 +3,5 @@ name = "hoarcekat"
 [[inputs]]
 glob = "assets/*.png"
 codegen = true
-codegen-path = "src/Assets.lua"
+codegen-path = "src/Assets.luau"
 codegen-base-path = "assets"
