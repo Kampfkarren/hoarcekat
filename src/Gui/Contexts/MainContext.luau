@@ -31,7 +31,7 @@ local function Provider(props: {
 				selectedStory = selectedStory,
 			}
 		end)
-	end, { selectedStory, props.plugin, props.root } :: { unknown })
+	end, { selectedStory, props } :: { unknown })
 
 	React.useEffect(function()
 		local connection
