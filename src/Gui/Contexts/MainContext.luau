@@ -1,5 +1,7 @@
+local ServerStorage = game:GetService("ServerStorage")
 local Hoarcekat = script.Parent:FindFirstAncestor("Hoarcekat")
 
+local ReactRoblox = require(ServerStorage.Hoarcekat.Packages.ReactRoblox)
 local React = require(Hoarcekat.Packages.React)
 
 local Context = React.createContext({
@@ -11,10 +13,10 @@ local Context = React.createContext({
 })
 
 local function Provider(props: {
-	root: any,
+	root: ReactRoblox.RootType,
 	savedState: { selectedStory: Instance? }?,
 	plugin: any,
-	children: any?,
+	children: React.ReactNode,
 })
 	local savedState = props.savedState
 	local initialValue = if savedState and savedState.selectedStory then savedState.selectedStory else nil
@@ -27,7 +29,7 @@ local function Provider(props: {
 				selectedStory = selectedStory,
 			}
 		end)
-	end, { selectedStory, props.plugin, props.root })
+	end, { selectedStory, props.plugin, props.root } :: { unknown })
 
 	React.useEffect(function()
 		local connection

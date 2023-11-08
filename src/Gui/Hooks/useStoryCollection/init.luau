@@ -6,7 +6,7 @@ local USER_SERVICES = require(Hoarcekat.Plugin.Config).userServices
 
 local StoryObserver = require(script.StoryObserver)
 
--- TODO: FIX TYPE ISSUES IN THIS SCRIPT (LINE G7 ONWARDS)
+-- TODO: FIX TYPE ISSUES IN THIS SCRIPT (LINE 67 ONWARDS)
 
 local function useStoryCollection()
 	local storyScripts, setStoryScripts = React.useState({} :: { [Instance]: boolean })

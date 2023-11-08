@@ -11,10 +11,12 @@ local VerticalSplitter = require(Hoarcekat.Plugin.Gui.Components.VerticalSplitte
 
 local e = React.createElement
 
+-- TODO: FIX PLUGIN TYPE (CREATE TYPE BASED ON PluginFacade.lua)
+
 local function App(props: {
 	root: ReactRoblox.RootType,
 	plugin: any,
-	children: any?,
+	children: React.ReactNode,
 	mouse: PluginMouse,
 	savedState: { selectedStory: Instance? }?,
 })
