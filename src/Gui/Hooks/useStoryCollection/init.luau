@@ -5,11 +5,12 @@ local React = require(Hoarcekat.Packages.React)
 local USER_SERVICES = require(Hoarcekat.Plugin.Config).userServices
 
 local StoryObserver = require(script.StoryObserver)
+local Types = require(Hoarcekat.Plugin.Types)
 
 -- TODO: FIX TYPE ISSUES IN THIS SCRIPT (LINE 67 ONWARDS)
 
 local function useStoryCollection()
-	local storyScripts, setStoryScripts = React.useState({} :: { [Instance]: boolean })
+	local storyScripts, setStoryScripts = React.useState({} :: Types.StoryScripts)
 
 	React.useEffect(function()
 		local storyObserver = StoryObserver.new(setStoryScripts)
@@ -38,7 +39,7 @@ local function useStoryCollection()
 	end, {})
 
 	return React.useMemo(function()
-		local storyTree = {}
+		local storyTree: Types.StoryTree = {}
 
 		for storyScript in storyScripts do
 			local hierarchy = {}
