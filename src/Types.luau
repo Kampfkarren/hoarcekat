@@ -25,4 +25,8 @@ export type PluginFacade = {
 	_watch: (self: PluginFacade, Instance) -> (),
 }
 
+export type StoryArray = { ModuleScript }
+export type StoryTree = StoryArray | { [string]: StoryTree }
+export type StoryScripts = { [Instance]: boolean }
+
 return nil
