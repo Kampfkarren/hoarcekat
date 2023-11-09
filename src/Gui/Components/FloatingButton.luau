@@ -4,7 +4,7 @@ local React = require(Hoarcekat.Packages.React)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
 local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
-local useButtonBehaviour = require(Hoarcekat.Plugin.Gui.Hooks.useButtonBehaviour)
+local useToggleState = require(Hoarcekat.Plugin.Gui.Hooks.useToggleState)
 
 local e = React.createElement
 
@@ -15,21 +15,19 @@ local function FloatingButton(props: {
 	imageSize: UDim,
 })
 	local theme = React.useContext(StudioTheme.Context)
-	local button = useButtonBehaviour()
+	local hovering = useToggleState(false)
+	local pressed = useToggleState(false)
 
 	return e("ImageButton", {
 		BackgroundTransparency = 1,
 		Image = Assets.button_fill,
-		ImageColor3 = theme.floatingButton[if button.pressed
-			then "pressed"
-			elseif button.hovering then "hovered"
-			else "default"],
+		ImageColor3 = theme.floatingButton[if pressed.on then "pressed" elseif hovering.on then "hovered" else "default"],
 		Size = UDim2.new(props.size, props.size),
 
-		[React.Event.MouseEnter] = button.onMouseEnter,
-		[React.Event.MouseLeave] = button.onMouseLeave,
-		[React.Event.MouseButton1Down] = button.onMouseButton1Down,
-		[React.Event.MouseButton1Up] = button.onMouseButton1Up,
+		[React.Event.MouseEnter] = hovering.enable,
+		[React.Event.MouseLeave] = hovering.disable,
+		[React.Event.MouseButton1Down] = pressed.enable,
+		[React.Event.MouseButton1Up] = pressed.disable,
 		[React.Event.Activated] = props.activated,
 	}, {
 		Image = e("ImageLabel", {

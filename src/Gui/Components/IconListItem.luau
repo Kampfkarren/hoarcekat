@@ -6,7 +6,7 @@ local BAR_HEIGHT = 24
 local ICON_SIZE = 16
 
 local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
-local useButtonBehaviour = require(Hoarcekat.Plugin.Gui.Hooks.useButtonBehaviour)
+local useToggleState = require(Hoarcekat.Plugin.Gui.Hooks.useToggleState)
 
 local e = React.createElement
 
@@ -18,8 +18,8 @@ local function IconListItem(props: {
 	icon: string,
 })
 	local theme = React.useContext(StudioTheme.Context)
-	local button = useButtonBehaviour()
-	local transparency = if props.selected then 0.5 elseif button.hovering then 0.85 else 1
+	local hovering = useToggleState(false)
+	local transparency = if props.selected then 0.5 elseif hovering.on then 0.85 else 1
 
 	return e("TextButton", {
 		AutomaticSize = Enum.AutomaticSize.X,
@@ -32,8 +32,8 @@ local function IconListItem(props: {
 		Text = "",
 		ClipsDescendants = true,
 
-		[React.Event.MouseEnter] = button.onMouseEnter,
-		[React.Event.MouseLeave] = button.onMouseLeave,
+		[React.Event.MouseEnter] = hovering.enable,
+		[React.Event.MouseLeave] = hovering.disable,
 		[React.Event.Activated] = props.activated,
 	}, {
 		Layout = e("UIListLayout", {
