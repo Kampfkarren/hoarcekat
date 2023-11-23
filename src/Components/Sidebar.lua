@@ -179,6 +179,24 @@ function Sidebar:render()
 					parent = parent.Parent
 				until parent == game or parent == nil
 
+				local doesHierarchyMatchFilter = false
+				for _, instance in hierarchy do
+					local instanceName = string.sub(instance.Name, 1, -#".story" - 1)
+					local doesInstanceMatchFilter = string.find(
+						string.lower(instanceName),
+						string.lower(self.state.nameFilter or ""),
+						nil,
+						true
+					)
+					if doesInstanceMatchFilter then
+						doesHierarchyMatchFilter = true
+						break
+					end
+				end
+				if not doesHierarchyMatchFilter then
+					continue
+				end
+
 				local current = storyTree
 				for _, node in ipairs(hierarchy) do
 					if node == storyScript then
@@ -221,11 +239,37 @@ function Sidebar:render()
 					PaddingTop = UDim.new(0, 2),
 				}),
 
-				StoriesLabel = e(TextLabel, {
-					Font = Enum.Font.SourceSansBold,
+				Header = e("Frame", {
+					AutomaticSize = Enum.AutomaticSize.Y,
+					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Text = "STORIES",
-					TextColor3 = theme:GetColor("DimmedText", "Default"),
+					Size = UDim2.new(1, -5, 0, 0),
+				}, {
+					StoriesLabel = e(TextLabel, {
+						Font = Enum.Font.SourceSansBold,
+						Text = "STORIES",
+						TextColor3 = theme:GetColor("DimmedText", "Default"),
+					}),
+					SearchBar = e("TextBox", {
+						AnchorPoint = Vector2.new(1, 0.5),
+						AutomaticSize = Enum.AutomaticSize.XY,
+						BackgroundTransparency = 1,
+						FontFace = Font.fromName("SourceSansPro", Enum.FontWeight.Regular, Enum.FontStyle.Italic),
+						PlaceholderText = "Search...",
+						PlaceholderColor3 = theme:GetColor("DimmedText", "Default"),
+						Position = UDim2.fromScale(1, 0.5),
+						Size = UDim2.fromOffset(50, 0),
+						Text = self.state.nameFilter or "",
+						TextColor3 = theme:GetColor("DimmedText", "Default"),
+						TextSize = 16,
+						TextXAlignment = Enum.TextXAlignment.Right,
+
+						[Roact.Change.Text] = function (rbx: TextBox)
+							self:setState({
+								nameFilter = rbx.Text,
+							})
+						end,
+					}),
 				}),
 
 				StoryLists = e(AutomatedScrollingFrame, {
