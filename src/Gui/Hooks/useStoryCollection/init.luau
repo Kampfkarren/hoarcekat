@@ -7,8 +7,6 @@ local USER_SERVICES = require(Hoarcekat.Plugin.Config).userServices
 local StoryObserver = require(script.StoryObserver)
 local Types = require(Hoarcekat.Plugin.Types)
 
--- TODO: FIX TYPE ISSUES IN THIS SCRIPT (LINE 67 ONWARDS)
-
 local function useStoryCollection()
 	local storyScripts, setStoryScripts = React.useState({} :: Types.StoryScripts)
 
@@ -59,17 +57,17 @@ local function useStoryCollection()
 
 			for _, node in hierarchy do
 				if node == storyScript then
-					table.insert(current, storyScript)
+					table.insert(current :: Types.StoryTreeArray, storyScript)
 					break
 				end
 
 				local name = node.Name
-
-				if not current[name] then
-					current[name] = {}
+				local nextLevel = current :: Types.StoryTreeFolder
+				if nextLevel[name] == nil then
+					nextLevel[name] = {}
 				end
 
-				current = current[name]
+				current = nextLevel[name]
 			end
 		end
 
