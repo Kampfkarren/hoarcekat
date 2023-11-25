@@ -12,6 +12,11 @@ if not RunService:IsClient() then
 	return
 end
 
+-- Don't initialize during running mode (not needed and may affect performance in Studio)
+if RunService:IsRunning() then
+	return
+end
+
 -- Change to true to enable hot reloading support. Opening a place
 -- containing the code synced via Rojo will cause the plugin to be
 -- reloaded in edit mode. (No need for play solo or the hotswap plugin.)
