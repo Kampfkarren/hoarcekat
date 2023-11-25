@@ -96,13 +96,13 @@ function StoryPreviewer:prepareState(selectedStory)
 		cleanup = nil,
 		monkeyRequireCache = {},
 		monkeyGlobalTable = {},
-		otherScriptChangedConnection = nil,
+		scriptChangedConnections = {},
 		target = nil,
 	}
 
 	function state:destroy()
-		if self.otherScriptChangedConnection then
-			self.otherScriptChangedConnection:Disconnect()
+		for _, connection: RBXScriptConnection in self.scriptChangedConnections do
+			connection:Disconnect()
 		end
 
 		if self.cleanup then
@@ -119,18 +119,17 @@ function StoryPreviewer:prepareState(selectedStory)
 		end
 	end
 
-	local function monkeyRequire(otherScript)
+	local function monkeyRequire(otherScript: ModuleScript)
 		if state.monkeyRequireCache[otherScript] then
 			return state.monkeyRequireCache[otherScript]
 		end
 
-		if state.otherScriptChangedConnection then
-			state.otherScriptChangedConnection:Disconnect()
-		end
-
-		state.otherScriptChangedConnection = otherScript.Changed:connect(function()
-			self:refreshPreview()
-		end)
+		table.insert(
+			state.scriptChangedConnections,
+			otherScript.Changed:Connect(function()
+				self:refreshPreview()
+			end)
+		)
 
 		-- loadstring is used to avoid cache while preserving `script` (which requiring a clone wouldn't do)
 		local result, parseError = loadstring(otherScript.Source, otherScript:GetFullName())
@@ -177,10 +176,6 @@ function StoryPreviewer:prepareState(selectedStory)
 
 	state.cleanup = cleanup
 	return nil, state
-end
-
-function StoryPreviewer:Destroy()
-	-- time to clear up
 end
 
 return StoryPreviewer
