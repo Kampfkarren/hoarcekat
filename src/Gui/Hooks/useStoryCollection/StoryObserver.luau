@@ -79,7 +79,7 @@ function StoryObserver:addStoryScript(storyScript)
 
 	connectionB = storyScript.AncestryChanged:Connect(function()
 		if not storyScript:IsDescendantOf(game) then
-			-- We were removed from the data model
+			-- We were removed from the data model, let's clean up
 			clean()
 		end
 	end)
@@ -98,7 +98,7 @@ function StoryObserver:removeStoryScript(storyScript)
 		local changedConnection
 		changedConnection = storyScript.Changed:Connect(function()
 			if isStoryScript(storyScript) then
-				-- We didn't use to be a story script, now we are, add us
+				-- We were not previously a story script, now we are, add me to the sidebar list
 				self:addStoryScript(storyScript)
 				changedConnection:Disconnect()
 			end
