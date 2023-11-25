@@ -15,8 +15,6 @@ local function Collapsible(props: {
 })
 	local open, setOpen = React.useState(true)
 
-	local content = open and props.children
-
 	return e("Frame", {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
@@ -44,6 +42,7 @@ local function Collapsible(props: {
 			BackgroundTransparency = 1,
 			Position = UDim2.fromOffset(OFFSET, 0),
 			LayoutOrder = 2,
+			Visible = open,
 		}, {
 			UIListLayout = e("UIListLayout", {
 				Padding = UDim.new(0, 5),
@@ -53,7 +52,7 @@ local function Collapsible(props: {
 				PaddingLeft = UDim.new(0, OFFSET),
 			}),
 
-			Content = content and e(React.Fragment, nil, content),
+			Content = e(React.Fragment, nil, props.children),
 		}),
 	})
 end
