@@ -21,7 +21,9 @@ local function Sidebar()
 			SortOrder = Enum.SortOrder.Name,
 		}),
 	}
-	for parent, children in storyTree do
+
+	-- pairs is nowadays redundant but pairs in this case will avoid a strict type error
+	for parent, children in pairs(storyTree) do
 		storyListChildren[parent] = e(SidebarList, {
 			title = tostring(parent),
 			instanceChildren = children,
