@@ -9,13 +9,13 @@ dependencies = [["Roact", "roblox/roact@1.4.2"], ["RoactRodux", "roblox/roact-ro
 
 [[package]]
 name = "roblox/roact"
-version = "1.4.2"
+version = "1.4.4"
 dependencies = []
 
 [[package]]
 name = "roblox/roact-rodux"
 version = "0.3.0"
-dependencies = [["Roact", "roblox/roact@1.4.2"], ["Rodux", "roblox/rodux@3.0.0"]]
+dependencies = [["Roact", "roblox/roact@1.4.4"], ["Rodux", "roblox/rodux@3.0.0"]]
 
 [[package]]
 name = "roblox/rodux"

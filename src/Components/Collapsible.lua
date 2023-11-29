@@ -13,7 +13,7 @@ local OFFSET = 8
 
 function Collapsible:init()
 	self:setState({
-		open = true,
+		open = false,
 	})
 
 	self.toggle = function()
