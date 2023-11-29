@@ -70,6 +70,10 @@ function Sidebar:init()
 			self:checkStory(child)
 		end))
 	end
+
+	self:setState({
+		search = ""
+	})
 end
 
 function Sidebar:patchStoryScripts(patch)
@@ -137,6 +141,12 @@ function Sidebar:addStoryScript(storyScript)
 		end
 	end))
 
+	instanceMaid:GiveTask(storyScript:GetPropertyChangedSignal("Name"):Connect(function()
+		if isStoryScript(storyScript) then
+			self:setState({}) -- force update if name changes
+		end
+	end))
+
 	self:patchStoryScripts({
 		[storyScript] = true,
 	})
@@ -167,12 +177,21 @@ function Sidebar:willUnmount()
 end
 
 function Sidebar:render()
+	print(self.state.storyScripts)
 	return e(StudioThemeAccessor, {}, {
 		function(theme)
 			local storyTree = {}
+			local searchStr = self.state.search:lower()
+
 			for storyScript in pairs(self.state.storyScripts or {}) do
 				local hierarchy = {}
 				local parent = storyScript
+
+				local scriptName = storyScript.Name
+
+				if searchStr ~= "" and not scriptName:lower():find(searchStr, 1, true) then
+					continue
+				end
 
 				repeat
 					table.insert(hierarchy, 1, parent)
@@ -195,6 +214,8 @@ function Sidebar:render()
 					current = current[name]
 				end
 			end
+
+			warn(storyTree)
 
 			local storyLists = {}
 			for parent, children in pairs(storyTree) do
