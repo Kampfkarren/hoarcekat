@@ -1,4 +1,4 @@
-local Hoarcekat = script:FindFirstAncestor("Storyboards")
+local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local FitComponent = require(script.Parent.FitComponent)
 local Roact = require(Hoarcekat.Vendor.Roact)

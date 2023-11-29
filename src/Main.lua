@@ -1,6 +1,6 @@
 local RunService = game:GetService("RunService")
 
-local Hoarcekat = script:FindFirstAncestor("Storyboards")
+local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local Reducer = require(script.Parent.Reducer)
 local Roact = require(Hoarcekat.Vendor.Roact)
@@ -19,16 +19,16 @@ end
 
 local function Main(plugin, savedState)
 	local displaySuffix, nameSuffix = getSuffix(plugin)
-	local toolbar = plugin:toolbar("Storyboards" .. displaySuffix)
+	local toolbar = plugin:toolbar("Hoarcekat" .. displaySuffix)
 
-	local toggleButton = plugin:button(toolbar, "Storyboards", "Open the Storyboards window", "rbxassetid://11600481404")
+	local toggleButton = plugin:button(toolbar, "Hoarcekat", "Open the Hoarcekat window", "rbxassetid://11600481404")
 
 	local store = Rodux.Store.new(Reducer, savedState)
 
 	local info = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, false, 0, 0)
-	local gui = plugin:createDockWidgetPluginGui("Storyboards" .. nameSuffix, info)
-	gui.Name = "Storyboards" .. nameSuffix
-	gui.Title = "Storyboards " .. displaySuffix
+	local gui = plugin:createDockWidgetPluginGui("Hoarcekat" .. nameSuffix, info)
+	gui.Name = "Hoarcekat" .. nameSuffix
+	gui.Title = "Hoarcekat " .. displaySuffix
 	gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	toggleButton:SetActive(gui.Enabled)
 
@@ -46,7 +46,7 @@ local function Main(plugin, savedState)
 		}),
 	})
 
-	local instance = Roact.mount(app, gui, "Storyboards")
+	local instance = Roact.mount(app, gui, "Hoarcekat")
 
 	plugin:beforeUnload(function()
 		Roact.unmount(instance)
@@ -60,7 +60,7 @@ local function Main(plugin, savedState)
 
 	local unloadConnection
 	unloadConnection = gui.AncestryChanged:Connect(function()
-		print("New Storyboards version coming online; unloading the old version")
+		print("New Hoarcekat version coming online; unloading the old version")
 		unloadConnection:Disconnect()
 		plugin:unload()
 	end)

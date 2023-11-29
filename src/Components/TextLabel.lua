@@ -1,6 +1,6 @@
 local TextService = game:GetService("TextService")
 
-local Hoarcekat = script:FindFirstAncestor("Storyboards")
+local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local Roact = require(Hoarcekat.Vendor.Roact)
 
