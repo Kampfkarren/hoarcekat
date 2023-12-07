@@ -53,7 +53,7 @@ local function Sidebar()
 			Font = Enum.Font.SourceSansBold,
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
-			Text = `STORIES`,
+			Text = "STORIES",
 			TextSize = 20,
 			TextColor3 = theme.sideBar.storiesLabelTextColor,
 		}, {
