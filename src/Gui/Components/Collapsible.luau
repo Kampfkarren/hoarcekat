@@ -50,9 +50,7 @@ local function Collapsible(props: {
 			UIPadding = e("UIPadding", {
 				PaddingLeft = UDim.new(0, OFFSET),
 			}),
-
-			Content = e(React.Fragment, nil, props.children),
-		}),
+		}, props.children),
 	})
 end
 
