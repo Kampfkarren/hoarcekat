@@ -2,7 +2,35 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local React = require(Hoarcekat.Packages.React)
 
-local function deriveHoarcekatTheme(studioTheme: StudioTheme)
+export type ContextType = {
+	holder: {
+		background: Color3,
+	},
+
+	sideBar: {
+		background: Color3,
+		storiesLabelTextColor: Color3,
+	},
+
+	iconListItem: {
+		buttonColor: Color3,
+		iconColor: Color3,
+		textColor: Color3,
+	},
+
+	verticalSplitter: {
+		grabber: Color3,
+		border: Color3,
+	},
+
+	floatingButton: {
+		default: Color3,
+		hovered: Color3,
+		pressed: Color3,
+	},
+}
+
+local function deriveHoarcekatTheme(studioTheme: StudioTheme): ContextType
 	return {
 		holder = {
 			background = studioTheme:GetColor(Enum.StudioStyleGuideColor.MainBackground),
@@ -39,7 +67,8 @@ local function deriveHoarcekatTheme(studioTheme: StudioTheme)
 end
 
 local studioSettings = settings().Studio
-local Context = React.createContext(deriveHoarcekatTheme(studioSettings.Theme))
+local default: ContextType = deriveHoarcekatTheme(studioSettings.Theme)
+local Context = React.createContext(default)
 
 local function ThemeProvider(props: { children: React.ReactNode })
 	local theme, setTheme = React.useState(deriveHoarcekatTheme(studioSettings.Theme))
@@ -54,8 +83,10 @@ local function ThemeProvider(props: { children: React.ReactNode })
 		end
 	end, {})
 
+	local value: ContextType = theme
+
 	return React.createElement(Context.Provider, {
-		value = theme,
+		value = value,
 	}, props.children)
 end
 
