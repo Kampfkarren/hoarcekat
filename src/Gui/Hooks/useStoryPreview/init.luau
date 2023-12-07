@@ -15,7 +15,7 @@ local function useStoryPreview(rootRef, selectedStory, expand, setCurrentPreview
 		end
 
 		return function()
-			if storyPreviewer.current then
+			if storyPreviewer.current ~= nil then
 				storyPreviewer.current:clearPreview()
 			end
 		end
