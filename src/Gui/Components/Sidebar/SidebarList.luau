@@ -19,15 +19,11 @@ local function SidebarList(props: { title: string, instanceChildren: { Instance 
 		if typeof(child) == "Instance" then
 			contents["Instance" .. child.Name] = e(IconListItem, {
 				activated = function()
-					if selectedStory == child then
-						setSelectedStory(nil)
-					else
-						setSelectedStory(child)
-					end
+					setSelectedStory(if selectedStory == child then nil else child)
 				end,
 				icon = Assets.hamburger,
 				selected = selectedStory == child,
-				text = child.Name:sub(1, #child.Name - #".story"),
+				text = child.Name:sub(#child.Name - #".story"),
 			})
 		else
 			contents["Folder" .. childName] = e(SidebarList, {
