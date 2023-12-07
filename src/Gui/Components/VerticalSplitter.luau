@@ -38,7 +38,7 @@ local function VerticalSplitter(props: {
 		end
 	end, {})
 
-	local onInputChanged = React.useCallback(function(_, input)
+	local onInputChanged = React.useCallback(function(_, input: InputObject)
 		if input.UserInputType ~= Enum.UserInputType.MouseMovement then
 			return
 		end
@@ -50,8 +50,8 @@ local function VerticalSplitter(props: {
 		local container = containerRef.current
 
 		if container then
-			local width = container.AbsoluteSize.x
-			local x: number = input.Position.X
+			local width = container.AbsoluteSize.X
+			local x = input.Position.X
 			local offset = x - container.AbsolutePosition.X
 			offset = math.clamp(offset, HANDLE_WIDTH, width - HANDLE_WIDTH)
 			setAlpha(offset / width)
@@ -114,6 +114,7 @@ local function VerticalSplitter(props: {
 				BorderSizePixel = 0,
 				Visible = hovering or dragging,
 			}),
+
 			RightBorder = e("Frame", {
 				Position = UDim2.fromScale(1, 0),
 				Size = UDim2.new(0, 1, 1, 0),
