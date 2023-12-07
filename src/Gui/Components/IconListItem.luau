@@ -2,13 +2,13 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local React = require(Hoarcekat.Packages.React)
 
-local BAR_HEIGHT = 24
-local ICON_SIZE = 16
-
 local StudioTheme = require(Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 local useToggleState = require(Hoarcekat.Plugin.Gui.Hooks.useToggleState)
 
 local e = React.createElement
+
+local BAR_HEIGHT = 24
+local ICON_SIZE = 16
 
 local function IconListItem(props: {
 	selected: boolean?,
