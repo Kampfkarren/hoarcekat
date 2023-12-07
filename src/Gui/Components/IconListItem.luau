@@ -72,7 +72,7 @@ local function IconListItem(props: {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 2,
-			Size = UDim2.new(0, 0, 0, BAR_HEIGHT),
+			Size = UDim2.fromOffset(0, BAR_HEIGHT),
 			Text = props.text,
 			TextColor3 = theme.iconListItem.textColor,
 			TextXAlignment = Enum.TextXAlignment.Left,
