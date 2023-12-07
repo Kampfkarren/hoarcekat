@@ -24,7 +24,7 @@ local function Preview()
 	local storyPreviewer = useStoryPreview(rootRef, selectedStory, expand, setCurrentPreview)
 
 	local selectStoryInstance = React.useCallback(function()
-		if currentPreview and currentPreview.target then
+		if currentPreview ~= nil and currentPreview.target ~= nil then
 			Selection:Set({ currentPreview.target })
 		end
 	end, { currentPreview })
