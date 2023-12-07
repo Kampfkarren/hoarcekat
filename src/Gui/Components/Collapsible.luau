@@ -23,7 +23,6 @@ local function Collapsible(props: {
 		BackgroundTransparency = 1,
 	}, {
 		UIListLayout = e("UIListLayout", {
-			Padding = UDim.new(0, 0),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 		}),
 
