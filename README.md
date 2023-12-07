@@ -11,7 +11,7 @@ With that in mind, Hoarcekat is **especially** useful when using libraries such 
 - [Fusion](https://elttob.uk/Fusion)
 - [Plasma](https://eryn.io/plasma/)
 
-> Note: You do **not** have to use these libraries to be able to use Hoarcekat.
+Note: You do **not** have to use these libraries to be able to use Hoarcekat.
 
 
 
@@ -23,13 +23,9 @@ It's much simpler to understand when you look at [an example story](https://gith
 
 ## How do I download it?
 
-> Method 1:
+One method is to download the plugin [on the Roblox marketplace](https://www.roblox.com/library/4621580428/Hoarcekat).
 
-You can download the plugin [on the Roblox marketplace](https://www.roblox.com/library/4621580428/Hoarcekat).
-
-> Method 2:
-
-You can download the latest version in the [GitHub releases](https://github.com/Kampfkarren/hoarcekat/releases). From here, go to the "Plugins Folder" found under the "Plugins" tab in Roblox Studio, and put the `.rbxmx` in there.
+Another is to download the latest version in the [GitHub releases](https://github.com/Kampfkarren/hoarcekat/releases). From here, go to the "Plugins Folder" found under the "Plugins" tab in Roblox Studio, and put the `.rbxmx` in there.
 
 ## Why the name?
 
