@@ -23,7 +23,7 @@ local function SidebarList(props: { title: string, instanceChildren: { Instance 
 				end,
 				icon = Assets.hamburger,
 				selected = selectedStory == child,
-				text = child.Name:sub(#child.Name - #".story"),
+				text = child.Name:sub(1, #child.Name - #".story"),
 			})
 		else
 			contents["Folder" .. childName] = e(SidebarList, {
