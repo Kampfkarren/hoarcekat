@@ -1,11 +1,10 @@
-local ServerStorage = game:GetService("ServerStorage")
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local React = require(Hoarcekat.Packages.React)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
 local IconListItem = require(Hoarcekat.Plugin.Gui.Components.IconListItem)
-local useToggleState = require(ServerStorage.Hoarcekat.Plugin.Gui.Hooks.useToggleState)
+local useToggleState = require(Hoarcekat.Plugin.Gui.Hooks.useToggleState)
 local e = React.createElement
 
 local OFFSET = 8
