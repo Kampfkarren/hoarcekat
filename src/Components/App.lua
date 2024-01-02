@@ -4,7 +4,9 @@ local Roact = require(Hoarcekat.Vendor.Roact)
 
 local Preview = require(script.Parent.Preview)
 local Sidebar = require(script.Parent.Sidebar)
+
 local VerticalSplitter = require(script.Parent.VerticalSplitter)
+
 local StudioThemeAccessor = require(script.Parent.StudioThemeAccessor)
 
 local e = Roact.createElement
@@ -18,6 +20,7 @@ local function App(props)
 			}, {
 				Splitter = e(VerticalSplitter, {
 					Mouse = props.Mouse,
+					Plugin = props.Plugin,
 				}, {
 					Left = e(Sidebar),
 					Right = e(Preview),

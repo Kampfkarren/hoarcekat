@@ -54,7 +54,27 @@ local function SidebarList(props)
 
 	return e(Collapsible, {
 		Title = props.Title,
+		IsSearching = props.IsSearching,
 	}, contents)
+end
+
+local function getNumChildren(t)
+	local count = 0
+
+	for _, _ in pairs(t) do
+		count += 1
+	end
+	return count
+end
+
+local function getKeyOfFirstChild(t): string | nil
+	if typeof(t) == "Instance" then
+		return nil
+	end
+
+	for key, _ in pairs(t) do
+		return key
+	end
 end
 
 function Sidebar:init()
@@ -70,10 +90,16 @@ function Sidebar:init()
 			self:checkStory(child)
 		end))
 	end
+
+	self:setState({
+		search = "",
+	})
 end
 
 function Sidebar:patchStoryScripts(patch)
-	if self.cleaning then return end
+	if self.cleaning then
+		return
+	end
 
 	local storyScripts = {}
 
@@ -134,6 +160,14 @@ function Sidebar:addStoryScript(storyScript)
 		if not storyScript:IsDescendantOf(game) then
 			-- We were removed from the data model
 			instanceMaid:DoCleaning()
+		else
+			self:setState({}) -- force update if parent changes
+		end
+	end))
+
+	instanceMaid:GiveTask(storyScript:GetPropertyChangedSignal("Name"):Connect(function()
+		if isStoryScript(storyScript) then
+			self:setState({}) -- force update if name changes
 		end
 	end))
 
@@ -167,12 +201,22 @@ function Sidebar:willUnmount()
 end
 
 function Sidebar:render()
+	local searchStr = self.state.search:lower()
+	local isSearching = searchStr ~= ""
+
 	return e(StudioThemeAccessor, {}, {
 		function(theme)
 			local storyTree = {}
+
 			for storyScript in pairs(self.state.storyScripts or {}) do
 				local hierarchy = {}
 				local parent = storyScript
+
+				local scriptName = storyScript.Name
+
+				if isSearching and not scriptName:lower():find(searchStr, 1, true) then
+					continue
+				end
 
 				repeat
 					table.insert(hierarchy, 1, parent)
@@ -196,6 +240,98 @@ function Sidebar:render()
 				end
 			end
 
+			--[[
+				if a parent folder has no children, combine with the parent
+				{
+					tree = {
+						["ReplicatedStorage"] = {
+							["System1"} = {
+								["Folder3"} = {
+									[1] = script : Instance
+								}
+							},
+							["System2"} = {
+								[1] = script : Instance
+							}
+						}
+					}
+					Becomes
+					tree = {
+						["ReplicatedStorage"] = {
+							["System1/Folder3"} = {
+								script : Instance
+							},
+							["System2"} = {
+								[1] = script : Instance
+							}
+						}
+					}
+				}
+			]]
+
+			local function condense(t)
+				local newT = {}
+				for key, value in pairs(t) do
+					if typeof(value) == "Instance" then
+						newT[key] = value
+						continue
+					end
+
+					local function areAllValuesStories()
+						for _, child in pairs(value) do
+							if typeof(child) ~= "Instance" or not child:IsA("ModuleScript") then
+								return false
+							end
+						end
+
+						return true
+					end
+
+					if areAllValuesStories() then
+						newT[key] = value
+						continue
+					end
+
+					local numChildren = getNumChildren(value)
+					local newKey = key
+
+					local r = 0
+					repeat
+						if numChildren == 1 then
+							local childName = getKeyOfFirstChild(value)
+
+							if not childName then
+								break
+							end
+
+							local addKey: string = getKeyOfFirstChild(value)
+
+							if type(addKey) == "number" then
+								break
+							end
+
+							newKey ..= "<b>/</b>" .. addKey
+							value = value[addKey]
+							numChildren = getNumChildren(value)
+						else
+							value = condense(value)
+							break
+						end
+						r += 1
+					until r == 10
+
+					if r == 10 then
+						warn("Recursion limit reached")
+					end
+
+					newT[newKey] = value
+				end
+
+				return newT
+			end
+
+			storyTree = condense(storyTree)
+
 			local storyLists = {}
 			for parent, children in pairs(storyTree) do
 				storyLists[parent] = e(SidebarList, {
@@ -203,6 +339,7 @@ function Sidebar:render()
 					SelectStory = self.props.selectStory,
 					SelectedStory = self.props.selectedStory,
 					Title = parent,
+					IsSearching = isSearching,
 				})
 			end
 
@@ -211,6 +348,7 @@ function Sidebar:render()
 				BorderSizePixel = 0,
 				ClipsDescendants = true,
 				Size = UDim2.fromScale(1, 1),
+				ZIndex = 2,
 			}, {
 				UIListLayout = e("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
@@ -221,11 +359,43 @@ function Sidebar:render()
 					PaddingTop = UDim.new(0, 2),
 				}),
 
-				StoriesLabel = e(TextLabel, {
-					Font = Enum.Font.SourceSansBold,
-					LayoutOrder = 1,
-					Text = "STORIES",
-					TextColor3 = theme:GetColor("DimmedText", "Default"),
+				Top = e("Frame", {
+					Size = UDim2.fromScale(1, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					BackgroundTransparency = 1,
+				}, {
+					StoriesLabel = e(TextLabel, {
+						Font = Enum.Font.SourceSansBold,
+						LayoutOrder = 1,
+						Text = "STORIES",
+						TextColor3 = theme:GetColor("DimmedText", "Default"),
+					}),
+
+					SearchBox = e("TextBox", {
+						Size = UDim2.new(0, 100, 1, -4),
+						Position = UDim2.new(1, -20, 0.5, 0),
+						AnchorPoint = Vector2.new(1, 0.5),
+						PlaceholderText = "Search...",
+						Text = "",
+						TextXAlignment = Enum.TextXAlignment.Left,
+						TextScaled = true,
+						BackgroundColor3 = theme:GetColor("InputFieldBackground", "Default"),
+						PlaceholderColor3 = theme:GetColor("DimmedText", "Default"),
+						TextColor3 = theme:GetColor("MainText", "Default"),
+						[Roact.Change.Text] = function(rbx)
+							self:setState({
+								search = rbx.Text,
+							})
+						end,
+					}, {
+						Corner = e("UICorner", {
+							CornerRadius = UDim.new(0, 5),
+						}),
+						Stroke = e("UIStroke", {
+							Thickness = 2,
+							Color = theme:GetColor("Border", "Default"),
+						}),
+					}),
 				}),
 
 				StoryLists = e(AutomatedScrollingFrame, {

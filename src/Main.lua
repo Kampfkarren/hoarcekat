@@ -42,6 +42,7 @@ local function Main(plugin, savedState)
 	}, {
 		App = Roact.createElement(App, {
 			Mouse = plugin:getMouse(),
+			Plugin = plugin
 		}),
 	})
 
