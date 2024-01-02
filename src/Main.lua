@@ -21,7 +21,7 @@ local function Main(plugin, savedState)
 	local displaySuffix, nameSuffix = getSuffix(plugin)
 	local toolbar = plugin:toolbar("Hoarcekat" .. displaySuffix)
 
-	local toggleButton = plugin:button(toolbar, "Hoarcekat", "Open the Hoarcekat window", "rbxassetid://11600481404")
+	local toggleButton = plugin:button(toolbar, "Hoarcekat", "Open the Hoarcekat window", "rbxassetid://4621571957")
 
 	local store = Rodux.Store.new(Reducer, savedState)
 
