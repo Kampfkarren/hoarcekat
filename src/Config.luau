@@ -1,5 +1,5 @@
 local Config = {
-	useDevSource = true,
+	useDevSource = false,
 	userServices = {
 		"Workspace",
 		"ReplicatedFirst",
