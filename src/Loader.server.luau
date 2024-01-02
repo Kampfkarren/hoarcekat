@@ -122,6 +122,10 @@ function PluginFacade:beforeUnload(callback)
 	self._beforeUnload = callback
 end
 
+function PluginFacade:setBeforeUnloadToNil()
+	self._beforeUnload = nil
+end
+
 function PluginFacade._load(_, savedState)
 	local ok, result = pcall(require, currentRoot.Plugin.Main)
 
@@ -145,7 +149,7 @@ function PluginFacade:unload()
 
 	if self._beforeUnload then
 		saveState = self._beforeUnload()
-		self._beforeUnload = nil
+		self:setBeforeUnloadToNil()
 	end
 
 	return saveState

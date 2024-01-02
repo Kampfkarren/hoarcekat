@@ -19,7 +19,9 @@ local function SidebarList(props: { title: string, instanceChildren: { Instance 
 		if typeof(child) == "Instance" then
 			contents["Instance" .. child.Name] = e(IconListItem, {
 				activated = function()
-					setSelectedStory(if selectedStory == child then nil else child)
+					setSelectedStory(function(current)
+						return if current == child then nil else child
+					end)
 				end,
 				icon = Assets.hamburger,
 				selected = selectedStory == child,

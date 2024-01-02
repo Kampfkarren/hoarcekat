@@ -19,6 +19,7 @@ export type PluginFacade = {
 	createDockWidgetPluginGui: (self: PluginFacade, string, ...any) -> DockWidgetPluginGui,
 	getMouse: (self: PluginFacade) -> PluginMouse,
 	beforeUnload: (self: PluginFacade, BeforeUnloadCallback) -> (),
+	setBeforeUnloadToNil: (self: PluginFacade) -> (),
 	_load: (self: PluginFacade, SaveState) -> (),
 	_reload: (self: PluginFacade) -> (),
 	unload: (self: PluginFacade) -> SaveState,

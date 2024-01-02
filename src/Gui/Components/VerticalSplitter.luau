@@ -22,42 +22,6 @@ local function VerticalSplitter(props: {
 	local dragging, setDragging = React.useState(false)
 	local alpha, setAlpha = React.useState(DEFAULT_ALPHA)
 
-	local onInputBegan = React.useCallback(function(_, input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement then
-			setHovering(true)
-		elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-			setDragging(true)
-		end
-	end, {})
-
-	local onInputEnded = React.useCallback(function(_, input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement then
-			setHovering(false)
-		elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-			setDragging(false)
-		end
-	end, {})
-
-	local onInputChanged = React.useCallback(function(_, input: InputObject)
-		if input.UserInputType ~= Enum.UserInputType.MouseMovement then
-			return
-		end
-
-		if not dragging then
-			return
-		end
-
-		local container = containerRef.current
-
-		if container then
-			local width = container.AbsoluteSize.X
-			local x = input.Position.X
-			local offset = x - container.AbsolutePosition.X
-			offset = math.clamp(offset, HANDLE_WIDTH, width - HANDLE_WIDTH)
-			setAlpha(offset / width)
-		end
-	end, { dragging })
-
 	React.useEffect(function()
 		local pluginMouse = props.mouse
 
@@ -78,7 +42,25 @@ local function VerticalSplitter(props: {
 		LayoutOrder = 1,
 		BackgroundTransparency = 1,
 		ref = containerRef,
-		[React.Event.InputChanged] = onInputChanged,
+		[React.Event.InputChanged] = function(_, input: InputObject)
+			if input.UserInputType ~= Enum.UserInputType.MouseMovement then
+				return
+			end
+
+			if not dragging then
+				return
+			end
+
+			local container = containerRef.current
+
+			if container then
+				local width = container.AbsoluteSize.X
+				local x = input.Position.X
+				local offset = x - container.AbsolutePosition.X
+				offset = math.clamp(offset, HANDLE_WIDTH, width - HANDLE_WIDTH)
+				setAlpha(offset / width)
+			end
+		end,
 	}, {
 		Left = e("Frame", {
 			Position = UDim2.fromScale(0, 0),
@@ -104,8 +86,20 @@ local function VerticalSplitter(props: {
 			BackgroundColor3 = theme.verticalSplitter.grabber,
 			BorderSizePixel = 0,
 			ZIndex = 1,
-			[React.Event.InputBegan] = onInputBegan,
-			[React.Event.InputEnded] = onInputEnded,
+			[React.Event.InputBegan] = function(_, input)
+				if input.UserInputType == Enum.UserInputType.MouseMovement then
+					setHovering(true)
+				elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+					setDragging(true)
+				end
+			end,
+			[React.Event.InputEnded] = function(_, input)
+				if input.UserInputType == Enum.UserInputType.MouseMovement then
+					setHovering(false)
+				elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+					setDragging(false)
+				end
+			end,
 		}, {
 			LeftBorder = e("Frame", {
 				Position = UDim2.fromOffset(-1, 0),

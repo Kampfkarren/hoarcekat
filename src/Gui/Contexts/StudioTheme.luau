@@ -71,7 +71,9 @@ local default: ContextType = deriveHoarcekatTheme(studioSettings.Theme)
 local Context = React.createContext(default)
 
 local function ThemeProvider(props: { children: React.ReactNode })
-	local theme, setTheme = React.useState(deriveHoarcekatTheme(studioSettings.Theme))
+	local theme, setTheme = React.useState(function()
+		return deriveHoarcekatTheme(studioSettings.Theme)
+	end)
 
 	React.useEffect(function()
 		local connection = studioSettings.ThemeChanged:Connect(function()
@@ -83,10 +85,8 @@ local function ThemeProvider(props: { children: React.ReactNode })
 		end
 	end, {})
 
-	local value: ContextType = theme
-
 	return React.createElement(Context.Provider, {
-		value = value,
+		value = theme,
 	}, props.children)
 end
 

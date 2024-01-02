@@ -10,16 +10,15 @@ local IconListItem = require(Hoarcekat.Plugin.Gui.Components.IconListItem)
 
 local e = React.createElement
 
-local function CollapsibleChildrenFragment(props: {
-	selectedIndex: number?,
-	setSelectedIndex: ((any) -> any) -> (),
-})
+local function TestCollapsibleStory()
+	local selectedIndex: number?, setSelectedIndex = React.useState(nil :: number?)
+
 	local elements = {}
 
 	for i = 1, 5 do
 		elements[i] = e(IconListItem, {
 			activated = function()
-				props.setSelectedIndex(function(current)
+				setSelectedIndex(function(current)
 					if current == i then
 						return nil
 					end
@@ -28,17 +27,11 @@ local function CollapsibleChildrenFragment(props: {
 				end)
 			end,
 			layoutOrder = i,
-			selected = props.selectedIndex == i,
+			selected = selectedIndex == i,
 			icon = Assets.hamburger,
 			text = "Story Number " .. i,
 		})
 	end
-
-	return e(React.Fragment, nil, elements)
-end
-
-local function TestCollapsibleStory()
-	local selectedIndex, setSelectedIndex = React.useState(nil)
 
 	return e("Frame", {
 		Position = UDim2.fromScale(0.5, 0.5),
@@ -76,12 +69,7 @@ local function TestCollapsibleStory()
 				}, {
 					CollapsibleC = e(Collapsible, {
 						title = "Stories",
-					}, {
-						ListItems = e(CollapsibleChildrenFragment, {
-							selectedIndex = selectedIndex,
-							setSelectedIndex = setSelectedIndex,
-						}),
-					}),
+					}, e(React.Fragment, nil, elements)),
 				}),
 			}),
 		}),

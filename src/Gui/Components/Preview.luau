@@ -23,12 +23,6 @@ local function Preview()
 
 	local storyPreviewer = useStoryPreview(rootRef, selectedStory, expand, setCurrentPreview)
 
-	local selectStoryInstance = React.useCallback(function()
-		if currentPreview ~= nil and currentPreview.target ~= nil then
-			Selection:Set({ currentPreview.target })
-		end
-	end, { currentPreview })
-
 	local expandSelection = React.useCallback(function()
 		setExpand(function(current)
 			local newExpandValue = not current
@@ -60,7 +54,11 @@ local function Preview()
 			ZIndex = 2,
 		}, {
 			Button = e(FloatingButton, {
-				activated = selectStoryInstance,
+				activated = function()
+					if currentPreview ~= nil and currentPreview.target ~= nil then
+						Selection:Set({ currentPreview.target })
+					end
+				end,
 				image = Assets.preview,
 				imageSize = UDim.new(0, 24),
 				size = UDim.new(0, 40),

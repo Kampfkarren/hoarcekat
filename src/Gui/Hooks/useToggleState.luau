@@ -8,7 +8,7 @@ local function useToggleState(default: boolean?): {
 	disable: () -> (),
 	toggle: () -> (),
 }
-	local toggled, setToggled = React.useState(not not default)
+	local toggled, setToggled = React.useState(default or false)
 
 	local enable = React.useCallback(function()
 		setToggled(true)

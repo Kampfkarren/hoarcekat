@@ -86,7 +86,7 @@ function StoryPreviewer:clearPreview()
 	if state == nil then
 		return
 	end
-	state:destroy()
+	state.destroy()
 	self.currentPreview = nil
 	self.setCurrentPreview(self.currentPreview)
 end
@@ -100,22 +100,22 @@ function StoryPreviewer:prepareState(selectedStory)
 		target = nil,
 	}
 
-	function state:destroy()
-		for _, connection: RBXScriptConnection in self.scriptChangedConnections do
+	function state.destroy()
+		for _, connection: RBXScriptConnection in state.scriptChangedConnections do
 			connection:Disconnect()
 		end
 
-		if self.cleanup then
-			local ok, result = pcall(self.cleanup)
+		if state.cleanup then
+			local ok, result = pcall(state.cleanup)
 			if not ok then
 				warn("Error cleaning up story: " .. result)
 			end
 
-			self.cleanup = nil
+			state.cleanup = nil
 		end
 
-		if self.target then
-			self.target:Destroy()
+		if state.target then
+			state.target:Destroy()
 		end
 	end
 
@@ -156,7 +156,7 @@ function StoryPreviewer:prepareState(selectedStory)
 
 	local requireOk, result = xpcall(monkeyRequire, debug.traceback, selectedStory)
 	if not requireOk then
-		state:destroy()
+		state.destroy()
 		return "Error requiring story: " .. result, nil
 	end
 
@@ -170,7 +170,7 @@ function StoryPreviewer:prepareState(selectedStory)
 	end, debug.traceback)
 
 	if not execOk then
-		state:destroy()
+		state.destroy()
 		return "Error executing story: " .. cleanup, nil
 	end
 

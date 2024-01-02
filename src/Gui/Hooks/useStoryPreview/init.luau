@@ -5,7 +5,11 @@ local React = require(Hoarcekat.Packages.React)
 local StoryPreviewer = require(script.StoryPreviewer)
 
 local function useStoryPreview(rootRef, selectedStory, expand, setCurrentPreview)
-	local storyPreviewer = React.useRef(StoryPreviewer.new(rootRef, setCurrentPreview))
+	local storyPreviewer = React.useRef(nil)
+
+	if storyPreviewer.current == nil then
+		storyPreviewer.current = StoryPreviewer.new(rootRef, setCurrentPreview)
+	end
 
 	React.useEffect(function()
 		if storyPreviewer.current then

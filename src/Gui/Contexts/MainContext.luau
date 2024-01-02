@@ -34,6 +34,10 @@ local function Provider(props: {
 				selectedStory = selectedStory,
 			}
 		end)
+
+		return function()
+			props.plugin:setBeforeUnloadToNil()
+		end
 	end, { selectedStory, props } :: { unknown })
 
 	React.useEffect(function()
@@ -41,11 +45,8 @@ local function Provider(props: {
 			return
 		end
 
-		local connection
-
-		connection = selectedStory.AncestryChanged:Connect(function()
+		local connection = selectedStory.AncestryChanged:Once(function()
 			setSelectedStory(nil)
-			connection:Disconnect()
 		end)
 
 		return function()
