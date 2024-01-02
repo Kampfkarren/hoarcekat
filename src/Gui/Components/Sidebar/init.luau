@@ -21,8 +21,7 @@ local function Sidebar()
 		}),
 	}
 
-	-- pairs is nowadays redundant but pairs in this case will avoid a strict type error
-	for parent, children in pairs(storyTree) do
+	for parent, children in storyTree :: any do
 		storyListChildren[parent] = e(SidebarList, {
 			title = tostring(parent),
 			instanceChildren = children,
@@ -71,7 +70,7 @@ local function Sidebar()
 			BorderSizePixel = 0,
 			ScrollBarThickness = SCROLL_BAR_THICKNESS,
 			Size = UDim2.new(1, 0, 1, -30),
-		}, storyListChildren),
+		}, storyListChildren :: any),
 	})
 end
 
