@@ -1,0 +1,78 @@
+local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
+
+local React = require(Hoarcekat.Packages.React)
+
+local USER_SERVICES = require(Hoarcekat.Plugin.Config).userServices
+
+local StoryObserver = require(script.StoryObserver)
+local Types = require(Hoarcekat.Plugin.Types)
+
+local function useStoryCollection()
+	local storyScripts, setStoryScripts = React.useState({} :: Types.StoryScripts)
+
+	React.useEffect(function()
+		local storyObserver = StoryObserver.new(setStoryScripts)
+
+		local connections: { RBXScriptConnection } = {}
+
+		for _, serviceName in USER_SERVICES do
+			local service = game:GetService(serviceName)
+
+			storyObserver:lookForStories(service)
+
+			table.insert(
+				connections,
+				service.DescendantAdded:Connect(function(child)
+					storyObserver:lookForStories(child)
+					storyObserver:checkStory(child)
+				end)
+			)
+		end
+
+		return function()
+			for _, connection in connections do
+				connection:Disconnect()
+			end
+		end
+	end, {})
+
+	return React.useMemo(function()
+		local storyTree: Types.StoryTree = {}
+
+		for storyScript in storyScripts do
+			local hierarchy = {}
+			local parent: Instance? = storyScript
+
+			while parent ~= game and parent ~= nil do
+				table.insert(hierarchy, 1, parent)
+
+				if parent and parent.Parent then
+					parent = parent.Parent
+				else
+					break
+				end
+			end
+
+			local current = storyTree
+
+			for _, node in hierarchy do
+				if node == storyScript then
+					table.insert(current :: Types.StoryTreeArray, storyScript)
+					break
+				end
+
+				local name = node.Name
+				local nextLevel = current :: Types.StoryTreeFolder
+				if nextLevel[name] == nil then
+					nextLevel[name] = {}
+				end
+
+				current = nextLevel[name]
+			end
+		end
+
+		return storyTree
+	end, { storyScripts })
+end
+
+return useStoryCollection

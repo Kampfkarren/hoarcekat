@@ -1,4 +1,0 @@
-[tools]
-rojo = { github = "rojo-rbx/rojo", version = "6.0.0-rc.1" }
-tarmac = { github = "Roblox/tarmac", version = "0.7.0" }
-wally = { github = "UpliftGames/wally", version = "0.3.1" }
