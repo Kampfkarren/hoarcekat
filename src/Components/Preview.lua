@@ -224,7 +224,7 @@ function Preview:render()
 		ExpandButton = e("Frame", {
 			AnchorPoint = Vector2.new(1, 1),
 			BackgroundTransparency = 1,
-			Position = UDim2.new(0.99, -45, 0.99),
+			Position = UDim2.new(.99, 0, 0.99,-44),
 			Size = UDim2.fromOffset(40, 40),
 			ZIndex = 2,
 		}, {
