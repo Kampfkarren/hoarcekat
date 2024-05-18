@@ -1,3 +1,4 @@
+local CoreGui = game:GetService("CoreGui")
 local Hoarcekat = script.Parent:FindFirstAncestor("Hoarcekat")
 
 local ReactRoblox = require(Hoarcekat.Packages.ReactRoblox)
@@ -30,6 +31,11 @@ local function Provider(props: {
 	React.useEffect(function()
 		props.plugin:beforeUnload(function()
 			props.root:unmount()
+
+			if CoreGui:FindFirstChild("HoarcekatDisplay") then
+				CoreGui.HoarcekatDisplay:Destroy()
+			end
+
 			return {
 				selectedStory = selectedStory,
 			}
