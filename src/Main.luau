@@ -1,4 +1,5 @@
 --!nonstrict
+local CoreGui = game:GetService("CoreGui")
 local RunService = game:GetService("RunService")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
@@ -54,6 +55,11 @@ local function Main(plugin, savedState)
 	local unloadConnection
 	unloadConnection = gui.AncestryChanged:Connect(function()
 		print("New Hoarcekat version coming online; unloading the old version")
+
+		if CoreGui:FindFirstChild("HoarcekatDisplay") then
+			CoreGui.HoarcekatDisplay:Destroy()
+		end
+
 		unloadConnection:Disconnect()
 		connection:Disconnect()
 		plugin:unload()
