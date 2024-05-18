@@ -1,8 +1,10 @@
 local CoreGui = game:GetService("CoreGui")
 local Selection = game:GetService("Selection")
+local ServerStorage = game:GetService("ServerStorage")
 
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
+local StudioTheme = require(ServerStorage.Hoarcekat.Plugin.Gui.Contexts.StudioTheme)
 local React = require(Hoarcekat.Packages.React)
 
 local Assets = require(Hoarcekat.Plugin.Assets)
@@ -15,6 +17,7 @@ local e = React.createElement
 local function Preview()
 	local mainContext = React.useContext(MainContext.Context)
 	local selectedStory = mainContext.selectedStory
+	local theme = React.useContext(StudioTheme.Context)
 
 	local rootRef = React.useRef(nil)
 
@@ -45,6 +48,53 @@ local function Preview()
 			PaddingLeft = UDim.new(0, 5),
 			PaddingTop = UDim.new(0, 5),
 		}),
+
+		ExpandMessage = if expand and currentPreview
+			then e("Frame", {
+				Position = UDim2.fromScale(0.5, 0.5),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				Size = UDim2.fromScale(1, 1),
+				BackgroundTransparency = 1,
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+				BorderSizePixel = 0,
+			}, {
+				UIListLayout = e("UIListLayout", {
+					Padding = UDim.new(0, 15),
+					HorizontalAlignment = Enum.HorizontalAlignment.Center,
+					VerticalAlignment = Enum.VerticalAlignment.Center,
+				}),
+
+				Icon = e("ImageLabel", {
+					Image = "rbxassetid://11569282129",
+					Position = UDim2.fromScale(0.5, 0.4),
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					BackgroundTransparency = 1,
+					Size = UDim2.fromScale(0, 0.1),
+				}, {
+					UISizeConstraint = e("UISizeConstraint", {
+						MinSize = Vector2.new(50, 50),
+						MaxSize = Vector2.new(300, 300),
+					}),
+
+					UIAspectRatioConstraint = e("UIAspectRatioConstraint", {
+						AspectRatio = 1,
+						AspectType = Enum.AspectType.ScaleWithParentSize,
+						DominantAxis = Enum.DominantAxis.Height,
+					}),
+				}),
+
+				Message = e("TextLabel", {
+					Text = "Story Mounted in <b>Studio Viewport</b>",
+					RichText = true,
+					TextColor3 = theme.textColor,
+					Font = Enum.Font.SourceSans,
+					TextSize = 22,
+					AutomaticSize = Enum.AutomaticSize.XY,
+					TextWrapped = true,
+					BackgroundTransparency = 1,
+				}),
+			})
+			else nil,
 
 		SelectInstanceButton = e("Frame", {
 			AnchorPoint = Vector2.new(1, 1),
