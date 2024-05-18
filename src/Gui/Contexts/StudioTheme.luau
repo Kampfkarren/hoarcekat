@@ -3,6 +3,8 @@ local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 local React = require(Hoarcekat.Packages.React)
 
 export type ContextType = {
+	textColor: Color3,
+
 	holder: {
 		background: Color3,
 	},
@@ -32,6 +34,8 @@ export type ContextType = {
 
 local function deriveHoarcekatTheme(studioTheme: StudioTheme): ContextType
 	return {
+		textColor = studioTheme:GetColor(Enum.StudioStyleGuideColor.BrightText),
+
 		holder = {
 			background = studioTheme:GetColor(Enum.StudioStyleGuideColor.MainBackground),
 		},
@@ -83,7 +87,7 @@ local function ThemeProvider(props: { children: React.ReactNode })
 		return function()
 			connection:Disconnect()
 		end
-	end, {})
+	end, { deriveHoarcekatTheme })
 
 	return React.createElement(Context.Provider, {
 		value = theme,
