@@ -4,6 +4,7 @@ local Selection = game:GetService("Selection")
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local Assets = require(Hoarcekat.Plugin.Assets)
+local StringPath = require(Hoarcekat.Plugin.StringPath)
 local EventConnection = require(script.Parent.EventConnection)
 local FloatingButton = require(script.Parent.FloatingButton)
 local Maid = require(Hoarcekat.Plugin.Maid)
@@ -137,7 +138,12 @@ function Preview:prepareState(selectedStory)
 		end
 	end
 
-	local function monkeyRequire(otherScript)
+	local function monkeyRequire(path, root)
+		local otherScript = StringPath(path, root)
+		if not otherScript then
+			return nil
+		end
+
 		if state.monkeyRequireCache[otherScript] then
 			return state.monkeyRequireCache[otherScript]
 		end
@@ -154,7 +160,9 @@ function Preview:prepareState(selectedStory)
 		end
 
 		local fenv = setmetatable({
-			require = monkeyRequire,
+			require = function(dep)
+				return monkeyRequire(dep, otherScript)
+			end,
 			script = otherScript,
 			_G = state.monkeyGlobalTable,
 		}, {
