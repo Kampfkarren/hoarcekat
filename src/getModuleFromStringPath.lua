@@ -1,5 +1,5 @@
-local function StringPath(path, root)
-	local pathTraceback = root and `in: {root:GetFullName()}` or ""
+local function getModuleFromStringPath(path: string, root: Instance): ModuleScript
+	local pathTraceback = if root then `in: {root:GetFullName()}` else ""
 
 	if typeof(path) == "Instance" then
 		if path:IsA("ModuleScript") then
@@ -55,4 +55,4 @@ local function StringPath(path, root)
 	return current
 end
 
-return StringPath
+return getModuleFromStringPath

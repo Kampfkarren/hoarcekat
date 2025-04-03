@@ -4,7 +4,7 @@ local Selection = game:GetService("Selection")
 local Hoarcekat = script:FindFirstAncestor("Hoarcekat")
 
 local Assets = require(Hoarcekat.Plugin.Assets)
-local StringPath = require(Hoarcekat.Plugin.StringPath)
+local getModuleFromStringPath = require(Hoarcekat.Plugin.getModuleFromStringPath)
 local EventConnection = require(script.Parent.EventConnection)
 local FloatingButton = require(script.Parent.FloatingButton)
 local Maid = require(Hoarcekat.Plugin.Maid)
@@ -139,7 +139,7 @@ function Preview:prepareState(selectedStory)
 	end
 
 	local function monkeyRequire(path, root)
-		local otherScript = StringPath(path, root)
+		local otherScript = getModuleFromStringPath(path, root)
 		if not otherScript then
 			return nil
 		end
