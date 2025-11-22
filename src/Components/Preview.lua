@@ -9,6 +9,7 @@ local FloatingButton = require(script.Parent.FloatingButton)
 local Maid = require(Hoarcekat.Plugin.Maid)
 local Roact = require(Hoarcekat.Vendor.Roact)
 local RoactRodux = require(Hoarcekat.Vendor.RoactRodux)
+local resolveRequirePath = require(Hoarcekat.Plugin.resolveRequirePath)
 
 local e = Roact.createElement
 
@@ -137,7 +138,11 @@ function Preview:prepareState(selectedStory)
 		end
 	end
 
-	local function monkeyRequire(otherScript)
+	local function monkeyRequire(otherScript, root)
+		if typeof(otherScript) == "string" then
+			otherScript = resolveRequirePath(otherScript, root)
+		end
+
 		if state.monkeyRequireCache[otherScript] then
 			return state.monkeyRequireCache[otherScript]
 		end
@@ -154,7 +159,9 @@ function Preview:prepareState(selectedStory)
 		end
 
 		local fenv = setmetatable({
-			require = monkeyRequire,
+			require = function(requiringScript)
+				return monkeyRequire(requiringScript, otherScript)
+			end,
 			script = otherScript,
 			_G = state.monkeyGlobalTable,
 		}, {
